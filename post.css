@@ -1,0 +1,206 @@
+body{
+    background-color: black;
+    color: white;
+}
+.navbar{
+    height: 50px;
+    position: sticky;
+    top:0px;
+    background-color: #1E1E1E;
+    display: flex;
+    justify-content: space-between;
+}
+
+.name{
+    padding-left: 30px;
+    padding-top: 10px;
+    font-size: 25px;
+    color: white;
+}
+
+#search-bar{
+    margin-top: 10px;
+    background-color: white;
+    width: 40%;
+    height: 25px;
+    border-radius: 25px;
+    color: black;
+    border: none;
+    text-align: center;
+}
+
+.profile{
+    background-color:#1E1E1E;
+    border: none;
+    height: 40px;
+    margin: 0px;
+    margin-top: 4px;
+    margin-right: 10px;
+}
+
+.profile-pic{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0px;
+}
+
+.post-container{
+    background-color: #282828;
+    margin-left: 200px;
+    margin-right: 200px;
+    height: 100%;
+}
+
+.header{
+    display: flex;
+    height: 1%;
+    margin: 20px;
+}
+
+.likes{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.like{
+    display: inline-block;
+    background-image: url("../MCO1/sprites2.png");
+    width: 50px;
+    height: 30px;
+    background-position: -550px -520px;
+    background-size: 900px 786px;
+    margin-top: 10px;
+    background-color: #282828;
+    border: none;
+}
+
+.like:hover{
+    background-color: #333333;
+}
+
+.counter{
+    font-size: 18px;
+    text-align: center;
+}
+
+.dislike{
+    display: inline-block;
+    background-image: url("../MCO1/sprites2.png");
+    width: 50px;
+    height: 30px;
+    background-position: -331px -520px;
+    background-size: 900px 786px;
+    margin-top: 0px;
+    background-color: #282828;
+    border: none;
+}
+
+.dislike:hover{
+    background-color: #333333;
+}
+
+.post-title{
+    margin: 10px;
+    padding-top: 34px;
+    font-size: 25px;
+}
+
+.body{
+    margin: 20px;
+    font-size: 18px;
+    margin-left: 100px;
+    padding-bottom: 10px;
+}
+
+.divider{
+    text-align: center;
+}
+
+.line{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.comments{
+    margin: 20px;
+    font-size: 18px;
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+
+.add-comment{
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
+
+.add-comment p{
+    font-size: 18px;
+}
+
+#comment-input{
+    margin-top: 0px;
+    background-color: #333333;
+    border: none;
+    color: white;
+    margin-top: 1px;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+.comment-thread{
+    
+}
+.comment-header{
+    display: flex;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.comment-profile{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.comment-name{
+    margin-left: 10px;
+    padding-top: 5px;
+}
+
+.comment-body{
+    margin-left: 80px;
+    font-size: 18px;
+}
+
+.comment-body + div{
+    margin-left: 100px;
+}
+
+.reply-button{
+    height: 30px;
+    background-color: #282828;
+    border: none;
+    color: white;
+    margin-top: 10px;
+    font-size: 15px;
+    
+}
+
+.reply-button:hover{
+    background-color: #333333;
+}
+
+.reply-input{
+    background-color: #333333;
+    border: none;
+    color: white;
+    margin-top: 1px;
+    height: 180px;
+    width: 60%;
+    text-align: center;
+    padding-bottom: 10px;
+}
