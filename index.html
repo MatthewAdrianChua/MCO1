@@ -2,7 +2,6 @@
 <html>
     <head>
         <title>Forum</title>
-        <script src="script.js"></script>
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
@@ -23,6 +22,57 @@
         </div>
         <div class="secondhead">
             <button id="createpost" name="createpost" type="button">Create Post</button>
+            <span class="rightbtns">
+                <button class="movebutton" name="prevpage" type="button">Previous Page</button>
+                <button class="movebutton" name="nextpage" type="button">Next Page</button>
+            </span>
         </div>
+        <div class="wrapper">
+            <button class="closelogreg" type="button">X</button>
+            <div class="formbox log">
+                <h2>Login</h2>
+                <form action="#">
+                    <div class="inputbox">
+                        <input type="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox">
+                        Remember me</label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="submitbtn">Login</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="formbox reg">
+                <h2>Register</h2>
+                <form action="#">
+                    <div class="inputbox">
+                        <input type="text" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
+                    <button type="submit" class="submitbtn">Register</button>
+                    <div class="login-register">
+                        <p>Already have an Account? <a href="#" class="login-link">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>

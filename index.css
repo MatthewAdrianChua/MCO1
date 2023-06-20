@@ -4,8 +4,18 @@
     font-family: 'Roboto Mono', monospace;
 }
 
+
+
 body {
     margin: 0px;
+}
+
+body .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    z-index: 999;
 }
 
 .firsthead {
@@ -22,7 +32,6 @@ body {
      top: 0px;
      background-color: #66c0db;
      overflow: hidden;
-     display: flex;
      height: 4rem;
 }
 
@@ -95,6 +104,7 @@ body {
     font-family: 'Roboto Mono', monospace;
     display: flex;
     flex-direction: left;
+    float: left;
     font-size: 1rem;
     padding: 0.5rem;
     border-radius: 1.625rem;
@@ -102,4 +112,184 @@ body {
 
 #createpost:hover {
     cursor:pointer;
+}
+
+.rightbtns {
+    display: flex;
+    float: right;
+    text-align: right;
+    flex-direction: right;
+    justify-content: flex-end;
+}
+
+.movebutton {
+    margin: 0.5rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    float: right;
+    text-align: right;
+    flex-direction: right;
+    justify-content: flex-end;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+.movebutton:hover{
+    cursor:pointer;
+}
+
+.wrapper {
+    display:flex;
+    position: relative;
+    background-color: #3bc98e;
+    width: 440px;
+    height: 440px;
+    border: 4px solid #249e6b;
+    border-radius: 1.625rem;
+    overflow:hidden;
+    z-index: 999;
+    transform: scale(0);
+    transition: transform .5s , height .2s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1);
+}
+
+
+.closelogreg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width:45px;
+    height: 45px;
+    font-weight: 1000;
+    z-index: 1;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.closelogreg:hover {
+    cursor: pointer;
+}
+
+.wrapper .formbox {
+    width: 100%;
+    padding: 40px;
+}
+
+
+.wrapper .formbox.log {
+    position: flex;
+    transition: transform .18s ease;
+    transform: translateX(0px);
+}
+
+.wrapper.active .formbox.log{
+    transition: none;
+    transform: translateX(-500px)
+}
+
+.wrapper .formbox.reg{
+    position:absolute;
+    transition: none;
+    transform: translateX(500px);
+}
+
+.wrapper.active .formbox.reg{
+    position: flex;
+    transition: transform .18s ease;
+    transform: translateX(0px);
+}
+
+.formbox h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.inputbox {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid;
+    margin: 30px 0;
+}
+
+.inputbox label {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.inputbox input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.submitbtn {
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1em;
+    transition: .5s;
+}
+
+.submitbtn:hover {
+    background-color: black;
+    color: white;
+}
+
+.login-register {
+    font-size: .9em;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    text-decoration: none;
+    font-weight: 600px;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
 }
