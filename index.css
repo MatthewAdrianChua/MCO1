@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root {
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    margin: 0px;
+}
+
+.firsthead {
+     position: sticky;
+     top: 0px;
+     background-color: #0081A7;
+     overflow: hidden;
+     display: flex;
+     height: 4rem;
+}
+
+.secondhead {
+    position: sticky;
+     top: 0px;
+     background-color: #66c0db;
+     overflow: hidden;
+     display: flex;
+     height: 4rem;
+}
+
+.logo {
+    font-size: 40px;
+    margin: 0px;
+    float: right;
+}
+
+.header_logo {
+    background-image: url("https://media.discordapp.net/attachments/354239629798539264/1120363756287951061/merchant.jpg");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+}
+
+#searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    padding: 9px;
+    border: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 17px;
+    border-radius: 1.625rem;
+    outline: none;
+    background: #f5f5f5;
+}
+
+#searchsubmit {
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: -2.5rem;
+}
+
+#searchsubmit:hover{
+    cursor: pointer;
+}
+
+#logregbtn {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: right;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+#logregbtn:hover{
+    cursor: pointer;
+}
+
+#createpost {
+    margin: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: left;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+#createpost:hover {
+    cursor:pointer;
+}
