@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Tsukimi+Rounded:wght@700&display=swap');
+
+body {
+	color: #262626;
+	font-family: Roboto, sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.body-container {
+	margin-top: 10ch;
+}
+
+.button-container{
+    float: right;
+}
+
+.clickable{
+    margin-right: 20px;
+}
+
+.clickable:hover{
+    background-color: rgba(149, 149, 149, 0.5);
+}
+
+div.actions {
+	margin-top: 4px;
+	display: flex;
+}
+
+div.post-container{
+	margin: auto;
+	width: 450px;
+	background-color:#fafafa;
+	border: 1px solid #E8EAED;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+div.post-footer {
+	padding: 0 16px;
+}
+
+div.post-header {
+	border-bottom: 0.5px solid #EFEFEF;
+	height: 35px;
+	padding: 16px;
+	display: flex;
+	position: relative;
+}
+
+div.user-info {
+	display: flex;
+	flex-direction: row;
+	max-width: 240px;
+}
+
+img.post-body {
+	width: 449px;
+}
+
+
+.nav-bar{
+	background-color:red;
+}
+
+.title{
+    font-family: 'Tsukimi Rounded', sans-serif;
+    font-size: 1.4rem;
+}
+
+span.like {
+	display: inline-block;
+	background-image: url("sprites2.png");
+	background-size: 411px 393px;
+	background-position: 0px -319px;
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px;
+	margin: 8px 4px 8px 0px;
+}
+
+span.comment {
+	display: inline-block;
+	background-image: url("sprites2.png");
+	background-size: 411px 393px;
+	background-position: -125px -294px;
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px;
+	margin: 8px 4px 8px 4px;
+}
+
+span.share {
+	display: inline-block;
+	background-image: url("sprites2.png");
+	background-size: 411px 393px;
+	background-position: -200px -294px;
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px;
+	margin: 8px 4px 8px 4px;
+}
+
+span.bookmark {
+	display: inline-block;
+	background-image: url("sprites2.png");
+	background-size: 411px 393px;
+	background-position: -175px -344px;
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px;
+	margin-left: auto;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.username {
+	font-size: inherit;
+	font-weight: 700;
+	vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+}
+
+.user-handle {
+	color: #262626;
+	font-weight: 600;
+	padding-left: 5px;
+	margin-left: -5px;
+}
+
+.user-icon {
+	width: 32px;
+	height: 32px;
+	margin-right: 5px;
+	border-radius: 50%;
+	background-color: #FAFAFA;
+	vertical-align: baseline;
+	border: 1px solid #EFEFEF;
+}
+
