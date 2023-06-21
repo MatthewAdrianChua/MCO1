@@ -9,11 +9,19 @@ body {
 }
 
 .body-container {
-	margin-top: 10ch;
+    padding: 30px;
+	margin-top: 0px;
+    background-color: #FFBD59;
 }
 
 .button-container{
     float: right;
+}
+
+.content-header{
+    text-align: center;
+    border-radius: 50px;
+    background-color: white;
 }
 
 .clickable{
@@ -31,11 +39,12 @@ div.actions {
 
 div.post-container{
 	margin: auto;
-	width: 450px;
-	background-color:#fafafa;
-	border: 1px solid #E8EAED;
+	width: 800px;
+	background-color:grey;
+	border: 1px solid black;
 	font-size: 14px;
 	box-sizing: border-box;
+    padding: 5px;
 }
 
 div.post-footer {
@@ -43,23 +52,43 @@ div.post-footer {
 }
 
 div.post-header {
-	border-bottom: 0.5px solid #EFEFEF;
 	height: 35px;
 	padding: 16px;
 	display: flex;
 	position: relative;
+    margin-bottom: 17px;
 }
 
-div.user-info {
-	display: flex;
+
+.post-content {
+    padding: 10px;
+    background-color: #4F60B5;
+
+}
+
+.profile-icon {
+	width: 50px;
+	height: 50px;
+	margin-right: 5px;
+	border-radius: 50%;
+	background-color: #FAFAFA;
+	
+	border: 1px solid #EFEFEF;
+}
+
+.profile-name {
+    border-radius: 50px;
+    background-color: #00BF63;
+    display: flex;
 	flex-direction: row;
 	max-width: 240px;
+	margin-bottom: 10px;
 }
 
-img.post-body {
-	width: 449px;
+.profile-info{
+    border-radius: 50px;
+    background-color: #00BF63;
 }
-
 
 .nav-bar{
 	background-color:red;
@@ -131,13 +160,5 @@ span.bookmark {
 	margin-left: -5px;
 }
 
-.user-icon {
-	width: 32px;
-	height: 32px;
-	margin-right: 5px;
-	border-radius: 50%;
-	background-color: #FAFAFA;
-	vertical-align: baseline;
-	border: 1px solid #EFEFEF;
-}
+
 
