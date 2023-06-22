@@ -2,6 +2,20 @@ const submitBtn = document.getElementById("submit-comment");
 const formElement = document.forms.commentform;
 const commentSection = document.getElementById('comment-section');
 
+
+try{
+var likeCount = 0;
+document.querySelector('.counter').innerHTML = likeCount;
+localStorage.setItem('likeCount', likeCount)
+
+var commentCount = 0;
+localStorage.setItem('commentCount', commentCount)
+
+
+document.querySelector('.post-title').innerHTML = localStorage.getItem('title');
+document.querySelector('.body').innerHTML = localStorage.getItem('body');
+
+
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -24,6 +38,8 @@ submitBtn.addEventListener('click', (e) => {
     </div>`;
 
     commentSection.innerHTML += item;
+    commentCount++;
+    localStorage.setItem('commentCount', commentCount);  
 });
 
 commentSection.addEventListener('click', (e) => {
@@ -36,7 +52,7 @@ commentSection.addEventListener('click', (e) => {
         if (replyFormExists) return; // Prevent creating multiple reply forms
 
         const item = `<form class="reply-form">
-            <input class="reply-input" type="text" value="reply"></input>
+            <input class="reply-input" type="text" placeholder="reply"><br></input>
             <input class="submit-reply" type="submit" value="Submit">
         </form>`;
 
@@ -58,9 +74,6 @@ commentSection.addEventListener('click', (e) => {
                     <div class="comment-body">
                         ${replyText}
                     </div>
-                    <div>
-                        <button class="reply-button">Reply</button>
-                    </div>
                 </div>
             </div>`;
 
@@ -68,7 +81,28 @@ commentSection.addEventListener('click', (e) => {
             replyContainer.innerHTML += replyItem;
             replyForm.remove();
 
-            
+            commentCount++;      
+            localStorage.setItem('commentCount', commentCount);    
         });
     }
 });
+
+const likeBtn = document.querySelector('.like');
+
+likeBtn.addEventListener('click' , (e) => {
+    likeCount++;
+    document.querySelector('.counter').innerHTML = likeCount;
+    localStorage.setItem('likeCount', likeCount);
+    
+})
+
+const dislikeBtn = document.querySelector('.dislike');
+
+dislikeBtn.addEventListener('click' , (e) => {
+    likeCount--;
+    document.querySelector('.counter').innerHTML = likeCount;
+    localStorage.setItem('likeCount', likeCount);
+})
+} catch(err){
+    console.log("post page loaded");
+}
