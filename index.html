@@ -3,6 +3,7 @@
     <head>
         <title>Forum</title>
         <link rel="stylesheet" href="index.css">
+        <script src="script.js" defer></script>
     </head>
     <body>
         <div class="firsthead">
@@ -17,14 +18,15 @@
                 </button>
             </span>
             <span class="profile">
-                <div class="profile-dropdown">
-                    <button id="profileButton">
-                        <img id="profilePic" src="profile.jpg">
+                <div class="dropdown">
+                    <button class="profileBtn">
+                    Profile
                     </button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <p>Hello</p>
-                        <a href="#profile">Profile</a>
-                        <a href="#logout">Logout</a>
+                    <div class="dropdown-content">
+                        <ul>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="#logout">Logout</a></li>
+                        </ul>
                     </div>
                 </div>
             </span>
@@ -36,6 +38,5 @@
                 <button class="movebutton" name="nextpage" type="button">Next Page</button>
             </span>
         </div>
-        <script src="script.js"></script>
     </body>
 </html>
