@@ -21,12 +21,18 @@
             </span>
         </div>
         <div class="secondhead">
-            <button id="createpost" name="createpost" type="button">Create Post</button>
+                <button id="createpost" name="createpost" type="button">Create Post</button>           
             <span class="rightbtns">
                 <button class="movebutton" name="prevpage" type="button">Previous Page</button>
                 <button class="movebutton" name="nextpage" type="button">Next Page</button>
             </span>
         </div>
+
+        <div class="posts-container">
+           
+        </div>
+
+        
         <div class="wrapper">
             <button class="closelogreg" type="button">X</button>
             <div class="formbox log">
@@ -73,6 +79,22 @@
                 </form>
             </div>
         </div>
+
+            <form id="createpost-form" name="creatpost-form">
+                <div class="header-post">
+                    <span class ="header">CREATE A POST</span>
+                    <button class ="exit">X</button>
+                </div>
+                    <input id="title-post" name="title-post" type="text" placeholder="Title"></input><br>
+                    <input id="post-body" name="post-body" type="text" placeholder="Text"></input><br>
+                    <input id="submit-post" type="submit" value="Submit">
+             </form>
+               
+        </div>
+
         <script src="script.js"></script>
+        <script src="post.js"></script>
+        
     </body>
 </html>
+
