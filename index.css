@@ -205,7 +205,7 @@ ul{
 }
 
 
-.bottom-section h2 {
+.bottom-section h2 {    
     font-size: 0.9em;
     margin: 5px 0;
 }
@@ -274,8 +274,8 @@ ul{
 .body-container {
     border: 2px solid #000000; 
     border-radius: 10px; 
-    padding: 20px; 
-    width: 85%;
+    padding: 15px; 
+    width: 86%;
     margin: auto;
     margin-top: 40px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);

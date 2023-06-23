@@ -1,3 +1,5 @@
+
+/*============================EDIT PROFILE====================*/
 const profileBtn = document.querySelector('.profileBtn');
 const dropdownContent = document.querySelector('.dropdown');
 const postie = document.querySelector('.header_text');
@@ -48,3 +50,6 @@ saveBtn.onclick = function() {
     document.querySelector(".bottom-section h2").textContent = "Birthday: " + newBday;
     modal.style.display = "none";
 }
+
+
+/*===================================EDIT POST========================*/
