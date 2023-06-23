@@ -49,16 +49,18 @@ saveBtn.onclick = function() {
     modal.style.display = "none";
 }
 
+/*Opens the editor*/
 document.getElementById("edit-button").addEventListener("click", function() {
     document.getElementById("comment-body").style.display = "none";
     document.getElementById("edit-comment-body").value = document.getElementById("comment-body").textContent;
-    document.getElementById("edit-comment-body").style.display = "inline";
-    document.getElementById("save-button").style.display = "inline";
+    document.getElementById("edit-comment-body").style.display = "inline-block";
+    document.getElementById("save-button").style.display = "inline-block";
 });
 
+/*Closes the editor*/
 document.getElementById("save-button").addEventListener("click", function() {
     document.getElementById("comment-body").textContent = document.getElementById("edit-comment-body").value;
-    document.getElementById("comment-body").style.display = "inline";
+    document.getElementById("comment-body").style.display = "inline-block";
     document.getElementById("edit-comment-body").style.display = "none";
     document.getElementById("save-button").style.display = "none";
 });

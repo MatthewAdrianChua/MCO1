@@ -315,14 +315,14 @@ span.comment-body {
 	margin: 8px;
 }
 
-span.edit{
+img.edit{
 	float: right;
 	margin-right: 5px;
 }
 
 .edit {
     cursor: pointer;
-    display: inline-block;
+    display: block;
     background-image: url("/statics/edit-symbol.png");
     background-position: 0 0;
     background-repeat: no-repeat;
