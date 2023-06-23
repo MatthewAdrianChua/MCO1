@@ -292,8 +292,6 @@ div.post-footer {
 	vertical-align: center;
 	padding: 0 10px;
     border-radius: 50px;
-    
-	
     background-color: lightgray;
 	
 }
@@ -342,6 +340,7 @@ div.edit{
 
 	margin-left: 5px;
 	margin-top: 5px;
+    margin-left: 6em;
     float:right;
 
 }
@@ -360,7 +359,7 @@ div.edit{
 .content-header{
     background-color: white;
 	display: flex;
-    flex-wrap:wrap;
+    
     border-radius: 50px;
     align-items: center;
 }
@@ -397,7 +396,7 @@ div.post-header {
 
 .post-content {
     padding: 10px;
-    
+    background-color: darkgray;
 	border-radius: 10px;
 }
 
