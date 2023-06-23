@@ -9,7 +9,7 @@
     <body>
         <div class="firsthead">
             <span class="logo">
-                <img class="header_logo">Postiee
+                <img class="header_logo"><a href="index.html">Postiee</a>
             </span>
             <span class="search">
                 <input type="text" id="searchbar" name="searchbar" placeholder="Search...">
@@ -75,6 +75,19 @@
                 </form>
             </div>
         </div>
+        <form id="createpost-form" name="creatpost-form">
+            <div class="header-post">
+                <span class ="header">CREATE A POST</span>
+                <button class ="exit">X</button>
+            </div>
+                <input id="title-post" name="title-post" type="text" placeholder="Title"></input><br>
+                <textarea id="post-body" name="post-body" type="text" placeholder="Text"></textarea><br>
+                <input id="submit-post" type="submit" value="Submit">
+         </form>
+         <div class="posts-container">
+           
+         </div>
+         <!--= OLD TEMP DO NOT USE
         <div id="post-thread">
             <a class="post-button" href="#">
                 <div class="post-wrapper">
@@ -88,8 +101,9 @@
                     <p class="post-author">By:Lorem Ipsum</p>
                 </div>
             </div>
-        </a>
+        </a> -->
         <script src="script.js"></script>
+        <script src="post.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>

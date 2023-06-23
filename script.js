@@ -3,9 +3,6 @@ const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
 const btnPopup = document.querySelector('#logregbtn');
 const wrapperBtnClose = document.querySelector('.closelogreg');
-const postPopup = document.querySelector('#createpost');
-const postThread = document.getElementById('#post-thread');
-let logStatus = true;
 
 registerLink.addEventListener('click', () => {
     wrapper.classList.add('active')
@@ -23,23 +20,51 @@ wrapperBtnClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup');
 });
 
-postPopup.addEventListener('click', ()=> {
-    if(logStatus){
-        const post = `
-        <a class="post-button" href="#">
-            <div class="post-wrapper">
-                <ion-icon name="caret-up-circle-outline"></ion-icon>
-                <p class="post-numbers" id="">0</p>
-                <ion-icon name="caret-up-circle-outline"></ion-icon>
-                <p class="post-numbers">0</p>
-                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                <p class="post-numbers">0</p>
-                <p class="post-title">Lorem Ipsum Something Something</p>
-                <p class="post-author">By:Lorem Ipsum</p>
-            </div>
-        </a>`;
-        postThread.innerHTML += post;
-    }else{
-        wrapper.classList.add('active-popup');
-    }
+const createPost = document.querySelector('#createpost');
+const createpostForm = document.querySelector('#createpost-form');
+
+createPost.addEventListener('click', (e)=> {
+    createpostForm.classList.add('show');
 });
+
+const postSubmit = document.querySelector('#submit-post');
+
+
+postSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    title = document.querySelector('#title-post').value;
+    localStorage.setItem('title', title);
+    body = document.querySelector('#post-body').value;
+    localStorage.setItem('body', body);
+
+    window.open("post.html");
+
+    likeCount =  localStorage.getItem('likeCount');
+    commentCount = localStorage.getItem('commentCount');
+
+    const item = `<div class="post-instance">
+    <div class = "interactions">
+        <ion-icon name="caret-up-circle-outline"></ion-icon>
+        <div class="like-count"> ${likeCount}</div>
+        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+        <div class="comment-count">${commentCount}</div>
+    </div>
+    <div class="index-title"> <a href="post.html" id="index-title-link">${title}</a><div>
+    </div>`
+
+    document.querySelector('.posts-container').innerHTML += item;
+
+    createpostForm.classList.remove('show');
+
+})
+
+const exitpostform = document.querySelector('.exit');
+
+exitpostform.addEventListener('click', (e) => {
+    e.preventDefault();
+    createpostForm.classList.remove('show');
+})
+
+
+
