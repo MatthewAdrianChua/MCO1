@@ -1,20 +1,89 @@
+var postDocument = document;
 const submitBtn = document.getElementById("submit-comment");
 const formElement = document.forms.commentform;
-const commentSection = document.getElementById('comment-section');
+const channel = new BroadcastChannel('myChannel');
 
+post_Data = JSON.parse(localStorage.getItem('post_Data'));
 
-try{
-var likeCount = 0;
-document.querySelector('.counter').innerHTML = likeCount;
-localStorage.setItem('likeCount', likeCount)
+const commentSection = document.querySelector('#comment-section');
 
-var commentCount = 0;
-localStorage.setItem('commentCount', commentCount)
+document.querySelector('.counter').innerHTML = post_Data.likeCount;
+document.querySelector('.post-title').innerHTML = post_Data.title;
+document.querySelector('.body').innerHTML = post_Data.body;
 
+function getCommentThread(){ //sets all comments and replies to be used after submitting one
+    var tempcomment = [];
+    var tempcommentpic = [];
+    var tempcommentname = [];
+    var comments = document.querySelectorAll('.comment-thread');
+    for(let x = 0; x < comments.length; x++){
+        var commentInstance = comments[x].querySelectorAll('.comment-instance');
+        tempcomment.push([commentInstance[0].querySelector('.comment-body').textContent]);
+        tempcommentpic.push([commentInstance[0].querySelector('.comment-profile').src]);
+        tempcommentname.push([commentInstance[0].querySelector('.comment-name').textContent]);
 
-document.querySelector('.post-title').innerHTML = localStorage.getItem('title');
-document.querySelector('.body').innerHTML = localStorage.getItem('body');
+        for(let y = 1; y < commentInstance.length; y++){
+            console.log(y);
+            tempcomment[x].push(commentInstance[y].querySelector('.comment-body').textContent);
+            tempcommentpic[x].push(commentInstance[y].querySelector('.comment-profile').src);
+            tempcommentname[x].push(commentInstance[y].querySelector('.comment-name').textContent);
+            console.log(JSON.stringify(tempcomment[x][y]));
+        }
+    }
+    post_Data.comment = tempcomment;
+    post_Data.commentname = tempcommentname;
+    post_Data.commentpic = tempcommentpic;
+}
 
+function setCommentThread(){
+    for(let x = 0; x < post_Data.comment.length; x++){
+        var commentbody = post_Data.comment[x][0];
+        var commentname = post_Data.commentname[x][0];
+        var commentpic = post_Data.commentpic[x][0];
+        const item = `<div class="comment-thread">
+            <div class="comment-instance">
+                <div class="comment-header">
+                    <img class="comment-profile" src="${commentpic}">
+                    <div class="comment-name">${commentname}</div>
+                </div>
+            <div class="comment-body">
+                ${commentbody}
+            </div>
+            <div>
+                <button class="reply-button">Reply</button>
+            </div>
+        </div>
+    </div>`;
+
+        commentSection.innerHTML += item;
+
+        
+        for(let y = 1; y < post_Data.comment[x].length; y++){
+            var replyname = post_Data.commentname[x][y];
+            var replypic = post_Data.commentpic[x][y];
+            var replybody = post_Data.comment[x][y];
+
+            var comments = commentSection.querySelectorAll('.comment-thread');
+            var commentInstance = comments[x];
+
+            const replyItem = `
+                <div class="comment-instance">
+                    <div class="comment-header">
+                        <img class="comment-profile" src="${replypic}">
+                        <div class="comment-name">${replyname}</div>
+                    </div>
+                    <div class="comment-body">
+                        ${replybody}
+                    </div>
+                </div>
+            `;
+            const replyContainer = commentInstance.querySelector('.comment-body + div');
+            replyContainer.innerHTML += replyItem;
+        }
+    }
+}
+
+setCommentThread();
 
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -38,8 +107,14 @@ submitBtn.addEventListener('click', (e) => {
     </div>`;
 
     commentSection.innerHTML += item;
-    commentCount++;
-    localStorage.setItem('commentCount', commentCount);  
+
+    post_Data.commentCount++;   
+
+    
+    getCommentThread();
+    
+    localStorage.setItem('post_Data', JSON.stringify(post_Data));
+    channel.postMessage("Post Submitted");
 });
 
 commentSection.addEventListener('click', (e) => {
@@ -65,7 +140,7 @@ commentSection.addEventListener('click', (e) => {
             const replyInput = replyForm.querySelector('.reply-input');
             const replyText = replyInput.value;
 
-            const replyItem = `<div class="comment-thread">
+            const replyItem = `
                 <div class="comment-instance">
                     <div class="comment-header">
                         <img class="comment-profile" src="../MCO1/profile.jpg">
@@ -75,14 +150,19 @@ commentSection.addEventListener('click', (e) => {
                         ${replyText}
                     </div>
                 </div>
-            </div>`;
+            `;
 
             const replyContainer = commentInstance.querySelector('.comment-body + div');
             replyContainer.innerHTML += replyItem;
             replyForm.remove();
 
-            commentCount++;      
-            localStorage.setItem('commentCount', commentCount);    
+            post_Data.commentCount++;    
+            
+            getCommentThread();  
+            
+            localStorage.setItem('post_Data', JSON.stringify(post_Data));
+            channel.postMessage("Post Submitted");
+            
         });
     }
 });
@@ -90,19 +170,18 @@ commentSection.addEventListener('click', (e) => {
 const likeBtn = document.querySelector('.like');
 
 likeBtn.addEventListener('click' , (e) => {
-    likeCount++;
-    document.querySelector('.counter').innerHTML = likeCount;
-    localStorage.setItem('likeCount', likeCount);
+    post_Data.likeCount++;
+    document.querySelector('.counter').innerHTML = post_Data.likeCount;
+    localStorage.setItem('post_Data', JSON.stringify(post_Data));
+    channel.postMessage("Post Submitted");
     
 })
 
 const dislikeBtn = document.querySelector('.dislike');
 
 dislikeBtn.addEventListener('click' , (e) => {
-    likeCount--;
-    document.querySelector('.counter').innerHTML = likeCount;
-    localStorage.setItem('likeCount', likeCount);
+    post_Data.likeCount--;
+    document.querySelector('.counter').innerHTML = post_Data.likeCount;
+    localStorage.setItem('post_Data', JSON.stringify(post_Data));
+    channel.postMessage("Post Submitted");
 })
-} catch(err){
-    console.log("post page loaded");
-}
