@@ -247,29 +247,6 @@ ul{
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DEREK'S CSS ELEMENTS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-.button-container{
-    float: right;
-}
-
-.clickable{
-    margin-right: 20px;
-}
-
-.clickable:hover{
-    background-color: rgba(149, 149, 149, 0.5);
-}
-
-.nav-bar{
-	background-color:red;
-}
-
-.title{
-    font-family: 'Tsukimi Rounded', sans-serif;
-    font-size: 1.4rem;
-}
-/*End of header elements*/
-
 /*Edit post elements (Slide 5)*/
 .body-container {
     border: 2px solid #000000; 
@@ -282,7 +259,7 @@ ul{
 }
 
 div.post-footer {
-    margin-top: 5px;
+    
 	padding: 16px;
     background-color: darkgrey;
     border-radius: 10px;
@@ -290,6 +267,7 @@ div.post-footer {
 
 .comment-bar {
 	vertical-align: center;
+    align-items: center;
 	padding: 0 10px;
     border-radius: 50px;
     background-color: lightgray;
@@ -303,9 +281,8 @@ span.comment-title {
 	font-size: smaller;
 	background-color: white;
     border-radius: 50px;
-	min-height: 40px;
-	min-width: 200px;
-	
+	display: inline-block;
+    margin:  8px 0;
 }
 
 span.comment-body {
@@ -316,13 +293,14 @@ span.comment-body {
 }
 
 span.edit{
-	float: right;
+    cursor: pointer;
+	margin-left: 5px;
+	margin-top: 5px;
 	margin-right: 5px;
 }
 
 .edit {
-	
-	display: inline-block;
+	float: right;
 	background-image: url("edit-symbol.png");
 	background-position: 0 0;
 	background-repeat: no-repeat;
@@ -334,42 +312,53 @@ span.edit{
 	margin-bottom: 8px;
 }
 
-
-
-div.edit{
-
-	margin-left: 5px;
-	margin-top: 5px;
-    margin-left: 6em;
-    float:right;
-
-}
 /*End of comment bar content*/
 
 
+/*Post Edit Content*/
+
+.icon{
+    margin-right: 5px;
+}
+
+.post-title{
+    
+	background-repeat: no-repeat;
+    max-width: fit-content;
+	margin: 8px;
+}
+
+
 .comment{
-	display: block;
+	display: inline-block;
 	background: url('text_bubble_l.png') no-repeat 2.941% 40%;
 	background-size: 128px 32px;
 	width: 26px;
 	height: 22px;
-	margin-left: 4px;
+	margin-left: 0;
 }
 
+
+.flex{
+    display: flex;
+    flex-direction: row;
+}
 .content-header{
+    display: flex;
     background-color: white;
-	display: flex;
-    
+    padding: 0 10px;
     border-radius: 50px;
+    vertical-align: center;
     align-items: center;
 }
 
 .content-text{
     margin: 0 6px;
-	
+    margin-bottom: 5px;
 }
 
-.post-title{
+#edit-post-body{
+    display: inline-block;
     align-items: center;
     margin: 0 33em ;
 }
@@ -384,20 +373,21 @@ div.post-container{
 	
 }
 
-
-div.post-header {
-	height: 35px;
-	padding: 16px;
-	display: flex;
-	position: relative;
-    margin-bottom: 17px;
+div.comment-container{
+	margin: auto;
+	background-color:grey;
+	border: 1px solid black;
+	font-size: 14px;
+	box-sizing: border-box;
+    padding: 5px;
+	
 }
 
-
 .post-content {
-    padding: 10px;
+    padding: 16px;
     background-color: darkgray;
 	border-radius: 10px;
+    
 }
 
 .img-container{
@@ -418,7 +408,7 @@ div.post-header {
 }
 
 .like{
-	float:left;
+	display: inline-block;
 	background-image: url('thumbs.png');
 	background-size: 50px 25px;
 	background-position: 0 0;
@@ -429,48 +419,10 @@ div.post-header {
 }
 
 .dislike{
-	float:left;
+	display:inline-block;
 	background: url('thumbs.png') no-repeat -25px 0;
 	background-size: 50px 25px;
 	width: 25px;
 	height: 25px;
 	
-}
-
-.profile-icon {
-	width: 60px;
-	height: 60px;
-	margin-right: 5px;
-	border-radius: 50%;
-	background-color: #FAFAFA;
-	
-	border: 1px solid #EFEFEF;
-}
-
-.profile-name-container{
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 5px;
-}
-
-.profile-name {
-	padding: 5px;
-    border-radius: 50px;
-    background-color: lightgrey;
-	
-}
-
-.profile-info{
-	padding: 5px;
-    border-radius: 50px;
-    background-color: lightgray;
-	width: 300px;
-}
-
-
-.username {
-	font-size: inherit;
-	
-	margin: 0;
-	padding: 0;
 }

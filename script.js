@@ -53,3 +53,43 @@ saveBtn.onclick = function() {
 
 
 /*===================================EDIT POST========================*/
+/*Opens the editor*/
+
+
+document.getElementById("edit-post-button").addEventListener("click", function() {
+    var x = document.getElementsByClassName("post-title");
+    x[0].style.display = "none";
+    document.getElementById("edit-post-body").value = document.getElementById("post-title").textContent;
+    document.getElementById("edit-post-body").style.display = "inline-block";
+    document.getElementById("post-save-button").style.display = "inline-block";
+});
+
+/*Closes the editor*/
+
+let save = document.getElementById("post-save-button");
+save.addEventListener("click", function() {
+    document.getElementById("post-title").textContent = document.getElementById("edit-post-body").value;
+    document.getElementById("post-title").style.display = "inline-block";
+    document.getElementById("edit-post-body").style.display = "none";
+    save.style.display = "none";
+});
+
+/*
+
+document.getElementById("edit-button").addEventListener("click", function() {
+    document.getElementById("comment-body").style.display = "none";
+    document.getElementById("edit-comment-body").value = document.getElementById("comment-body").textContent;
+    document.getElementById("edit-comment-body").style.display = "inline-block";
+    document.getElementById("save-button").style.display = "inline-block";
+});
+
+ 
+document.getElementById("save-button").addEventListener("click", function() {
+    document.getElementById("comment-body").textContent = document.getElementById("edit-comment-body").value;
+    document.getElementById("comment-body").style.display = "inline-block";
+    document.getElementById("edit-comment-body").style.display = "none";
+    document.getElementById("save-button").style.display = "none";
+});
+
+*/
+/*===================================EDIT COMMENT======================*/
