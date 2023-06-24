@@ -204,6 +204,9 @@ ul{
     margin: 0;
 }
 
+.bottom-section p {
+    white-space: pre-wrap;
+}
 
 .bottom-section h2 {
     font-size: 0.9em;
@@ -289,12 +292,15 @@ div.post-footer {
 }
 
 .comment-bar {
-	vertical-align: center;
-	padding: 0 10px;
+    display: flex; /* This turns comment-bar into a flex container */
+    align-items: center; /* Aligns items at the start of the container */
+    padding: 0 10px;
     border-radius: 50px;
     background-color: lightgray;
-	
+    min-height: 50px; /* Or whatever height is appropriate */
+    overflow: auto; /* Adds scroll bar if necessary */
 }
+
 
 /*Content of comment bar*/
 
@@ -303,21 +309,21 @@ span.comment-title {
 	font-size: smaller;
 	background-color: white;
     border-radius: 50px;
-	min-height: 40px;
 	min-width: 200px;
 	
 }
 
-span.comment-body {
-	display: inline-block;
-	background-repeat: no-repeat;
-    max-width: fit-content;
-	margin: 8px;
+.comment-body p{
+    white-space: pre-wrap; /* Preformatted text */
+    background-repeat: no-repeat;
+    margin: 8px;
 }
 
 img.edit{
 	float: right;
 	margin-right: 5px;
+    margin-top: 10px;  /* Adjust as needed */
+    margin-left: 10px; /* Adjust as needed */
 }
 
 .edit {
@@ -333,9 +339,6 @@ img.edit{
     margin-bottom: 8px;
 }
 
-
-
-
 div.edit{
 
 	margin-left: 5px;
@@ -344,8 +347,6 @@ div.edit{
     float:right;
 
 }
-/*End of comment bar content*/
-
 
 .comment{
 	display: block;
