@@ -294,13 +294,20 @@ div.post-footer {
 .comment-bar {
     display: flex; /* This turns comment-bar into a flex container */
     align-items: center; /* Aligns items at the start of the container */
-    padding: 0 10px;
+    padding: 20px; /* add some padding */
     border-radius: 50px;
     background-color: lightgray;
     min-height: 50px; /* Or whatever height is appropriate */
-    overflow: auto; /* Adds scroll bar if necessary */
+    overflow: auto;
+    flex-wrap: wrap;
 }
 
+
+
+.comment-body {
+    flex-grow: 1;
+    overflow: auto;
+}
 
 /*Content of comment bar*/
 
@@ -314,7 +321,7 @@ span.comment-title {
 }
 
 .comment-body p{
-    white-space: pre-wrap; /* Preformatted text */
+    white-space: pre-wrap;
     background-repeat: no-repeat;
     margin: 8px;
 }
@@ -322,14 +329,14 @@ span.comment-title {
 img.edit{
 	float: right;
 	margin-right: 5px;
-    margin-top: 10px;  /* Adjust as needed */
-    margin-left: 10px; /* Adjust as needed */
+    margin-top: 10px;
+    margin-left: 10px; 
 }
 
 .edit {
     cursor: pointer;
     display: block;
-    background-image: url("/statics/edit-symbol.png");
+    background-image: url("edit-symbol.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: 20px 20px;
@@ -350,7 +357,7 @@ div.edit{
 
 .comment{
 	display: block;
-	background: url('/statics/text_bubble_l.png') no-repeat 2.941% 40%;
+	background: url('text_bubble_l.png') no-repeat 2.941% 40%;
 	background-size: 128px 32px;
 	width: 26px;
 	height: 22px;
@@ -420,7 +427,7 @@ div.post-header {
 
 .like{
 	float:left;
-	background-image: url('/statics/thumbs.png');
+	background-image: url('thumbs.png');
 	background-size: 50px 25px;
 	background-position: 0 0;
 	background-repeat: no-repeat;
@@ -431,7 +438,7 @@ div.post-header {
 
 .dislike{
 	float:left;
-	background: url('/statics/thumbs.png') no-repeat -25px 0;
+	background: url('thumbs.png') no-repeat -25px 0;
 	background-size: 50px 25px;
 	width: 25px;
 	height: 25px;
