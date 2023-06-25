@@ -94,15 +94,15 @@ const clickpostButtons = document.querySelectorAll('.post-button');
 
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('post-button')) {
-      e.preventDefault();
+    e.preventDefault();
 
-      const postInstance = e.target.closest('.post-instance');
-      var postID = parseInt(postInstance.querySelector('.id').textContent ,10);
+    const postInstance = e.target.closest('.post-instance');
+    var postID = parseInt(postInstance.querySelector('.id').textContent ,10);
 
-      localStorage.setItem('post_Data', JSON.stringify(post_container[postID]));
-      window.open("../MCO1/post.html");
+    localStorage.setItem('post_Data', JSON.stringify(post_container[postID]));
+    window.open("../MCO1/post.html");
     }
-  });
+});
 
 channel2.onmessage = function(event){
     if(event.data == "Post Submitted"){
@@ -111,10 +111,6 @@ channel2.onmessage = function(event){
         post_container[ID] = JSON.parse(localStorage.getItem('post_Data'));
     }
 }
-
-
-  
-
 
 
 
