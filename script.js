@@ -113,24 +113,6 @@ channel2.onmessage = function(event){
 }
 
 
-/*
-commentSection.addEventListener('click', (e) => {
-    if (e.target.classList.contains('reply-button')) {
-        console.log("Button was pressed");
-
-        const commentInstance = e.target.closest('.comment-instance');
-
-        const replyForm = commentInstance.querySelector('.reply-form');
-        replyForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            var ID = JSON.parse(localStorage.getItem('post_Data')).id;
-            post_container[ID] = JSON.parse(localStorage.getItem('post_Data'));
-            
-        });
-    }
-});
-*/
   
 
 
