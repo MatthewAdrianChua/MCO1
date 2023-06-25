@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root {
+    font-family: 'Roboto Mono', monospace;
+}
+
+body{
+    margin: 0px;
+}
+
+.firsthead {
+    position: sticky;
+    top: 0px;
+    background-color: #0081A7;
+    display: flex;
+    height: 4rem;
+    z-index: 2; 
+}
+
+.secondhead {
+    position: sticky;
+    top: 0px;
+    background-color: #66c0db;
+    height: 4rem;
+    z-index: 1;
+}
+
+.logo {
+    font-size: 40px;
+    margin: 0px;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.header_logo {
+    background-image: url("https://media.discordapp.net/attachments/354239629798539264/1120363756287951061/merchant.jpg");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+}
+
+.header_text{
+    cursor: pointer;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+}
+
+#searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    padding: 9px;
+    border: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 17px;
+    border-radius: 1.625rem;
+    outline: none;
+    background: #f5f5f5;
+}
+
+#searchsubmit {
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: -2.5rem;
+}
+
+#searchsubmit:hover{
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#profilePic {
+    border-radius: 50%;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    margin: 3px 10px 0px 0px;
+}
+
+.profileBtn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 64px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    background-color: #3bc98e;
+    border: 1px solid #249e6b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 10px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.show-menu .dropdown-content {
+    display: block;
+    opacity: 1;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#createpost {
+    margin: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: left;
+    float: left;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+#createpost:hover {
+    cursor:pointer;
+}
+
+.rightbtns {
+    display: flex;
+    float: right;
+    text-align: right;
+    flex-direction: right;
+    justify-content: flex-end;
+}
+
+.movebutton {
+    margin: 0.5rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    float: right;
+    text-align: right;
+    flex-direction: right;
+    justify-content: flex-end;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+.movebutton:hover{
+    cursor:pointer;
+}
+
+.profile-box {
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 85%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-pic img {
+    width: 80px; 
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.bottom-section p {
+    white-space: pre-wrap;
+}
+
+.bottom-section h2 {
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DEREK'S CSS ELEMENTS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.button-container{
+    float: right;
+}
+
+.clickable{
+    margin-right: 20px;
+}
+
+.clickable:hover{
+    background-color: rgba(149, 149, 149, 0.5);
+}
+
+.nav-bar{
+	background-color:red;
+}
+
+.title{
+    font-family: 'Tsukimi Rounded', sans-serif;
+    font-size: 1.4rem;
+}
+/*End of header elements*/
+
+/*Edit post elements (Slide 5)*/
+.body-container {
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 85%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div.post-footer {
+    margin-top: 5px;
+	padding: 16px;
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
+.comment-bar {
+    display: flex; /* This turns comment-bar into a flex container */
+    align-items: center; /* Aligns items at the start of the container */
+    padding: 20px; /* add some padding */
+    border-radius: 50px;
+    background-color: lightgray;
+    min-height: 50px; /* Or whatever height is appropriate */
+    overflow: auto;
+    flex-wrap: wrap;
+}
+
+
+
+.comment-body {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+/*Content of comment bar*/
+
+span.comment-title {
+	padding: 3px;
+	font-size: smaller;
+	background-color: white;
+    border-radius: 50px;
+	min-width: 200px;
+	
+}
+
+.comment-body p{
+    white-space: pre-wrap;
+    background-repeat: no-repeat;
+    margin: 8px;
+}
+
+img.edit{
+	float: right;
+	margin-right: 5px;
+    margin-top: 10px;
+    margin-left: 10px; 
+}
+
+.edit {
+    cursor: pointer;
+    display: block;
+    background-image: url("edit-symbol.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+div.edit{
+
+	margin-left: 5px;
+	margin-top: 5px;
+    margin-left: 6em;
+    float:right;
+
+}
+
+.comment{
+	display: block;
+	background: url('text_bubble_l.png') no-repeat 2.941% 40%;
+	background-size: 128px 32px;
+	width: 26px;
+	height: 22px;
+	margin-left: 4px;
+}
+
+.content-header{
+    background-color: white;
+	display: flex;
+    
+    border-radius: 50px;
+    align-items: center;
+}
+
+.content-text{
+    margin: 0 6px;
+	
+}
+
+.post-title{
+    align-items: center;
+    margin: 0 33em ;
+}
+
+div.post-container{
+	margin: auto;
+	background-color:grey;
+	border: 1px solid black;
+	font-size: 14px;
+	box-sizing: border-box;
+    padding: 5px;
+	
+}
+
+
+div.post-header {
+	height: 35px;
+	padding: 16px;
+	display: flex;
+	position: relative;
+    margin-bottom: 17px;
+}
+
+
+.post-content {
+    padding: 10px;
+    background-color: darkgray;
+	border-radius: 10px;
+}
+
+.img-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	padding: 10px;
+	width:500px;
+	height:500px;
+
+}
+.img{
+	width: 100%;
+    height: 100%;
+	overflow: hidden;
+
+}
+
+.like{
+	float:left;
+	background-image: url('thumbs.png');
+	background-size: 50px 25px;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 25px;
+	
+}
+
+.dislike{
+	float:left;
+	background: url('thumbs.png') no-repeat -25px 0;
+	background-size: 50px 25px;
+	width: 25px;
+	height: 25px;
+	
+}
+
+.profile-icon {
+	width: 60px;
+	height: 60px;
+	margin-right: 5px;
+	border-radius: 50%;
+	background-color: #FAFAFA;
+	
+	border: 1px solid #EFEFEF;
+}
+
+.profile-name-container{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 5px;
+}
+
+.profile-name {
+	padding: 5px;
+    border-radius: 50px;
+    background-color: lightgrey;
+	
+}
+
+.profile-info{
+	padding: 5px;
+    border-radius: 50px;
+    background-color: lightgray;
+	width: 300px;
+}
+
+.username {
+	font-size: inherit;
+	
+	margin: 0;
+	padding: 0;
+}
