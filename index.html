@@ -3,13 +3,11 @@
     <head>
         <title>Forum</title>
         <link rel="stylesheet" href="index.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
     </head>
     <body>
         <div class="firsthead">
             <span class="logo">
-                <img class="header_logo"><a href="index.html">Postiee</a>
+                <img class="header_logo">Postiee
             </span>
             <span class="search">
                 <input type="text" id="searchbar" name="searchbar" placeholder="Search...">
@@ -23,12 +21,16 @@
             </span>
         </div>
         <div class="secondhead">
-            <button id="createpost" name="createpost" type="button">Create Post</button>
+                <button id="createpost" name="createpost" type="button">Create Post</button>           
             <span class="rightbtns">
                 <button class="movebutton" name="prevpage" type="button">Previous Page</button>
                 <button class="movebutton" name="nextpage" type="button">Next Page</button>
             </span>
         </div>
+
+       
+
+        
         <div class="wrapper">
             <button class="closelogreg" type="button">X</button>
             <div class="formbox log">
@@ -47,7 +49,7 @@
                         Remember me</label>
                         <a href="#">Forgot Password?</a>
                     </div>
-                    <button type="submit" class="submitbtn">Login</button>
+                    <button type="submit" class="submitbtnlog">Login</button>
                     <div class="login-register">
                         <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
                     </div>
@@ -57,54 +59,25 @@
                 <h2>Register</h2>
                 <form action="#">
                     <div class="inputbox">
-                        <input type="text" required>
+                        <input type="text" id="regname" required>
                         <label>Username</label>
                     </div>
                     <div class="inputbox">
-                        <input type="email" required>
+                        <input type="email" id="regemail" required>
                         <label>Email</label>
                     </div>
                     <div class="inputbox">
-                        <input type="password" required>
+                        <input type="password" id="regpassword" required>
                         <label>Password</label>
                     </div>
-                    <button type="submit" class="submitbtn">Register</button>
+                    <button type="submit" class="submitbtnreg">Register</button>
                     <div class="login-register">
                         <p>Already have an Account? <a href="#" class="login-link">Login</a></p>
                     </div>
                 </form>
             </div>
-        </div>
-        <form id="createpost-form" name="creatpost-form">
-            <div class="header-post">
-                <span class ="header">CREATE A POST</span>
-                <button class ="exit">X</button>
-            </div>
-                <input id="title-post" name="title-post" type="text" placeholder="Title"></input><br>
-                <textarea id="post-body" name="post-body" type="text" placeholder="Text"></textarea><br>
-                <input id="submit-post" type="submit" value="Submit">
-         </form>
-         <div class="posts-container">
-           
-         </div>
-         <!--= OLD TEMP DO NOT USE
-        <div id="post-thread">
-            <a class="post-button" href="#">
-                <div class="post-wrapper">
-                    <ion-icon name="caret-up-circle-outline"></ion-icon>
-                    <p class="post-numbers" id="">0</p>
-                    <ion-icon name="caret-down-circle-outline"></ion-icon>
-                    <p class="post-numbers">0</p>
-                    <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                    <p class="post-numbers">0</p>
-                    <p class="post-title">Lorem Ipsum Something Something</p>
-                    <p class="post-author">By:Lorem Ipsum</p>
-                </div>
-            </div>
-        </a> -->
+        
         <script src="script.js"></script>
-        <script src="post.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
+

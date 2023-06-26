@@ -3,6 +3,9 @@ const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
 const btnPopup = document.querySelector('#logregbtn');
 const wrapperBtnClose = document.querySelector('.closelogreg');
+const createPost = document.querySelector('#createpost');
+
+const channel4 = new BroadcastChannel('myChannel');
 
 registerLink.addEventListener('click', () => {
     wrapper.classList.add('active')
@@ -20,51 +23,51 @@ wrapperBtnClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup');
 });
 
-const createPost = document.querySelector('#createpost');
-const createpostForm = document.querySelector('#createpost-form');
-
-createPost.addEventListener('click', (e)=> {
-    createpostForm.classList.add('show');
+createPost.addEventListener('click', (e) => {
+    wrapper.classList.add('active-popup')
 });
 
-const postSubmit = document.querySelector('#submit-post');
+const registerSumbit = document.querySelectorAll('.submitbtnreg');
+const users = [];
+var usercount = 0;
 
+class userData{
+    constructor(){
+        this.id = 0;
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.bio = ""
+        this.birthday = "";
+        this.userposts = [];
+        this.usercomments = []; //2d array the first column of a row is the postid the second column is the row in commentarray and the third column is the column in th commentarray
+    }
+}
 
-postSubmit.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    title = document.querySelector('#title-post').value;
-    localStorage.setItem('title', title);
-    body = document.querySelector('#post-body').value;
-    localStorage.setItem('body', body);
-
-    window.open("post.html");
-
-    likeCount =  localStorage.getItem('likeCount');
-    commentCount = localStorage.getItem('commentCount');
-
-    const item = `<div class="post-instance">
-    <div class = "interactions">
-        <ion-icon name="caret-up-circle-outline"></ion-icon>
-        <div class="like-count"> ${likeCount}</div>
-        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        <div class="comment-count">${commentCount}</div>
-    </div>
-    <div class="index-title"> <a href="post.html" id="index-title-link">${title}</a><div>
-    </div>`
-
-    document.querySelector('.posts-container').innerHTML += item;
-
-    createpostForm.classList.remove('show');
-
+registerSumbit.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        var user = new userData();
+        user.id = usercount;
+        usercount++;
+        user.name = document.querySelector('#regname').value;
+        user.email = document.querySelector('#regemail').value;
+        user.password = document.querySelector('#regpassword').value;
+        users.push(user);
+        localStorage.setItem('user_id', JSON.stringify(user.id));
+        localStorage.setItem('users', JSON.stringify(users));
+        window.location.href = "../MCO1/login.html";
+    })
 })
 
-const exitpostform = document.querySelector('.exit');
+channel4.onmessage = function(event){ //to receive when a user saves their edited profile
+    if(event.data == "Profile Saved"){
+        var user_id = JSON.parse(localStorage.getItem('user-data')).id;
+        users[user_id] = JSON.parse(localStorage.getItem('user-data'))
+    }
+}
 
-exitpostform.addEventListener('click', (e) => {
-    e.preventDefault();
-    createpostForm.classList.remove('show');
-})
+
 
 
 
