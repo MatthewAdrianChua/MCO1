@@ -3,7 +3,6 @@
     <head>
         <title>Forum</title>
         <link rel="stylesheet" href="profile.css">
-        <script src="profile.js" defer></script>
     </head>
     <body>
         <div class="firsthead">
@@ -25,7 +24,7 @@
                     </button>
                     <div class="dropdown-content">
                         <ul>
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="profile.html">Profile</a></li> <!-- the link does not work when I attach event listener to it for now I added an openwindow function to an event listner to manually open profile page-->
                             <br>
                             <li><a href="index.html">Logout</a></li>
                         </ul>
@@ -66,47 +65,28 @@
             </div>
         </div>
 
+
         <!------------------------------------------------------DEREK'S PART--------------------------------------------------------->
         <div class = "body-container">
             <div class="post-container">
                 <!--- POSTS-->
-                <div class="post-content">
-                    <div class = "content-header">
-                        
-                        <span class = "content-text"> 5 </span> <span class ="like"> </span> 
-                        
-                        
-                        
-                        <span class = "content-text"> 8 </span> <span class ="dislike"> </span>
-                        
-                        
-                        
-                        <span class = "content-text"> 3 </span> <span class ="comment"> </span> 
-                        
-                        
-                        
-                        <span class = "post-title"> Post Title </span>
-                        
-                        <div class="edit"></div> 
-                        
-                        
-                    </div>
-                </div>
+                 
             </div>
-
-
 
                 <!--- COMMENTS-->
                 <div class="post-footer">
-                    <div class="comment-bar">
-                        <span class="comment-title"> comment on ___'s post </span>
-                        <span class="comment-body" id="comment-body">:  comment body </span>
-                        <input type="text" id="edit-comment-body" style="display: none;" />
-                        <button id="save-button" style="display: none;">Save</button>
-                        <span class="edit" id="edit-button"> </span>
-                    </div>
+                    
                 </div>
-            </div>
         </div>
+        <form id="editpost-form" name="editpost-form">
+            <div class="header-post">
+                <span class ="header">EDIT A POST</span>
+                <button class ="exit">X</button>
+            </div>
+            <input id="title-post" name="title-post" type="text" placeholder="Title"></input><br>
+            <input id="post-body" name="post-body" type="text" placeholder="Text"></input><br>
+            <input id="submit-post" type="submit" value="Submit">
+        </form>
+        <script src="profile.js" defer></script>
     </body>
 </html>
