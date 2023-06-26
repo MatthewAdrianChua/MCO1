@@ -5,12 +5,11 @@
         <link rel = "stylesheet" href = "post.css">
     </head>
     <body>
-        <div class="navbar">
-            <div class="name">
-                <span class="logo">
-                    <img class="header_logo">Postiee
-                </span>
-            </div>
+        <div class="firsthead">
+            <span class="logo">
+                <img class="header_logo">
+                <p class="header_text">Postiee</p>
+            </span>
             <span class="search">
                 <input type="text" id="searchbar" name="searchbar" placeholder="Search...">
                 <button id="searchsubmit" name="searchsubmit" type="submit">
@@ -18,9 +17,20 @@
                     </svg>
                 </button>
             </span>
-            <button class="profile">
-                <img class="profile-pic" src="../MCO1/profile.jpg">
-            </button>
+            <span class="profile">
+                <div class="dropdown">
+                    <button class="profileBtn">
+                    <img src="profile.jpg" alt="profilepic" id="profilePic">
+                    </button>
+                    <div class="dropdown-content">
+                        <ul>
+                            <li><a href="profile.html">Profile</a></li> <!-- the link does not work when I attach event listener to it for now I added an openwindow function to an event listner to manually open profile page-->
+                            <br>
+                            <li><a href="index.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </span>
         </div>
         <div class="post-container">
             <div class="header">
@@ -73,6 +83,5 @@
               
         </div>
         <script src="post.js" defer></script>
-        <script src="script.js" defer></script>
     </body>
 </html>

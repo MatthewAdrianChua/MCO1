@@ -261,3 +261,121 @@ body{
 .submit-reply:hover{
     margin-left: 100px;
 }
+
+.firsthead {
+    position: sticky;
+    top: 0px;
+    background-color: #0081A7;
+    display: flex;
+    height: 4rem;
+    z-index: 2; 
+}
+
+.logo {
+    font-size: 40px;
+    margin: 0px;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.header_logo {
+    background-image: url("https://media.discordapp.net/attachments/354239629798539264/1120363756287951061/merchant.jpg");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+}
+
+.header_text{
+    cursor: pointer;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+}
+
+#searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    padding: 9px;
+    border: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 17px;
+    border-radius: 1.625rem;
+    outline: none;
+    background: #f5f5f5;
+}
+
+#searchsubmit {
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: -2.5rem;
+}
+
+#searchsubmit:hover{
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#profilePic {
+    border-radius: 50%;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    margin: 3px 10px 0px 0px;
+}
+
+.profileBtn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 64px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    background-color: #3bc98e;
+    border: 1px solid #249e6b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 10px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.show-menu .dropdown-content {
+    display: block;
+    opacity: 1;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
