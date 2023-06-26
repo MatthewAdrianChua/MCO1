@@ -205,8 +205,9 @@ profileBtn.addEventListener('click', e => {
 }); 
 
 postie.addEventListener('click', e => {
-    window.location.href = "login.html";
+    localStorage.setItem('user_data', json.stringify(userDataInstance2));
     channel3.postMessage("Main page request");
+    window.location.href = "login.html";
 });
 
 

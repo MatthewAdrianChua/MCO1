@@ -44,6 +44,23 @@ class userData{
     }
 }
 
+function initializedTempUsers(id, name, email, password, bio, birthday, userposts, usercomments){
+    var user = new userData();
+    user.id = id;
+    usercount++;
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    user.bio = bio;
+    user.birthday = birthday;
+    user.userposts = userposts;
+    user.usercomments = usercomments;
+    users.push(user);
+}
+
+initializedTempUsers(usercount, "Matthew Adrian Chua", "Matthew@email.com", "1234", "Hi Im Matt", "05/09/2003", [0], [[0,0,0]]);
+initializedTempUsers(usercount, "Ysabelle", "Ysabelle@email.com", "1234", "Hi Im Ysabelle", "05/10/2003", [], [[0,0,1]]);
+
 registerSumbit.forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault();
@@ -54,7 +71,7 @@ registerSumbit.forEach(button => {
         user.email = document.querySelector('#regemail').value;
         user.password = document.querySelector('#regpassword').value;
         users.push(user);
-        localStorage.setItem('user_id', JSON.stringify(user.id));
+        localStorage.setItem('user_id', JSON.stringify(users[user.id]));
         localStorage.setItem('users', JSON.stringify(users));
         window.location.href = "../MCO1/login.html";
     })

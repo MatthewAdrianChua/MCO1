@@ -31,8 +31,7 @@ postie2.addEventListener('click', e => {
 const clickprofile2 = document.querySelector('.dropdown-content a:first-child');
 
 clickprofile2.addEventListener('click', (e) =>{
-    e.preventDefault();
-    localStorage.setItem('user_data', JSON.stringify(user_DataInstance));
+    localStorage.setItem('userDataInstance', JSON.stringify(user_DataInstance));
     const newWindow = window.open("../MCO1/profile.html");
 })
 
@@ -200,7 +199,7 @@ commentSection.addEventListener('click', (e) => {
             replyForm.remove();
 
             commentIDs[index].push(user_DataInstance.id);
-            console.log(commentIDs);
+            console.log('commentid',commentIDs[index]);
             
             post_Data.commentCount++;    
             
