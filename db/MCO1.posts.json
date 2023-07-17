@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "64b4984824a06d466ddf8dda"
+  },
+  "id": 1,
+  "likeCount": 5,
+  "commentCount": 5,
+  "title": "This is a post",
+  "body": "body",
+  "userID": 1,
+  "isDeleted": false
+}]

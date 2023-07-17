@@ -7,6 +7,11 @@ const formElement = document.forms.commentform;
 
 const commentSection = document.querySelector('#comment-section');
 
+postie2.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = "/loggedIn"
+})
+
 profileBtn2.addEventListener('click', e => {
     dropdownContent2.classList.toggle('show-menu');
 }); 

@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "64b4985124a06d466ddf8ddb"
+  },
+  "commentBody": "This is a comment",
+  "postID": "1",
+  "userID": 1,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "64b49bbc4d97cb09698bd36f"
+  },
+  "commentBody": "This is a comment by John",
+  "postID": "1",
+  "userID": 2,
+  "commentID": 2,
+  "parent": "",
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "64b49bc64d97cb09698bd370"
+  },
+  "commentBody": "This is a reply by John",
+  "postID": "1",
+  "userID": 2,
+  "commentID": 3,
+  "parent": "1",
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "64b4a623738e57088aea1be0"
+  },
+  "commentBody": "comment again",
+  "postID": "1",
+  "userID": 1,
+  "commentID": 4,
+  "parent": "",
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "64b4a664c194f43637959f70"
+  },
+  "commentBody": "Another reply",
+  "postID": "1",
+  "userID": 1,
+  "commentID": 5,
+  "parent": "4",
+  "isDeleted": false
+}]

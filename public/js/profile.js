@@ -13,7 +13,8 @@ profileBtn.addEventListener('click', e => {
 }); 
 
 postie.addEventListener('click', e => {
-    window.location.href = "login.html";
+  e.preventDefault();
+  window.location.href = "/loggedIn";
 });
 
 
