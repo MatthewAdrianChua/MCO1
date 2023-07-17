@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "64b497cf98c817df91f8b221"
+  },
+  "id": 1,
+  "name": "Matthew Chua",
+  "email": "matthewadrianchua@yahoo.com",
+  "password": "12345",
+  "image": "http://localhost:3000/image/64b4887c56db8478142667c4",
+  "bio": "",
+  "birthday": "",
+  "commentCount": 2
+},
+{
+  "_id": {
+    "$oid": "64b49ba54d97cb09698bd36e"
+  },
+  "id": 2,
+  "name": "John",
+  "email": "John@email.com",
+  "password": "12345",
+  "image": "http://localhost:3000/image/64b49c507c528562d83a6557",
+  "bio": "",
+  "birthday": ""
+}]

@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "64b4887c56db8478142667c4"
+  },
+  "length": 17165,
+  "chunkSize": 261120,
+  "uploadDate": {
+    "$date": "2023-07-17T00:17:00.948Z"
+  },
+  "filename": "noProfile.jpg"
+},
+{
+  "_id": {
+    "$oid": "64b49c507c528562d83a6557"
+  },
+  "length": 4269,
+  "chunkSize": 261120,
+  "uploadDate": {
+    "$date": "2023-07-17T01:41:36.776Z"
+  },
+  "filename": "profile2.jpg"
+}]

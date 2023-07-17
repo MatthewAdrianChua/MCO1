@@ -1,6 +1,12 @@
 install monngodb from 
 "https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/"
 
+install the optional mongodb compass
+
+in mongodb compass create these 5 collections: comments, fs.chunks, fs.files, posts, users
+
+import each of the db JSON files to its respective collection based of the name after the MCO1. i.e. MC01.users should be imported in the users collection
+
 in the terminal run these commands:
 npm i mongodb
 npm i express
