@@ -649,3 +649,7 @@ div.post-header {
 	margin: 0;
 	padding: 0;
 }
+
+.id{
+    display: none;
+}

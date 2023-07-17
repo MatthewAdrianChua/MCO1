@@ -31,7 +31,7 @@ postie2.addEventListener('click', e => {
 const clickprofile2 = document.querySelector('.dropdown-content a:first-child');
 
 clickprofile2.addEventListener('click', (e) =>{
-    localStorage.setItem('userDataInstance', JSON.stringify(user_DataInstance));
+    e.preventDefault();
     const newWindow = window.open("../MCO1/profile.html");
 })
 
@@ -129,7 +129,7 @@ submitBtn.addEventListener('click', (e) => {
     <div class="comment-instance">
         <div class="comment-header">
             <img class="comment-profile" src="../MCO1/profile.jpg">
-            <div class="comment-name" data-index= ${user_DataInstance.id}>Placeholder</div>
+            <div class="comment-name" data-index= ${user_DataInstance.id}>${user_DataInstance.name}</div>
         </div>
         <div class="comment-body">
             ${commenttext}
@@ -186,7 +186,7 @@ commentSection.addEventListener('click', (e) => {
                 <div class="comment-instance">
                     <div class="comment-header">
                         <img class="comment-profile" src="../MCO1/profile.jpg">
-                        <div class="comment-name" data-index= ${user_DataInstance}>Placeholder</div>
+                        <div class="comment-name" data-index= ${user_DataInstance}>${user_DataInstance.name}</div>
                     </div>
                     <div class="comment-body">
                         ${replyText}
@@ -199,7 +199,7 @@ commentSection.addEventListener('click', (e) => {
             replyForm.remove();
 
             commentIDs[index].push(user_DataInstance.id);
-            console.log('commentid',commentIDs[index]);
+            console.log(commentIDs);
             
             post_Data.commentCount++;    
             

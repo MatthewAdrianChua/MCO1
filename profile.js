@@ -205,9 +205,8 @@ profileBtn.addEventListener('click', e => {
 }); 
 
 postie.addEventListener('click', e => {
-    localStorage.setItem('user_data', json.stringify(userDataInstance2));
-    channel3.postMessage("Main page request");
     window.location.href = "login.html";
+    channel3.postMessage("Main page request");
 });
 
 
@@ -260,6 +259,5 @@ setPostContents();
 
 
 /*===================================EDIT POST========================*/
-
 
 

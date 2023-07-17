@@ -44,22 +44,22 @@ class userData{
     }
 }
 
-function initializedTempUsers(id, name, email, password, bio, birthday, userposts, usercomments){
-    var user = new userData();
-    user.id = id;
+function makeUserInstance(name, bio, birthday, userposts, usercomments){
+    let user = new userData();
+    user.id = usercount;
     usercount++;
     user.name = name;
-    user.email = email;
-    user.password = password;
     user.bio = bio;
     user.birthday = birthday;
     user.userposts = userposts;
     user.usercomments = usercomments;
+
     users.push(user);
 }
 
-initializedTempUsers(usercount, "Matthew Adrian Chua", "Matthew@email.com", "1234", "Hi Im Matt", "05/09/2003", [0], [[0,0,0]]);
-initializedTempUsers(usercount, "Ysabelle", "Ysabelle@email.com", "1234", "Hi Im Ysabelle", "05/10/2003", [], [[0,0,1]]);
+makeUserInstance("Matt", "Hi Im Matt", "05/09/2003", [0,1], [[0,0,0]])
+makeUserInstance("Ysabelle", "Hi Im Ysabelle", "05/09/2003", [2,3], [[0,0,1]])
+makeUserInstance("John", "Hi Im John", "05/09/2003", [4], [[0,0,2]])
 
 registerSumbit.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -71,7 +71,7 @@ registerSumbit.forEach(button => {
         user.email = document.querySelector('#regemail').value;
         user.password = document.querySelector('#regpassword').value;
         users.push(user);
-        localStorage.setItem('user_id', JSON.stringify(users[user.id]));
+        localStorage.setItem('user_id', JSON.stringify(user.id));
         localStorage.setItem('users', JSON.stringify(users));
         window.location.href = "../MCO1/login.html";
     })
@@ -83,7 +83,6 @@ channel4.onmessage = function(event){ //to receive when a user saves their edite
         users[user_id] = JSON.parse(localStorage.getItem('user-data'))
     }
 }
-
 
 
 
