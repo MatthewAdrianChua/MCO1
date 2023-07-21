@@ -143,7 +143,9 @@ body .wrapper {
 
 .wrapper {
     display:flex;
-    position: relative;
+    position: fixed;
+    top: 30%;
+    left: 35%;
     background-color: #3bc98e;
     width: 440px;
     height: 440px;
