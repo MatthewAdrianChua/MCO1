@@ -141,17 +141,27 @@ app.get("/postPage/:postID", async (req, res) => {
         const users = await db.collection('users');
         const user = await users.findOne({id: parseInt(currentUser)});
 
-        if(post){
+        if(post && currentUser){
             res.render("post", {
             title: post.title,
             postBody: post.body,
-            image: /*user.image*/ "", //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
+            image: user.image, //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
             likeCount: post.likeCount,
             script: "/static/js/post.js",
 
             comments: postComments,
             userArr: userArr
            
+            });
+        }else if(post){
+            res.render("post", {
+            title: post.title,
+            postBody: post.body,
+            likeCount: post.likeCount,
+            
+            script: "/static/js/post.js",
+            comments: postComments,
+            userArr: userArr    
             });
         }else{
             res.sendStatus(404);

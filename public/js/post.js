@@ -12,164 +12,268 @@ postie2.addEventListener('click', (e) => {
     window.location.href = "/loggedIn"
 })
 
-profileBtn2.addEventListener('click', e => {
-    dropdownContent2.classList.toggle('show-menu');
-}); 
-
-const clickprofile2 = document.querySelector('.dropdown-content a:first-child');
-
-clickprofile2.addEventListener('click', async (e) =>{
-    e.preventDefault();
-    
-    e.preventDefault();
-
-    const get = await fetch("/getCurrentUser", {
-        method: "GET"
-      });
-    
-      let currentUser;
-    
-      if(get.status == 200){
-        currentUser = await get.text();
-      }else{
-        console.error(`An error has occured. Status code = ${response.status}`); 
-      }
-
-    window.location.href = "/profile/"+currentUser;
-})
-
-submitBtn.addEventListener('click', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(formElement);
-
-    const body = formData.get("comment-input");
-    const currentUrl = window.location.href;
-    const postID = currentUrl.substring(currentUrl.lastIndexOf('/') + 1); //gets the postID at the end of the current url 
-    const parent = "";
-
-    console.log("Submit comment data: ", {body, postID, parent});
-
-    const jString = JSON.stringify({body, postID, parent});
-
-    const response = await fetch("/comment", {
-        method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-
-    if(response.status == 200){
-        console.log("Comment success");
-        window.location.reload();
-    }else
-        console.error(`An error has occured. Status code = ${response.status}`);
-});
-
-commentSection.addEventListener('click', (e) => {
-    if (e.target.classList.contains('reply-button')) {
-        console.log("Button was pressed");
-
-        const commentInstance = e.target.closest('.comment-instance');
-        const index = commentInstance.dataset.index;
-        console.log("INDEX", index);
-
-        const item = `<form class="reply-form">
-            <input class="reply-input" type="text" placeholder="reply"><br></input>
-            <input class="submit-reply" type="submit" value="Submit">
-        </form>`;
-
-        commentInstance.innerHTML += item;
-
-        const replyForm = commentInstance.querySelector('.reply-form');
-        replyForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const replyInput = replyForm.querySelector('.reply-input');
-            const body = replyInput.value;
-
-
-            const currentUrl = window.location.href;
-            const postID = currentUrl.substring(currentUrl.lastIndexOf('/') + 1); //gets the postID at the end of the current url 
-            const parent = index;
-
-            console.log("Submit comment data: ", {body, postID, parent});
-
-            const jString = JSON.stringify({body, postID, parent});
-
-            const response = await fetch("/comment", {
-            method: "POST",
-            body: jString,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        if(response.status == 200){
-            console.log("Comment success");
-            window.location.reload();
-        }else
-            console.error(`An error has occured. Status code = ${response.status}`);
-
-            replyForm.remove();
-
-        });
-    }
-});
+const wrapper = document.querySelector('.wrapper');
+const loginLink = document.querySelector('.login-link');
+const registerLink = document.querySelector('.register-link');
+const btnPopup = document.querySelector('#logregbtn');
+const wrapperBtnClose = document.querySelector('.closelogreg');
 
 const likeBtn = document.querySelector('.like');
 const dislikeBtn = document.querySelector('.dislike');
 
-likeBtn.addEventListener('click' , async (e) => {
-    const url = window.location.href;
+async function loadProfile(){ //this function will load the profile icon with drop down if a user is logged in if not otherwise it will load the login/register button
+    const response = await fetch("/getCurrentUser", {
+    method: "GET"
+    })
 
-    const parts = url.split("/");
-    const value = parts[parts.length - 1];
-
-    const jString = JSON.stringify({value});
-    console.log(jString);
-
-    const response = await fetch("/like", {
-        method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    let currentUser = "";
 
     if(response.status == 200){
-        console.log("Like success");
-        window.location.reload();
-    }else
-        console.error(`An error has occured. Status code = ${response.status}`);
+        currentUser = await response.text();
+    }else{
+        console.error(`An error has occured. Status code = ${response.status}`); 
+    }
 
+    if(currentUser != ""){
+        profileBtn2.addEventListener('click', e => {
+            dropdownContent2.classList.toggle('show-menu');
+        });
     
-})
+        const clickprofile2 = document.querySelector('.dropdown-content a:first-child');
+    
+        clickprofile2.addEventListener('click', async (e) =>{
+            e.preventDefault();
+    
+            window.location.href = "/profile/"+currentUser;
+        })
 
-dislikeBtn.addEventListener('click' , async(e) => {
-    const url = window.location.href;
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+        
+            const formData = new FormData(formElement);
+        
+            const body = formData.get("comment-input");
+            const currentUrl = window.location.href;
+            const postID = currentUrl.substring(currentUrl.lastIndexOf('/') + 1); //gets the postID at the end of the current url 
+            const parent = "";
+        
+            console.log("Submit comment data: ", {body, postID, parent});
+        
+            const jString = JSON.stringify({body, postID, parent});
+        
+            const response = await fetch("/comment", {
+                method: "POST",
+                body: jString,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        
+            if(response.status == 200){
+                console.log("Comment success");
+                window.location.reload();
+            }else
+                console.error(`An error has occured. Status code = ${response.status}`);
+        });
+        
+        commentSection.addEventListener('click', (e) => {
+            if (e.target.classList.contains('reply-button')) {
+                console.log("Button was pressed");
+        
+                const commentInstance = e.target.closest('.comment-instance');
+                const index = commentInstance.dataset.index;
+                console.log("INDEX", index);
+        
+                const item = `<form class="reply-form">
+                    <input class="reply-input" type="text" placeholder="reply"><br></input>
+                    <input class="submit-reply" type="submit" value="Submit">
+                </form>`;
+        
+                commentInstance.innerHTML += item;
+        
+                const replyForm = commentInstance.querySelector('.reply-form');
+                replyForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+        
+                    const replyInput = replyForm.querySelector('.reply-input');
+                    const body = replyInput.value;
+        
+        
+                    const currentUrl = window.location.href;
+                    const postID = currentUrl.substring(currentUrl.lastIndexOf('/') + 1); //gets the postID at the end of the current url 
+                    const parent = index;
+        
+                    console.log("Submit comment data: ", {body, postID, parent});
+        
+                    const jString = JSON.stringify({body, postID, parent});
+        
+                    const response = await fetch("/comment", {
+                    method: "POST",
+                    body: jString,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+        
+                if(response.status == 200){
+                    console.log("Comment success");
+                    window.location.reload();
+                }else
+                    console.error(`An error has occured. Status code = ${response.status}`);
+        
+                    replyForm.remove();
+        
+                });
+            }
+        });
+        
+        likeBtn.addEventListener('click' , async (e) => {
+            const url = window.location.href;
+        
+            const parts = url.split("/");
+            const value = parts[parts.length - 1];
+        
+            const jString = JSON.stringify({value});
+            console.log(jString);
+        
+            const response = await fetch("/like", {
+                method: "POST",
+                body: jString,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        
+            if(response.status == 200){
+                console.log("Like success");
+                window.location.reload();
+            }else
+                console.error(`An error has occured. Status code = ${response.status}`);
+        
+            
+        })
+        
+        dislikeBtn.addEventListener('click' , async(e) => {
+            const url = window.location.href;
+        
+            const parts = url.split("/");
+            const value = parts[parts.length - 1];
+        
+            const jString = JSON.stringify({value});
+            console.log(jString);
+        
+            const response = await fetch("/dislike", {
+                method: "POST",
+                body: jString,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        
+            if(response.status == 200){
+                console.log("Dislike success");
+                window.location.reload();
+            }else
+                console.error(`An error has occured. Status code = ${response.status}`);
+        })
+    }else{
+        /*-------------------------Registering user/logging in--------------------------------------*/
+    
+        registerLink.addEventListener('click', () => {
+            wrapper.classList.add('active')
+        });
+    
+        loginLink.addEventListener('click', () => {
+            wrapper.classList.remove('active')
+        });
+    
+        btnPopup.addEventListener('click', ()=> {
+            wrapper.classList.add('active-popup');
+        });
+    
+        wrapperBtnClose.addEventListener('click', ()=> {
+            wrapper.classList.remove('active-popup');
+        });
+    
+        const registerSumbit = document.querySelectorAll('.submitbtnreg');
+    
+        registerSumbit.forEach(button => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault();
+            
+                const name = document.querySelector('#regname').value;
+                const email = document.querySelector('#regemail').value;
+                const password = document.querySelector('#regpassword').value;
+    
+                console.log("in script.js",{name, email, password});
+                const jString = JSON.stringify({name, email, password});
+    
+                const response = await fetch("/register", {
+                    method: "POST",
+                    body: jString,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+    
+                if (response.status == 200)
+                    console.log("Register Successful");
+                else
+                    console.error(`An error has occurred, Status code = ${response.status}`);
+                 
+            })
+        })
+    
+        const loginSubmit = document.querySelector('.submitbtnlog');
+    
+        loginSubmit.addEventListener('click', async (e) => {
+            e.preventDefault();
+    
+            const email = document.querySelector('#logemail').value;
+            const password = document.querySelector('#logpassword').value;
+    
+            console.log("in script.js",{email, password});
+            const jString = JSON.stringify({email, password});
+    
+            const response = await fetch("/login", {
+                method: "POST",
+                body: jString,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if(response.status == 200){
+                console.log("Login Successful");
+                window.location.reload(); //not sure if this is the correct way to do redirect after a login
+            }
+            else
+                console.error(`An error has occured, Status code = ${response.status}`);
+    
+        })
 
-    const parts = url.split("/");
-    const value = parts[parts.length - 1];
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault
+            wrapper.classList.add('active-popup');
+        })
 
-    const jString = JSON.stringify({value});
-    console.log(jString);
+        commentSection.addEventListener('click', (e) => {
+            e.preventDefault
+            wrapper.classList.add('active-popup');
+        })
 
-    const response = await fetch("/dislike", {
-        method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+        likeBtn.addEventListener('click', (e) => {
+            e.preventDefault
+            wrapper.classList.add('active-popup');
+        })
 
-    if(response.status == 200){
-        console.log("Dislike success");
-        window.location.reload();
-    }else
-        console.error(`An error has occured. Status code = ${response.status}`);
-})
+        dislikeBtn.addEventListener('click', (e) => {
+            e.preventDefault
+            wrapper.classList.add('active-popup');
+        })
+    }
+}
+loadProfile();
 
 commentSection.addEventListener('click', (e) => {
     if (e.target.matches('.comment-name')) {
@@ -182,4 +286,5 @@ commentSection.addEventListener('click', (e) => {
         window.location.href = "/profile/"+index;
     }
 });
+
   
