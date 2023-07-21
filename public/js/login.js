@@ -6,9 +6,6 @@ const channel2 = new BroadcastChannel('myChannel');
 const createPost = document.querySelector('#createpost');
 const createpostForm = document.querySelector('#createpost-form');
 
-var users = JSON.parse(localStorage.getItem('users'));
-var userDataInstance = users[parseInt(localStorage.getItem('user_id'))];
-
 profileBtn.addEventListener('click', e => {
     dropdownContent.classList.toggle('show-menu');
 }); 
@@ -18,19 +15,6 @@ createPost.addEventListener('click', (e)=> {
 });
 
 const postSubmit = document.querySelector('#submit-post');
-
-/*
-const item = `<div class="post-instance">
-    <div class = "interactions">
-        <div class="like-sprite"></div>
-        <div class="like-count"> ${post_Data.likeCount}</div>
-        <div class="comment-sprite"></div>
-        <div class="comment-count">${post_Data.commentCount}</div>
-    </div>
-    <span class="index-title"><button class="post-button">${post_Data.title}</button><span>
-    <span class="id" hidden>${post_Data.id}</span>
-    </div>`
-*/
 
 postSubmit.addEventListener('click', async (e) => {
     e.preventDefault();

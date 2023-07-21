@@ -287,4 +287,12 @@ commentSection.addEventListener('click', (e) => {
     }
 });
 
+const posterInfo = document.querySelector('.posterInfo');
+
+posterInfo.addEventListener('click', (e) => {
+    const index = posterInfo.dataset.index;
+
+    window.location.href = "/profile/"+index;
+})
+
   
