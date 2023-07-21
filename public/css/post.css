@@ -136,8 +136,8 @@ body{
 }
 
 .post-title{
-    margin: 10px;
-    margin-top: 5px;
+    margin-left: 10px;
+    margin-top: 0px;
     padding-top: 10px;
     font-size: 25px;
 }
@@ -563,4 +563,15 @@ ul{
 
 .login-register p a:hover {
     text-decoration: underline;
+}
+
+.posterAndEdited{
+    display: flex;
+}
+
+.isEdited{
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 11px;
+    font-weight: 700;
 }
