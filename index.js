@@ -36,6 +36,10 @@ const hbs = exphbs.create({
         },
         eq2: function(a, b) {
             return a[b];
+        },
+        eq3: function(a){
+            if(a == true)
+                return a;
         }
     }
 })
@@ -141,13 +145,19 @@ app.get("/postPage/:postID", async (req, res) => {
         const users = await db.collection('users');
         const user = await users.findOne({id: parseInt(currentUser)});
 
+        const poster = await users.findOne({id: post.userID});
+
         if(post && currentUser){
+
             res.render("post", {
             title: post.title,
             postBody: post.body,
-            image: user.image, //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
             likeCount: post.likeCount,
+            posterName: poster.name,
+            posterID: poster.id,
             script: "/static/js/post.js",
+
+            image: user.image, //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
 
             comments: postComments,
             userArr: userArr
@@ -158,7 +168,9 @@ app.get("/postPage/:postID", async (req, res) => {
             title: post.title,
             postBody: post.body,
             likeCount: post.likeCount,
-            
+            posterName: poster.name,
+            posterID: poster.id,
+
             script: "/static/js/post.js",
             comments: postComments,
             userArr: userArr    
@@ -619,6 +631,51 @@ app.get('/image/:id', async (req, res) => {
       res.sendStatus(500);
     }
   });
+
+app.post('/deletePost', async(req, res) => {
+    console.log("Delete post request received");
+
+    const {index} = req.body;
+
+    console.log(index);
+
+    const posts = await db.collection('posts');
+    try{
+        const post = await posts.updateOne({id: parseInt(index)},
+        {$set: {
+            isDeleted: true
+            }                
+        });
+        console.log(post);
+        res.sendStatus(200);
+        console.log("Post Deleted");
+    }catch(err){
+        res.sendStatus(400);
+        console.log("Post not deleted");
+    }
+})
+
+app.post('/deleteComment', async(req, res) => {
+    console.log("Delete post request received");
+
+    const {commentID, postID} = req.body;
+
+    const comments = await db.collection('comments');
+    try{
+        const comment = await comments.updateOne({postID: postID, commentID: parseInt(commentID)},
+        {$set: {
+            commentBody: "--Deleted by User--",
+            isDeleted: true
+            }                
+        });
+        console.log(comment);
+        res.sendStatus(200);
+        console.log("Comment Deleted");
+    }catch(err){
+        res.sendStatus(400);
+        console.log("Comment not deleted");
+    }
+})
   
   
 

@@ -40,7 +40,10 @@
                     <div class="counter">{{likeCount}}</div>
                     <button class="dislike"></button>
                 </div>
-                <div class="post-title">{{title}}</div>
+                <div class="post-info">
+                    <span class="posterInfo" data-index={{posterID}}>--Posted by {{posterName}}</span>
+                    <span class="post-title">{{title}}</span>
+                </div>
             </div>
 
             <div class="body">
@@ -63,7 +66,7 @@
               
                 <div id="comment-section">
                     {{#each comments}}
-                        {{#if (eq parent "")}} 
+                        {{#if (eq parent "")}}
                             <div class="comment-thread">
                                 <div class="comment-instance" data-index={{commentID}}>
                                 {{#unless (eq2 (lookup ../userArr @index) 2)}}
@@ -72,8 +75,8 @@
                                     <div>
                                         <button class="reply-button">Reply</button>
                                         {{#each ../comments}}
-                                        {{#if (eq parent ../commentID)}}            
-                                        {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3)}}  
+                                        {{#if (eq parent ../commentID)}}           
+                                            {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3)}}  
                                         {{/if}}
                                         {{/each}}
                                     </div>

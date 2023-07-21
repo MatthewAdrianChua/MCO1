@@ -137,12 +137,12 @@ body{
 
 .post-title{
     margin: 10px;
-    padding-top: 34px;
+    margin-top: 5px;
+    padding-top: 10px;
     font-size: 25px;
 }
 
 .body{
-    margin: 20px;
     font-size: 18px;
     margin-left: 100px;
     padding-bottom: 10px;
@@ -378,6 +378,18 @@ ul{
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+.post-info{
+    display: flex;
+    flex-direction: column;
+    height: 75px;
+}
+
+.posterInfo{
+    margin-top: 12px;
+    height: 20px;
+    font-size: 12px;
 }
 
 /*----------------------------------FORM BOX REGISTER-------------------------------------*/
