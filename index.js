@@ -239,6 +239,13 @@ app.get("/profile/:userID", async (req, res) => {
     }
 })
 
+app.get("/logout", (req, res) => {
+    console.log("logout request received");
+    currentUser = "";
+    
+    res.sendStatus(200);
+})
+
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 class userData{
@@ -329,6 +336,7 @@ class post_data{
         this.body = "";
         this.userID = 0;
         this.isDeleted = false;
+        this.isEdited = false;
     }
 }
 
@@ -421,6 +429,7 @@ class commentData{
         this.commentID = ""; //unique comment id per post
         this.parent = ""; //the parent of the comment if the comment is a reply the commentID of the main comment will be placed here
         this.isDeleted = false;
+        this.isEdited = false;
     }
 }
 
@@ -479,7 +488,8 @@ app.post("/editPost", async (req,res) => {
             const edit = await posts.updateOne({id: sendPostID},
                 {$set: {
                     title: title,
-                    body: body
+                    body: body,
+                    isEdited: true
                     }
                 }
             );
@@ -506,7 +516,8 @@ app.post("/editComment", async (req,res) => {
         try{
             const edit = await comments.updateOne({postID: postID, commentID: parseInt(commentID)},
                 {$set: {
-                    commentBody: commentBody
+                    commentBody: commentBody,
+                    isEdited: true
                     }                
                 }     
             );

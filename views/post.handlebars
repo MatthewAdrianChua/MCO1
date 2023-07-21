@@ -41,7 +41,12 @@
                     <button class="dislike"></button>
                 </div>
                 <div class="post-info">
-                    <span class="posterInfo" data-index={{posterID}}>--Posted by {{posterName}}</span>
+                    <div class="posterAndEdited">
+                        <span class="posterInfo" data-index={{posterID}}>--Posted by {{posterName}}</span>
+                        {{#unless (eq3 isEdited)}}
+                            <span class="isEdited"> ● edited</span>
+                        {{/unless}}
+                    </div>
                     <span class="post-title">{{title}}</span>
                 </div>
             </div>
@@ -70,13 +75,13 @@
                             <div class="comment-thread">
                                 <div class="comment-instance" data-index={{commentID}}>
                                 {{#unless (eq2 (lookup ../userArr @index) 2)}}
-                                {{> comment this name=(eq2 (lookup ../userArr @index) 0) image=(eq2 (lookup ../userArr @index) 1) id=(eq2 (lookup ../userArr @index) 3)}}
+                                {{> comment this name=(eq2 (lookup ../userArr @index) 0) image=(eq2 (lookup ../userArr @index) 1) id=(eq2 (lookup ../userArr @index) 3) edited=(eq3 isEdited)}}
                                 {{/unless}}
                                     <div>
                                         <button class="reply-button">Reply</button>
                                         {{#each ../comments}}
                                         {{#if (eq parent ../commentID)}}           
-                                            {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3)}}  
+                                            {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3) edited=(eq3 isEdited)}}  
                                         {{/if}}
                                         {{/each}}
                                     </div>

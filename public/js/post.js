@@ -7,11 +7,6 @@ const formElement = document.forms.commentform;
 
 const commentSection = document.querySelector('#comment-section');
 
-postie2.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = "/loggedIn"
-})
-
 const wrapper = document.querySelector('.wrapper');
 const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
@@ -35,6 +30,11 @@ async function loadProfile(){ //this function will load the profile icon with dr
     }
 
     if(currentUser != ""){
+        postie2.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = "/loggedIn"
+        })
+
         profileBtn2.addEventListener('click', e => {
             dropdownContent2.classList.toggle('show-menu');
         });
@@ -178,6 +178,11 @@ async function loadProfile(){ //this function will load the profile icon with dr
         })
     }else{
         /*-------------------------Registering user/logging in--------------------------------------*/
+
+        postie2.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = "/"
+        })
     
         registerLink.addEventListener('click', () => {
             wrapper.classList.add('active')
@@ -293,6 +298,23 @@ posterInfo.addEventListener('click', (e) => {
     const index = posterInfo.dataset.index;
 
     window.location.href = "/profile/"+index;
+})
+
+const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
+
+logout.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/logout", {
+        method: "GET"
+    });
+
+    if(response.status == 200){
+        console.log("Logout successful");
+        window.location.href = "/";
+    }
+    else
+        console.log("Logout failed");
 })
 
   

@@ -1,7 +1,10 @@
 
         <div class="comment-header" data-index={{id}}>
             <img class="comment-profile" src={{image}}>
-            <div class="comment-name">{{name}}</div>
+            <span class="comment-name">{{name}}</span>
+            {{#if isEdited}}
+                <span class="isEdited"> ● edited</span>
+            {{/if}}
         </div>
         <div class="comment-body">
             {{commentBody}}

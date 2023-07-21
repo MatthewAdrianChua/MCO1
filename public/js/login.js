@@ -66,7 +66,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-const clickprofile = document.querySelector('.dropdown-content a:first-child');
+const clickprofile = document.querySelector('.dropdown-content ul li:first-child');
 
 clickprofile.addEventListener('click', async (e) =>{
     e.preventDefault();
@@ -84,4 +84,21 @@ clickprofile.addEventListener('click', async (e) =>{
       }
 
     window.location.href = "/profile/"+currentUser;
+})
+
+const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
+
+logout.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/logout", {
+        method: "GET"
+    });
+
+    if(response.status == 200){
+        console.log("Logout successful");
+        window.location.href = "/";
+    }
+    else
+        console.log("Logout failed");
 })
