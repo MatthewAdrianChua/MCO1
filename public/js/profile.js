@@ -1,11 +1,14 @@
 const profileBtn = document.querySelector('.profileBtn');
 const dropdownContent = document.querySelector('.dropdown');
 const postie = document.querySelector('.header_text');
+const uploadBtn = document.querySelector('.profile-pic');
+const uploadForm = document.querySelector('.pictureUpload');
 
 var modal = document.getElementById("editProfileModal");
 var btn = document.getElementById("editProfile");
 var span = document.getElementsByClassName("close")[0];
 var saveBtn = document.getElementById("saveChanges");
+
 var isMouseDownInModal = false;
 
 profileBtn.addEventListener('click', e => {
@@ -17,6 +20,9 @@ postie.addEventListener('click', e => {
   window.location.href = "/loggedIn";
 });
 
+uploadBtn.addEventListener('click', e => {
+  uploadForm.classList.toggle('pictureUpload');
+});
 
 btn.onclick = function() {
     modal.style.display = "block";

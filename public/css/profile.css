@@ -122,7 +122,7 @@ body{
     transition: opacity 0.3s ease-in-out;
 }
 
-.show-menu .dropdown-content {
+.show-menu .dropdown-content .pictureUpload {
     display: block;
     opacity: 1;
 }
@@ -712,4 +712,8 @@ div.post-header {
     border-radius: 50px;
     background-color: lightgray;
 	width: 200px;
+}
+
+.pictureUpload{
+    display: none;
 }
