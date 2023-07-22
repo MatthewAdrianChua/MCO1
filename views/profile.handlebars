@@ -69,14 +69,18 @@
         <div class = "body-container">
             <div class="post-container">
                 {{#each posts}}
-                {{> profilePosts this}}
+                    {{#unless (eq3 isDeleted)}}
+                        {{> profilePosts this}}
+                    {{/unless}}
                 {{/each}}               
             </div>
 
                 <!--- COMMENTS-->
                 <div class="post-footer">
                     {{#each comments}}
-                    {{> profileComments this}}
+                        {{#unless (eq3 isDeleted)}}
+                            {{> profileComments this}}
+                        {{/unless}}
                     {{/each}}
                 </div>
         </div>

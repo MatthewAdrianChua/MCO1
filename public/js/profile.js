@@ -54,7 +54,7 @@ editPost.forEach(button =>{
       const submitPost = document.querySelector('#submit-post');
 
       const postInstance = a.target.closest('.post-instance');
-      const postID = postInstance.dataset.index;
+      const postID = postInstance.getAttribute('data-ID');
       console.log("POST INDEX", postID);
 
       submitPost.addEventListener('click', async (e) => {
@@ -205,8 +205,75 @@ savePic.addEventListener('click', async (e) => {
 
 })
 
+const deletePost = document.querySelectorAll('.delete-post-button');
 
+for (let x = 0; x < deletePost.length; x++) {
+    deletePost[x].addEventListener("click", async (e) => {
+      const postInstance = e.target.closest('.post-instance');
+      const index = postInstance.getAttribute('data-ID');
 
+      const jString = JSON.stringify({index});
+
+      const response = await fetch("/deletePost", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+      });
+  
+      if(response.status == 200){
+        console.log("Delete Post Success");
+        window.location.reload();
+      }else
+        console.error(`An error has occured. Status code = ${response.status}`); 
+  });
+}
+
+const deleteComment = document.querySelectorAll('.delete-comment-button');
+
+for (let x = 0; x < deleteComment.length; x++) {
+    deleteComment[x].addEventListener("click", async (e) => {
+      const commentInstance = e.target.closest('.comment-bar');
+      const commentID = commentInstance.getAttribute('data-commentID');
+      const postID = commentInstance.getAttribute('data-postID');
+
+      console.log(commentID, postID);
+
+      const jString = JSON.stringify({commentID,postID});
+
+      const response = await fetch("/deleteComment", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+      });
+  
+      if(response.status == 200){
+        console.log("Delete Post Success");
+        window.location.reload();
+      }else
+        console.error(`An error has occured. Status code = ${response.status}`); 
+  });
+}
+
+const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
+
+logout.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/logout", {
+        method: "GET"
+    });
+
+    if(response.status == 200){
+        console.log("Logout successful");
+        window.location.href = "/";
+    }
+    else
+        console.log("Logout failed");
+})
 
 
 

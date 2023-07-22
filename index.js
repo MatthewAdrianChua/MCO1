@@ -36,6 +36,10 @@ const hbs = exphbs.create({
         },
         eq2: function(a, b) {
             return a[b];
+        },
+        eq3: function(a){
+            if(a == true)
+                return a;
         }
     }
 })
@@ -141,17 +145,35 @@ app.get("/postPage/:postID", async (req, res) => {
         const users = await db.collection('users');
         const user = await users.findOne({id: parseInt(currentUser)});
 
-        if(post){
+        const poster = await users.findOne({id: post.userID});
+
+        if(post && currentUser){
+
             res.render("post", {
             title: post.title,
             postBody: post.body,
-            image: /*user.image*/ "", //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
             likeCount: post.likeCount,
+            posterName: poster.name,
+            posterID: poster.id,
             script: "/static/js/post.js",
+
+            image: user.image, //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
 
             comments: postComments,
             userArr: userArr
            
+            });
+        }else if(post){
+            res.render("post", {
+            title: post.title,
+            postBody: post.body,
+            likeCount: post.likeCount,
+            posterName: poster.name,
+            posterID: poster.id,
+
+            script: "/static/js/post.js",
+            comments: postComments,
+            userArr: userArr    
             });
         }else{
             res.sendStatus(404);
@@ -215,6 +237,13 @@ app.get("/profile/:userID", async (req, res) => {
             res.sendStatus(500);
         }
     }
+})
+
+app.get("/logout", (req, res) => {
+    console.log("logout request received");
+    currentUser = "";
+    
+    res.sendStatus(200);
 })
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -307,6 +336,7 @@ class post_data{
         this.body = "";
         this.userID = 0;
         this.isDeleted = false;
+        this.isEdited = false;
     }
 }
 
@@ -399,6 +429,7 @@ class commentData{
         this.commentID = ""; //unique comment id per post
         this.parent = ""; //the parent of the comment if the comment is a reply the commentID of the main comment will be placed here
         this.isDeleted = false;
+        this.isEdited = false;
     }
 }
 
@@ -457,7 +488,8 @@ app.post("/editPost", async (req,res) => {
             const edit = await posts.updateOne({id: sendPostID},
                 {$set: {
                     title: title,
-                    body: body
+                    body: body,
+                    isEdited: true
                     }
                 }
             );
@@ -484,7 +516,8 @@ app.post("/editComment", async (req,res) => {
         try{
             const edit = await comments.updateOne({postID: postID, commentID: parseInt(commentID)},
                 {$set: {
-                    commentBody: commentBody
+                    commentBody: commentBody,
+                    isEdited: true
                     }                
                 }     
             );
@@ -609,9 +642,140 @@ app.get('/image/:id', async (req, res) => {
       res.sendStatus(500);
     }
   });
+
+app.post('/deletePost', async(req, res) => {
+    console.log("Delete post request received");
+
+    const {index} = req.body;
+
+    console.log(index);
+
+    const posts = await db.collection('posts');
+    try{
+        const post = await posts.updateOne({id: parseInt(index)},
+        {$set: {
+            isDeleted: true
+            }                
+        });
+        console.log(post);
+        res.sendStatus(200);
+        console.log("Post Deleted");
+    }catch(err){
+        res.sendStatus(400);
+        console.log("Post not deleted");
+    }
+})
+
+app.post('/deleteComment', async(req, res) => {
+    console.log("Delete post request received");
+
+    const {commentID, postID} = req.body;
+
+    const comments = await db.collection('comments');
+    try{
+        const comment = await comments.updateOne({postID: postID, commentID: parseInt(commentID)},
+        {$set: {
+            commentBody: "--Deleted by User--",
+            isDeleted: true
+            }                
+        });
+        console.log(comment);
+        res.sendStatus(200);
+        console.log("Comment Deleted");
+    }catch(err){
+        res.sendStatus(400);
+        console.log("Comment not deleted");
+    }
+})
   
-  
+/*------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+app.get("/search", async (req, res) => {
+    console.log("Search page loaded");
+    console.log("help", searchText);
+    const str = searchText;
+    const posts = await db.collection('posts');
+    const searchCollection = await posts.find({title: str}).toArray(function(err, documents){
+        if(err){
+            console.error(err);
+        }
+    });
+    res.render("index", {
+        script: "static/js/script.js",
+
+        posts: searchCollection
+    });
+
+})
+
+app.get("/searchl", async (req, res) => {
+    console.log("Search page loaded");
+    console.log("help", searchText);
+    const str = searchText;
+    const posts = await db.collection('posts');
+    const searchCollection = await posts.find({title: str}).toArray(function(err, documents){
+        if(err){
+            console.error(err);
+        }
+    });
+    const users = await db.collection('users');
+    const user = await users.findOne({id: parseInt(currentUser)});
+
+    res.render("indexLogin", {
+        title: "Login",
+        script: "static/js/login.js",
+        image: user.image,
+
+        posts: searchCollection
+    })
+})
+
+let searchText = "";
+
+app.post("/searchquery", async (req, res) => {
+    console.log("Search Request Recieved");
+    console.log("help", req.body.searchText);
+    try{
+        searchText = req.body.searchText;
+    }
+    catch(err){
+        console.log("err")
+        console.error(err);
+    }
+    res.sendStatus(200);
+})
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log("Server is now listening...");
 })
+
+/*
+app.get("/search/:searchText", async (req, res) => {
+    console.log("Search page loaded");
+    const searchText = req.params.searchText;
+    console.log(searchText);
+    const posts = await db.collection('posts');
+    const searchCollection = await posts.find({title: searchText}).toArray(function(err, documents){
+        if(err){
+            console.error(err);
+        }
+    });
+    try{
+        if(searchText){
+            res.render("index", {
+                script: "static/js/script.js",
+        
+                posts: searchCollection
+            });
+        }
+        else{
+            res.sendStatus(404);
+        }
+    }catch(err){
+        console.log("Error Searching");
+        console.error(err);
+        res.sendStatus(500);
+    }
+
+})*/

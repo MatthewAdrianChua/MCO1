@@ -19,9 +19,9 @@
                     </button>
                     <div class="dropdown-content">
                         <ul>
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="placeholder.html">Profile</a></li>
                             <br>
-                            <li><a href="index.html">Logout</a></li>
+                            <li><a href="placeholder.html">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,7 +37,9 @@
 
         <div class="posts-container">
             {{#each posts}}
-            {{> posts this}}
+                {{#unless (eq3 isDeleted)}}
+                    {{> posts this}}
+                {{/unless}}
             {{/each}}
         </div>
 

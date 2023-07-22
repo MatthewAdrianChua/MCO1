@@ -39,6 +39,8 @@ body .wrapper {
     font-size: 40px;
     margin: 0px;
     float: right;
+    align-items: center;
+    cursor: pointer;
 }
 
 .header_logo {
@@ -49,6 +51,11 @@ body .wrapper {
     width: 50px;
     height: 50px;
     margin: 0px;
+    cursor: pointer;
+}
+
+.header_text{
+    cursor: pointer;
 }
 
 .search {
@@ -143,7 +150,9 @@ body .wrapper {
 
 .wrapper {
     display:flex;
-    position: relative;
+    position: fixed;
+    top: 30%;
+    left: 35%;
     background-color: #3bc98e;
     width: 440px;
     height: 440px;

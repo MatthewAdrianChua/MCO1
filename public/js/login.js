@@ -6,9 +6,6 @@ const channel2 = new BroadcastChannel('myChannel');
 const createPost = document.querySelector('#createpost');
 const createpostForm = document.querySelector('#createpost-form');
 
-var users = JSON.parse(localStorage.getItem('users'));
-var userDataInstance = users[parseInt(localStorage.getItem('user_id'))];
-
 profileBtn.addEventListener('click', e => {
     dropdownContent.classList.toggle('show-menu');
 }); 
@@ -18,19 +15,6 @@ createPost.addEventListener('click', (e)=> {
 });
 
 const postSubmit = document.querySelector('#submit-post');
-
-/*
-const item = `<div class="post-instance">
-    <div class = "interactions">
-        <div class="like-sprite"></div>
-        <div class="like-count"> ${post_Data.likeCount}</div>
-        <div class="comment-sprite"></div>
-        <div class="comment-count">${post_Data.commentCount}</div>
-    </div>
-    <span class="index-title"><button class="post-button">${post_Data.title}</button><span>
-    <span class="id" hidden>${post_Data.id}</span>
-    </div>`
-*/
 
 postSubmit.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -82,7 +66,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-const clickprofile = document.querySelector('.dropdown-content a:first-child');
+const clickprofile = document.querySelector('.dropdown-content ul li:first-child');
 
 clickprofile.addEventListener('click', async (e) =>{
     e.preventDefault();
@@ -101,3 +85,50 @@ clickprofile.addEventListener('click', async (e) =>{
 
     window.location.href = "/profile/"+currentUser;
 })
+
+const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
+
+logout.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/logout", {
+        method: "GET"
+    });
+
+    if(response.status == 200){
+        console.log("Logout successful");
+        window.location.href = "/";
+    }
+    else
+        console.log("Logout failed");
+})
+
+const searchPostBtn = document.querySelector("#searchsubmit");
+
+searchPostBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const searchText = document.querySelector("#searchbar").value;
+
+    console.log("index.js data", searchText);
+    const jString = JSON.stringify({searchText});
+
+    const response = await fetch("/searchquery", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href= "/searchl";
+    if(response.status == 200){
+        console.log("Search Success")
+    }
+})
+
+const logoBtn = document.querySelector(".logo");
+
+logoBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    window.location.href = "/loggedIn";
+})
+
