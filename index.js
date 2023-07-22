@@ -4,6 +4,7 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 import multer from 'multer';
 import { GridFSBucket, ObjectId } from 'mongodb';
+import session from 'express-session';
 
 let db = "";
 
@@ -21,8 +22,13 @@ function main(err){
 connectToMongo(main);
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
-
 const app = express();
+
+app.use(session({
+    secret: 'ABCDEFG',
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use("/static", express.static("public"));
 
@@ -161,7 +167,7 @@ app.get("/postPage/:postID", async (req, res) => {
 
             comments: postComments,
             userArr: userArr
-           
+        
             });
         }else if(post){
             res.render("post", {
@@ -214,18 +220,7 @@ app.get("/profile/:userID", async (req, res) => {
                     }
                 });
 
-                const get = await fetch("/getCurrentUser", {
-                    method: "GET"
-                });
-
-                let currentUser;
-                if(get.status == 200){
-                    currentUser = await get.text();
-                }else{
-                    console.error(`An error has occurred. Status code = ${response.status}`); 
-                }
-
-                if(currentUser == profileID){
+                if (req.session.userID == profileID) {
                     // Render 'profile' when viewing own profile
                     res.render("profile", {
                         script: "/static/js/profile.js",
@@ -335,7 +330,8 @@ app.post("/login", async (req, res) => {
             currentUser = loginResult.id;
             console.log("Current User ",currentUser);
 
-            res.sendStatus(200);
+            req.session.userID = loginResult.id;
+            res.redirect('/');
         }else{
             console.log("Incorrect email or password");
             res.sendStatus(403);
@@ -344,6 +340,7 @@ app.post("/login", async (req, res) => {
         res.sendStatus(400);
     }
 })
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
