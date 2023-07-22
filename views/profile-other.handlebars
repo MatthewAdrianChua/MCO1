@@ -47,7 +47,7 @@
             <div class="post-container">
                 {{#each posts}}
                     {{#unless (eq3 isDeleted)}}
-                        {{> profilePosts this}}
+                        {{> profilePosts-other this}}
                     {{/unless}}
                 {{/each}}               
             </div>
@@ -56,17 +56,8 @@
                 <div class="post-footer">
                     {{#each comments}}
                         {{#unless (eq3 isDeleted)}}
-                            {{> profileComments this}}
+                            {{> profileComments-other this}}
                         {{/unless}}
                     {{/each}}
                 </div>
         </div>
-        <form id="editpostform" name="editpost-form">
-            <div class="header-post">
-                <span class ="header">EDIT A POST</span>
-                <button class ="exit">X</button>
-            </div>
-            <input id="titlepost" name="title-post" type="text" placeholder="Title"></input><br>
-            <input id="postbody" name="post-body" type="text" placeholder="Text"></input><br>
-            <input id="submit-post" type="submit" value="Submit">
-        </form>
