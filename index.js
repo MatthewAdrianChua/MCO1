@@ -189,44 +189,72 @@ app.get("/postPage/:postID", async (req, res) => {
 app.get("/profile/:userID", async (req, res) => {
     console.log("Profile page loaded");
     console.log("Request received:", req.method, req.url);
-    const userID = req.params.userID;
-    console.log("user ID", userID);
+    const profileID = req.params.userID;
+    console.log("Profile ID", profileID);
 
-    if(Number.isInteger(parseInt(userID))){ //this 'if' statement is to ignore the image request of the url in the request initiator chain
+    if(Number.isInteger(parseInt(profileID))){ //this 'if' statement is to ignore the image request of the url in the request initiator chain
         try{
             const users = await db.collection('users');
-            const currentUser = await users.findOne({id: parseInt(userID)});
-            console.log(currentUser);
+            const profileUser = await users.findOne({id: parseInt(profileID)});
+            console.log(profileUser);
 
-            if(currentUser){
+            if(profileUser){
 
                 const posts = await db.collection('posts');
-                const postsCollection = await posts.find({userID: currentUser.id}).toArray(function(err, documents) {
+                const postsCollection = await posts.find({userID: profileUser.id}).toArray(function(err, documents) {
                     if(err){
                         console.error(err);
                     }
                 });
 
                 const comments = await db.collection('comments');
-                const commentsCollection = await comments.find({userID: currentUser.id}).toArray(function(err, documents) {
+                const commentsCollection = await comments.find({userID: profileUser.id}).toArray(function(err, documents) {
                     if(err){
                         console.error(err);
                     }
                 });
 
-                res.render("profile", {
-                    script: "/static/js/profile.js",
+                const get = await fetch("/getCurrentUser", {
+                    method: "GET"
+                });
 
-                    name: currentUser.name,
-                    email:currentUser.email,
-                    password: currentUser.password,
-                    image: currentUser.image,
-                    bio: currentUser.bio,
-                    birthday: currentUser.birthday,
+                let currentUser;
+                if(get.status == 200){
+                    currentUser = await get.text();
+                }else{
+                    console.error(`An error has occurred. Status code = ${response.status}`); 
+                }
 
-                    posts: postsCollection,
-                    comments: commentsCollection,
-                })
+                if(currentUser == profileID){
+                    // Render 'profile' when viewing own profile
+                    res.render("profile", {
+                        script: "/static/js/profile.js",
+
+                        name: profileUser.name,
+                        email: profileUser.email,
+                        password: profileUser.password,
+                        image: profileUser.image,
+                        bio: profileUser.bio,
+                        birthday: profileUser.birthday,
+
+                        posts: postsCollection,
+                        comments: commentsCollection,
+                    })
+                }else{
+                    // Render 'profile-other' when viewing another user's profile
+                    res.render("profile-other", {
+                        script: "/static/js/profile-other.js",
+
+                        name: profileUser.name,
+                        image: profileUser.image,
+                        bio: profileUser.bio,
+                        birthday: profileUser.birthday,
+
+                        posts: postsCollection,
+                        comments: commentsCollection,
+                    })
+                }
+
             }else{
                 res.sendStatus("Profile not found");
                 res.sendStatus(404);
@@ -237,15 +265,7 @@ app.get("/profile/:userID", async (req, res) => {
             res.sendStatus(500);
         }
     }
-})
-
-app.get("/logout", (req, res) => {
-    console.log("logout request received");
-    currentUser = "";
-    
-    res.sendStatus(200);
-})
-
+});
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 class userData{
