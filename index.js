@@ -214,17 +214,6 @@ app.get("/profile/:userID", async (req, res) => {
                     }
                 });
 
-                const get = await fetch("/getCurrentUser", {
-                    method: "GET"
-                });
-
-                let currentUser;
-                if(get.status == 200){
-                    currentUser = await get.text();
-                }else{
-                    console.error(`An error has occurred. Status code = ${response.status}`); 
-                }
-
                 if(currentUser == profileID){
                     // Render 'profile' when viewing own profile
                     res.render("profile", {
