@@ -149,7 +149,7 @@ body{
 }
 
 #savePic:hover, #profilePic2:hover, #uploadButton:hover {
-    background-color: #0081A7;
+    border: 3px solid #0081A7;
 }
 
 .pictureUpload{
