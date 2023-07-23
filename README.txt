@@ -11,6 +11,7 @@ in the terminal run these commands:
 npm i mongodb
 npm i express
 npm i express-handlebars
+npm i express-session
 npm i dotenv
 npm i multer
 

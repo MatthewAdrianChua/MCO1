@@ -4,6 +4,7 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 import multer from 'multer';
 import { GridFSBucket, ObjectId } from 'mongodb';
+import session from 'express-session';
 
 let db = "";
 
@@ -21,8 +22,13 @@ function main(err){
 connectToMongo(main);
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
-
 const app = express();
+
+app.use(session({
+    secret: 'ABCDEFG',
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use("/static", express.static("public"));
 
@@ -161,7 +167,7 @@ app.get("/postPage/:postID", async (req, res) => {
 
             comments: postComments,
             userArr: userArr
-           
+        
             });
         }else if(post){
             res.render("post", {
@@ -189,44 +195,61 @@ app.get("/postPage/:postID", async (req, res) => {
 app.get("/profile/:userID", async (req, res) => {
     console.log("Profile page loaded");
     console.log("Request received:", req.method, req.url);
-    const userID = req.params.userID;
-    console.log("user ID", userID);
+    const profileID = req.params.userID;
+    console.log("Profile ID", profileID);
 
-    if(Number.isInteger(parseInt(userID))){ //this 'if' statement is to ignore the image request of the url in the request initiator chain
+    if(Number.isInteger(parseInt(profileID))){ //this 'if' statement is to ignore the image request of the url in the request initiator chain
         try{
             const users = await db.collection('users');
-            const currentUser = await users.findOne({id: parseInt(userID)});
-            console.log(currentUser);
+            const profileUser = await users.findOne({id: parseInt(profileID)});
+            console.log(profileUser);
 
-            if(currentUser){
+            if(profileUser){
 
                 const posts = await db.collection('posts');
-                const postsCollection = await posts.find({userID: currentUser.id}).toArray(function(err, documents) {
+                const postsCollection = await posts.find({userID: profileUser.id}).toArray(function(err, documents) {
                     if(err){
                         console.error(err);
                     }
                 });
 
                 const comments = await db.collection('comments');
-                const commentsCollection = await comments.find({userID: currentUser.id}).toArray(function(err, documents) {
+                const commentsCollection = await comments.find({userID: profileUser.id}).toArray(function(err, documents) {
                     if(err){
                         console.error(err);
                     }
                 });
 
-                res.render("profile", {
-                    script: "/static/js/profile.js",
+                if (req.session.userID == profileID) {
+                    // Render 'profile' when viewing own profile
+                    res.render("profile", {
+                        script: "/static/js/profile.js",
 
-                    name: currentUser.name,
-                    email:currentUser.email,
-                    password: currentUser.password,
-                    image: currentUser.image,
-                    bio: currentUser.bio,
-                    birthday: currentUser.birthday,
+                        name: profileUser.name,
+                        email: profileUser.email,
+                        password: profileUser.password,
+                        image: profileUser.image,
+                        bio: profileUser.bio,
+                        birthday: profileUser.birthday,
 
-                    posts: postsCollection,
-                    comments: commentsCollection,
-                })
+                        posts: postsCollection,
+                        comments: commentsCollection,
+                    })
+                }else{
+                    // Render 'profile-other' when viewing another user's profile
+                    res.render("profile-other", {
+                        script: "/static/js/profile-other.js",
+
+                        name: profileUser.name,
+                        image: profileUser.image,
+                        bio: profileUser.bio,
+                        birthday: profileUser.birthday,
+
+                        posts: postsCollection,
+                        comments: commentsCollection,
+                    })
+                }
+
             }else{
                 res.sendStatus("Profile not found");
                 res.sendStatus(404);
@@ -237,15 +260,7 @@ app.get("/profile/:userID", async (req, res) => {
             res.sendStatus(500);
         }
     }
-})
-
-app.get("/logout", (req, res) => {
-    console.log("logout request received");
-    currentUser = "";
-    
-    res.sendStatus(200);
-})
-
+});
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 class userData{
@@ -315,7 +330,8 @@ app.post("/login", async (req, res) => {
             currentUser = loginResult.id;
             console.log("Current User ",currentUser);
 
-            res.sendStatus(200);
+            req.session.userID = loginResult.id;
+            res.redirect('/');
         }else{
             console.log("Incorrect email or password");
             res.sendStatus(403);
@@ -324,6 +340,7 @@ app.post("/login", async (req, res) => {
         res.sendStatus(400);
     }
 })
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -745,37 +762,8 @@ app.post("/searchquery", async (req, res) => {
     }
     res.sendStatus(200);
 })
+  
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log("Server is now listening...");
 })
-
-/*
-app.get("/search/:searchText", async (req, res) => {
-    console.log("Search page loaded");
-    const searchText = req.params.searchText;
-    console.log(searchText);
-    const posts = await db.collection('posts');
-    const searchCollection = await posts.find({title: searchText}).toArray(function(err, documents){
-        if(err){
-            console.error(err);
-        }
-    });
-    try{
-        if(searchText){
-            res.render("index", {
-                script: "static/js/script.js",
-        
-                posts: searchCollection
-            });
-        }
-        else{
-            res.sendStatus(404);
-        }
-    }catch(err){
-        console.log("Error Searching");
-        console.error(err);
-        res.sendStatus(500);
-    }
-
-})*/

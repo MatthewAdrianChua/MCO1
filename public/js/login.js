@@ -131,4 +131,3 @@ logoBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     window.location.href = "/loggedIn";
 })
-
