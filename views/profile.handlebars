@@ -30,13 +30,15 @@
         <div class="profile-box">
             <div class="top-section">
                 <button class="profile-pic">
-                    <img src={{image}} alt="profilepic" id="profilePic" preload>
+                    <!-- <div class = "black-hover"></div> -->
+                    <img src={{image}} alt="profilepic" id="profilePic2" preload>         
                 </button>
                 <div class="profile-info">
                     <h1>{{name}}</h1>
                 </div>
-                <form id="pictureUpload" name="pictureUpload" class ="pictureUpload">
+                <form id="pictureUpload" name="pictureUpload" class ="pictureUpload hidden">
                     <input type="file" id="newProfilePic" name="newProfilePic">
+                    <label for="newProfilePic" id="uploadButton">Upload profile pic</label>
                     <button type="button" id="savePic">Save</button>
                 </form>
             </div>
@@ -57,7 +59,7 @@
                     <textarea id="newBio" name="newBio" placeholder="Bio"></textarea><br>
                     <label for="newBday">Birthday:</label><br>
                     <input type="date" id="newBday" name="newBday"><br>
-                    <label for="newProfilePic">Profile Picture:</label><br>
+                    <!--label for="newProfilePic">Profile Picture:</label><br-->
                     <!--<input type="file" id="newProfilePic" name="newProfilePic"><br>-->
                     <button type="button" id="saveChanges">Save</button>
                 </form>

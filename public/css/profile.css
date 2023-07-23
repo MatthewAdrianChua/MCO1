@@ -86,6 +86,7 @@ body{
 }
 
 #profilePic {
+    background-color: black;
     border-radius: 50%;
     border: 1px solid black;
     width: 50px;
@@ -122,9 +123,43 @@ body{
     transition: opacity 0.3s ease-in-out;
 }
 
-.show-menu .dropdown-content .pictureUpload {
+.show-menu .dropdown-content  {
     display: block;
     opacity: 1;
+}
+
+#newProfilePic {
+    display:none;
+}
+
+
+#uploadButton{
+    padding: 10px;
+    border-radius: 50px;
+    background-color: rgba(149, 149, 149, 0.5);
+    border: solid black;
+}
+
+#savePic{
+    padding: 10px;
+    border-radius: 50px;
+	border: solid black;
+    background-color: rgba(149, 149, 149, 0.5);
+}
+
+#savePic:hover, #profilePic2:hover, #uploadButton:hover {
+    background-color: #0081A7;
+}
+
+.pictureUpload{
+    margin-left: 1rem;
+    margin: 5px;
+    border-radius: 50px;
+    line-height: 5ch;
+}
+
+.hidden{
+    display: none;
 }
 
 ul{
@@ -177,6 +212,7 @@ ul{
 }
 
 .profile-box {
+    
     border: 2px solid #000000; 
     border-radius: 10px; 
     padding: 20px; 
@@ -190,9 +226,36 @@ ul{
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    
 }
 
-.profile-pic img {
+.profile-pic{                     
+    background: transparent;
+    border: none !important;              
+}
+ 
+/* 
+.black-hover{
+    display: none;
+    background-color: #000;
+    border-radius: 50%;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    margin: 3px 10px 0px 0px;
+}*/
+
+
+#profilePic2 {
+    background-color: black;
+    border-radius: 50%;
+    border: 3px solid black;
+    width: 50px;
+    height: 50px;
+    margin: 3px 10px 0px 0px;
+}
+
+.profilePic img{
     width: 80px; 
     height: 80px;
     border-radius: 50%;
@@ -443,8 +506,6 @@ ul{
     animation: fadeIn 1s;
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DEREK'S CSS ELEMENTS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
 .button-container{
     float: right;
 }
@@ -678,6 +739,10 @@ div.post-header {
 	padding: 0;
 }
 
+#editProfile:hover{
+    background-color: #0081A7;
+}
+
 #editProfile {
     font-family: 'Roboto Mono', monospace;
     font-size: 1.2rem;
@@ -696,6 +761,9 @@ div.post-header {
 	width: 200px;
 }
 
+.edit-button:hover{
+    background-color: #0081A7;
+}
 .edit-button {
     font-family: 'Roboto Mono', monospace;
     font-size: 1.2rem;
@@ -714,6 +782,3 @@ div.post-header {
 	width: 200px;
 }
 
-.pictureUpload{
-    display: none;
-}
