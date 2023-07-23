@@ -128,25 +128,33 @@ logoBtn.addEventListener('click', async (e) => {
     window.location.href = "/";
 })
 
-
 const nextPageBtn = document.querySelector("#nextPage");
-let pageID = 0;
-const paginationElement = document.getElementById("pagination");
-pageID = parseInt(paginationElement.dataset.totalPages);
+const prevPageBtn = document.querySelector("#prevPage");
 
 nextPageBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-    pageID++;
-    window.location.href = `/${pageID}`;
-});
-
-const prevPageBtn = document.querySelector("#prevPage");
+    const nextPage = 1; 
+    const jString = JSON.stringify({nextPage});
+    const response = await fetch("/changePage", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href = "/page";
+})
 
 prevPageBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-    if (pageID > 0) {
-        pageID--;
-    }
-    window.location.href = `/${pageID}`;
-});
-
+    const nextPage = -1; 
+    const jString = JSON.stringify({nextPage});
+    const response = await fetch("/changePage", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href = "/page";
+})
