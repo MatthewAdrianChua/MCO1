@@ -131,3 +131,34 @@ logoBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     window.location.href = "/loggedIn";
 })
+
+const nextPageBtn = document.querySelector("#nextPage");
+const prevPageBtn = document.querySelector("#prevPage");
+
+nextPageBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const nextPage = 1; 
+    const jString = JSON.stringify({nextPage});
+    const response = await fetch("/changePage", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href = "/pagel";
+})
+
+prevPageBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const nextPage = -1; 
+    const jString = JSON.stringify({nextPage});
+    const response = await fetch("/changePage", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href = "/pagel";
+})
