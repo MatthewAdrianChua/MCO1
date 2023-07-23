@@ -141,7 +141,7 @@ pageID = parseInt(paginationElement.dataset.totalPages);
 nextPageBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     pageID++;
-    window.location.href = `/loggedin/${pageID}`;
+    window.location.href = `/loggedIn/${pageID}`;
 });
 
 const prevPageBtn = document.querySelector("#prevPage");
@@ -151,5 +151,5 @@ prevPageBtn.addEventListener('click', async (e) => {
     if (pageID > 0) {
         pageID--;
     }
-    window.location.href = `/loggedin/${pageID}`;
+    window.location.href = `/loggedIn/${pageID}`;
 });
