@@ -56,13 +56,11 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-const pageLimit = 2;
-
 app.get("/", async (req,res) => {
     console.log("Index page loaded");
 
     const posts = await db.collection('posts');
-    const postsCollection = await posts.find({}).limit(pageLimit).toArray(function(err, documents) {
+    const postsCollection = await posts.find({}).toArray(function(err, documents) {
         if(err){
             console.error(err);
         }
@@ -81,7 +79,7 @@ app.get("/loggedIn", async (req, res) => {
     console.log("Logged In Page loaded")
 
     const posts = await db.collection('posts');
-    const postsCollection = await posts.find({}).limit(pageLimit).toArray(function(err, documents) {
+    const postsCollection = await posts.find({}).toArray(function(err, documents) {
         if(err){
             console.error(err);
         }
@@ -983,66 +981,7 @@ app.post("/searchquery", async (req, res) => {
     res.sendStatus(200);
 })
   
-/*------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-app.get("/page", async (req, res) => {
-    console.log("Pages Loaded");
-    const posts = await db.collection('posts');
-    const pageCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
-        if (err) {
-            console.error(err);
-        }
-    });
-    
-    res.render("index", {
-        script: "static/js/script.js",
-        posts: pageCollection
-    });
-})
-
-app.get("/pagel", async (req, res) => {
-    console.log("Pages Loaded");
-    const posts = await db.collection('posts');
-    const pageCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
-        if (err) {
-            console.error(err);
-        }
-    });
-    
-    const users = await db.collection('users');
-    const user = await users.findOne({id: parseInt(currentUser)});
-
-    res.render("indexLogin", {
-        title: "Login",
-        script: "static/js/login.js",
-        image: user.image,
-
-        posts: pageCollection
-    })
-})
-
-let pageIndex = 0;
-
-app.post("/changePage", async (req, res) => {
-    console.log("Page Request Recieved");
-    console.log(req.body.nextPage);
-    const posts = await db.collection('posts');
-    const postCount = await posts.count(function (err, documents) {
-        if(err){
-            console.error(err);
-        }
-    });
-    console.log(postCount);
-    pageIndex = pageIndex + req.body.nextPage;
-    if(pageIndex < 0){
-        pageIndex = 0;
-    }
-    if(pageIndex > Math.round(postCount / pageLimit)){
-        pageIndex = pageIndex - 1;
-    }
-    res.sendStatus(200);
-})
+  
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log("Server is now listening...");
