@@ -30,13 +30,15 @@
         <div class="profile-box">
             <div class="top-section">
                 <button class="profile-pic">
-                    <img src={{image}} alt="profilepic" id="profilePic" preload>
+                    <!-- <div class = "black-hover"></div> -->
+                    <img src={{image}} alt="profilepic" id="profilePic2" preload>         
                 </button>
                 <div class="profile-info">
                     <h1>{{name}}</h1>
                 </div>
-                <form id="pictureUpload" name="pictureUpload">
+                <form id="pictureUpload" name="pictureUpload" class ="pictureUpload hidden">
                     <input type="file" id="newProfilePic" name="newProfilePic">
+                    <label for="newProfilePic" id="uploadButton">Upload profile pic</label>
                     <button type="button" id="savePic">Save</button>
                 </form>
             </div>
@@ -57,7 +59,7 @@
                     <textarea id="newBio" name="newBio" placeholder="Bio"></textarea><br>
                     <label for="newBday">Birthday:</label><br>
                     <input type="date" id="newBday" name="newBday"><br>
-                    <label for="newProfilePic">Profile Picture:</label><br>
+                    <!--label for="newProfilePic">Profile Picture:</label><br-->
                     <!--<input type="file" id="newProfilePic" name="newProfilePic"><br>-->
                     <button type="button" id="saveChanges">Save</button>
                 </form>
@@ -74,16 +76,20 @@
                     {{/unless}}
                 {{/each}}               
             </div>
+            <button type="button" id="morePosts" data-index={{ID}}>View all posts</button>
 
                 <!--- COMMENTS-->
                 <div class="post-footer">
                     {{#each comments}}
                         {{#unless (eq3 isDeleted)}}
-                            {{> profileComments this}}
+                            {{> profileComments this name=(lookup ../userArr @index )}}
                         {{/unless}}
                     {{/each}}
                 </div>
+                <button type="button" id="moreComments" data-index={{ID}}>View all comments</button>
         </div>
+
+        <div class="editDiv">
         <form id="editpostform" name="editpost-form">
             <div class="header-post">
                 <span class ="header">EDIT A POST</span>
@@ -93,3 +99,4 @@
             <input id="postbody" name="post-body" type="text" placeholder="Text"></input><br>
             <input id="submit-post" type="submit" value="Submit">
         </form>
+        </div>

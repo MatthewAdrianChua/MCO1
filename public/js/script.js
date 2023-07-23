@@ -128,6 +128,11 @@ logoBtn.addEventListener('click', async (e) => {
     window.location.href = "/";
 })
 
+const nextPageBtn = document.querySelector("#nextPage");
+let pageNum = 0;
 
-
+nextPageBtn.addEventListener('click', async (e) => {
+    e.preventDefault;
+    
+})
 
