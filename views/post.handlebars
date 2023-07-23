@@ -43,16 +43,16 @@
                 <div class="post-info">
                     <div class="posterAndEdited">
                         <span class="posterInfo" data-index={{posterID}}>--Posted by {{posterName}}</span>
-                        {{#unless (eq3 isEdited)}}
+                        {{#if (eq3 isEdited)}}
                             <span class="isEdited"> ● edited</span>
-                        {{/unless}}
+                        {{/if}}
                     </div>
                     <span class="post-title">{{title}}</span>
                 </div>
             </div>
 
             <div class="body">
-               {{postBody}}
+                {{postBody}}
             </div>
 
             <div class="comments">
@@ -63,12 +63,12 @@
                         <input id="submit-comment" type="button" value="Submit">     
                     </form>
                 </div>
-              
+
                 <div class="divider">
-                  <hr class="line">
-                  Comments
+                    <hr class="line">
+                    Comments
                 </div>
-              
+
                 <div id="comment-section">
                     {{#each comments}}
                         {{#if (eq parent "")}}

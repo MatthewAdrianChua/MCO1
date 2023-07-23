@@ -76,16 +76,20 @@
                     {{/unless}}
                 {{/each}}               
             </div>
+            <button type="button" id="morePosts" data-index={{ID}}>View all posts</button>
 
                 <!--- COMMENTS-->
                 <div class="post-footer">
                     {{#each comments}}
                         {{#unless (eq3 isDeleted)}}
-                            {{> profileComments this}}
+                            {{> profileComments this name=(lookup ../userArr @index )}}
                         {{/unless}}
                     {{/each}}
                 </div>
+                <button type="button" id="moreComments" data-index={{ID}}>View all comments</button>
         </div>
+
+        <div class="editDiv">
         <form id="editpostform" name="editpost-form">
             <div class="header-post">
                 <span class ="header">EDIT A POST</span>
@@ -95,3 +99,4 @@
             <input id="postbody" name="post-body" type="text" placeholder="Text"></input><br>
             <input id="submit-post" type="submit" value="Submit">
         </form>
+        </div>

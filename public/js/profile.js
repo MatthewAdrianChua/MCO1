@@ -57,6 +57,35 @@ window.addEventListener('mouseup', function(event) {
     isMouseDownInModal = false;
 });
 
+const searchPostBtn = document.querySelector("#searchsubmit");
+
+searchPostBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const searchText = document.querySelector("#searchbar").value;
+
+    console.log("index.js data", searchText);
+    const jString = JSON.stringify({searchText});
+
+    const response = await fetch("/searchquery", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href= "/searchl";
+    if(response.status == 200){
+        console.log("Search Success")
+    }
+})
+
+const logoBtn = document.querySelector(".logo");
+
+logoBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    window.location.href = "/loggedIn";
+})
+
 const editPost = document.querySelectorAll('.edit-post-button');
 const editpostForm = document.querySelector('#editpostform'); 
 
@@ -137,7 +166,7 @@ for (let x = 0; x < editButton.length; x++) {
             }
           });
 
-          editpostForm.classList.remove('show');
+          //editpostForm.classList.remove('show');
 
           if(response.status == 200){
             console.log("Edit post success");
@@ -186,16 +215,6 @@ saveBtn.onclick = async function() {
       window.location.reload();
     }else
       console.error(`An error has occured. Status code = ${response.status}`); 
-
-
-
-      /*
-  // For now, we will just update the profile box directly
-    document.querySelector(".profile-info h1").textContent = newUsername;
-    document.querySelector(".bottom-section p").textContent = newBio;
-    document.querySelector(".bottom-section h2").textContent = "Birthday: " + newBday;
-    modal.style.display = "none";
-    */
 
 }
 
@@ -294,6 +313,24 @@ logout.addEventListener('click', async (e) => {
     else
         console.log("Logout failed");
 })
+
+const viewPosts = document.querySelector('#morePosts');
+
+viewPosts.addEventListener('click', async (e) => {
+    const index = viewPosts.dataset.index;
+    console.log(index);
+    window.location.href = '/profilePosts/'+index;
+    
+})
+
+const viewComments = document.querySelector('#moreComments');
+
+viewComments.addEventListener('click', async (e) => {
+    const index = viewPosts.dataset.index;
+    console.log(index);
+    window.location.href = '/profileComments/'+index;   
+})
+
 
 
 

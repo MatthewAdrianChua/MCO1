@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root {
+    font-family: 'Roboto Mono', monospace;
+}
+
+body{
+    margin: 0px;
+}
+.navbar{
+    height: 4rem;
+    position: sticky;
+    top:0px;
+    background-color: #0081A7;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+.logo {
+    font-size: 40px;
+    margin: 0px;
+    float: right;
+}
+
+.header_logo {
+    background-image: url("https://media.discordapp.net/attachments/354239629798539264/1120363756287951061/merchant.jpg");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+}
+
+.name{
+    padding-top: 10px;
+    font-size: 25px;
+    color: black;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+}
+
+#searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    padding: 9px;
+    border: none;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 17px;
+    border-radius: 1.625rem;
+    outline: none;
+    background: #f5f5f5;
+}
+
+.firsthead {
+    position: sticky;
+    top: 0px;
+    background-color: #0081A7;
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    z-index: 2; 
+}
+
+.logo {
+    font-size: 40px;
+    margin: 0px;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.header_logo {
+    background-image: url("https://media.discordapp.net/attachments/354239629798539264/1120363756287951061/merchant.jpg");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+}
+
+.header_text{
+    cursor: pointer;
+}
+
+#searchsubmit {
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: -2.5rem;
+}
+
+#searchsubmit:hover{
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#profilePic {
+    border-radius: 50%;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    margin: 3px 10px 0px 0px;
+}
+
+.profileBtn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 64px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    background-color: #3bc98e;
+    border: 1px solid #249e6b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 10px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.show-menu .dropdown-content {
+    display: block;
+    opacity: 1;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.post-info{
+    display: flex;
+    flex-direction: column;
+    height: 75px;
+}
+
+.posterInfo{
+    margin-top: 12px;
+    height: 20px;
+    font-size: 12px;
+}
+
+/*----------------------------------FORM BOX REGISTER-------------------------------------*/
+
+#logregbtn {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: right;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+#logregbtn:hover{
+    cursor: pointer;
+}
+
+
+.wrapper {
+    display:flex;
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    background-color: #3bc98e;
+    width: 440px;
+    height: 440px;
+    border: 4px solid #249e6b;
+    border-radius: 1.625rem;
+    overflow:hidden;
+    z-index: 999;
+    transform: scale(0);
+    transition: transform .5s , height .2s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1);
+}
+
+
+.closelogreg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width:45px;
+    height: 45px;
+    font-weight: 1000;
+    z-index: 1;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.closelogreg:hover {
+    cursor: pointer;
+}
+
+.wrapper .formbox {
+    width: 100%;
+    padding: 40px;
+}
+
+
+.wrapper .formbox.log {
+    position: flex;
+    transition: transform .18s ease;
+    transform: translateX(0px);
+}
+
+.wrapper.active .formbox.log{
+    transition: none;
+    transform: translateX(-500px)
+}
+
+.wrapper .formbox.reg{
+    position:absolute;
+    transition: none;
+    transform: translateX(500px);
+}
+
+.wrapper.active .formbox.reg{
+    position: flex;
+    transition: transform .18s ease;
+    transform: translateX(0px);
+}
+
+.formbox h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.inputbox {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid;
+    margin: 30px 0;
+}
+
+.inputbox label {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.inputbox input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.submitbtn {
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1em;
+    transition: .5s;
+}
+
+.submitbtn:hover {
+    background-color: black;
+    color: white;
+}
+
+.login-register {
+    font-size: .9em;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    text-decoration: none;
+    font-weight: 600px;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+/*----------------------------------------------*/
+
+.profile-box {
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 85%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-pic img {
+    width: 80px; 
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.body-container {
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 85%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-instance{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 0;
+    border: solid 3px ;
+    margin: 15px;
+    font-size: 30px;
+    border-radius: 50px;
+    background-color: #3bc98e;
+    pointer-events: none;
+    transition: 0.5s;
+  
+}
+
+.interactions{
+    display: flex;
+    margin-left: 20px;
+}
+
+.like-sprite{
+    display: inline-block;
+    background-image: url("/static/images/sprites2.png");
+    width: 50px;
+    height: 30px;
+    background-position: -605px -520px;
+    background-size: 900px 786px;
+    margin-top: 10px;
+    background-color: yellow;
+    border: none;
+}
+
+.like-count{
+    padding-top: 4px;
+    padding-left: 10px;
+    font-size: 2rem;
+}
+
+.comment-sprite{
+    display: inline-block;
+    background-image: url("/static/images/sprites2.png");
+    width: 50px;
+    height: 30px;
+    background-position: -211px -785px;
+    background-size: 700px 450px;
+    margin-top: 10px;
+    background-color: yellow;
+    border: none;
+    margin-left: 10px;
+}
+
+.index-title{
+    margin-left: 100px;
+    font-size: 20px;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-top: 4px;
+    pointer-events: auto;
+}
+
+.comment-count{
+    padding-left: 10px;
+    padding-top: 4px;
+    font-size: 2rem;
+}
+
+.post-instance:hover{
+    background-color: #249e6b;
+}
+
+
+.post-button {
+    font-size: 2rem;
+    align-items: center;
+    font-family: 'Roboto Mono', monospace;
+    margin: auto;
+    border: none;
+    background: none;
+    pointer-events: auto;
+}
