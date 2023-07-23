@@ -605,9 +605,18 @@ div.post-footer {
     margin-top: 15px;
 }
 
+#comment-edit-body{
+    margin-top: 1%;
+    width: 950px;
+    height: 80px;
+    background-color: #3bc98e;
+    margin-left: 2%;
+    border-radius: 25px;
+    border: solid #249e6b;
+    font-size: 17px;
+}
 
-
-.comment-body {
+.comment-body{
     flex-grow: 1;
     overflow: auto;
 }
@@ -621,6 +630,12 @@ span.comment-title {
     border-radius: 50px;
 	min-width: 200px;
 	
+}
+
+#edit-comment-body{
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 50px;
 }
 
 .comment-body p{
