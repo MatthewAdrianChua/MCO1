@@ -1,15 +1,20 @@
 const profileBtn = document.querySelector('.profileBtn');
 const dropdownContent = document.querySelector('.dropdown');
 const postie = document.querySelector('.header_text');
+const uploadBtn = document.querySelector('.profile-pic');
+const uploadForm = document.querySelector('.pictureUpload');
 
+var blackBlock = document.querySelector(".black-hover");
 var modal = document.getElementById("editProfileModal");
 var btn = document.getElementById("editProfile");
 var span = document.getElementsByClassName("close")[0];
 var saveBtn = document.getElementById("saveChanges");
+
 var isMouseDownInModal = false;
 
 profileBtn.addEventListener('click', e => {
     dropdownContent.classList.toggle('show-menu');
+    
 }); 
 
 postie.addEventListener('click', e => {
@@ -17,6 +22,21 @@ postie.addEventListener('click', e => {
   window.location.href = "/loggedIn";
 });
 
+/*
+uploadBtn.addEventListener('mouseover', e => {
+  blackBlock.style.display = "block";
+  document.getElementById('#profilePic').style.visibility = "hidden";
+
+});
+
+uploadBtn.addEventListener('mouseout', e => {
+  blackBlock.style.display = "none";
+  document.getElementById('#profilePic').style.display = "visible";
+});*/
+
+uploadBtn.addEventListener('click', e => {
+  uploadForm.classList.toggle('hidden');
+});
 
 btn.onclick = function() {
     modal.style.display = "block";
