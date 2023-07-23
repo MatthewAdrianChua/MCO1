@@ -56,7 +56,7 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-const pageLimit = 2; //*******CHANGE THIS TO TEST PAGE LIMIT*********
+const pageLimit = 20; //*******CHANGE THIS TO TEST PAGE LIMIT*********
 let pageId = 0;
 
 app.get("/", async (req, res) => {
