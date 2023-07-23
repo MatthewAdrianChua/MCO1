@@ -128,11 +128,25 @@ logoBtn.addEventListener('click', async (e) => {
     window.location.href = "/";
 })
 
+
 const nextPageBtn = document.querySelector("#nextPage");
-let pageNum = 0;
+let pageID = 0;
+const paginationElement = document.getElementById("pagination");
+pageID = parseInt(paginationElement.dataset.totalPages);
 
 nextPageBtn.addEventListener('click', async (e) => {
-    e.preventDefault;
-    
-})
+    e.preventDefault();
+    pageID++;
+    window.location.href = `/${pageID}`;
+});
+
+const prevPageBtn = document.querySelector("#prevPage");
+
+prevPageBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (pageID > 0) {
+        pageID--;
+    }
+    window.location.href = `/${pageID}`;
+});
 

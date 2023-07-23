@@ -56,31 +56,54 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-app.get("/", async (req,res) => {
+const pageLimit = 2; //*******CHANGE THIS TO TEST PAGE LIMIT*********
+let pageId = 0;
+
+app.get("/", async (req, res) => {
     console.log("Index page loaded");
 
+    const pageIndex = 0; // Default page index is 0
+
     const posts = await db.collection('posts');
-    const postsCollection = await posts.find({}).toArray(function(err, documents) {
-        if(err){
+    const postsCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
             console.error(err);
         }
     });
-    
+
     res.render("index", {
         script: "static/js/script.js",
-
-        posts: postsCollection
+        posts: postsCollection,
+        pageIndex: pageIndex
     });
-    
+});
 
+app.get("/:pageID", async (req, res) => {
+    console.log("Index page loaded");
+
+    const pageIndex = parseInt(req.params.pageID); // Get the page index from the URL parameter
+    pageId = pageIndex;
+    const posts = await db.collection('posts');
+    const postsCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    res.render("index", {
+        script: "static/js/script.js",
+        posts: postsCollection,
+        pageIndex: pageId
+    });
 });
 
 app.get("/loggedIn", async (req, res) => {
     console.log("Logged In Page loaded")
 
+    const pageIndex = 0; // Default page index is 0
     const posts = await db.collection('posts');
-    const postsCollection = await posts.find({}).toArray(function(err, documents) {
-        if(err){
+    const postsCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
             console.error(err);
         }
     });
@@ -93,7 +116,33 @@ app.get("/loggedIn", async (req, res) => {
         script: "static/js/login.js",
         image: user.image,
 
-        posts: postsCollection
+        posts: postsCollection,
+        pageIndex: pageIndex
+    })
+})
+
+app.get("/loggedIn/:pageID", async (req, res) => {
+    console.log("Logged In Page loaded")
+
+    const pageIndex = parseInt(req.params.pageID); // Get the page index from the URL parameter
+    pageId = pageIndex;
+    const posts = await db.collection('posts');
+    const postsCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    const users = await db.collection('users');
+    const user = await users.findOne({id: parseInt(currentUser)});
+
+    res.render("indexLogin", {
+        title: "Login",
+        script: "static/js/login.js",
+        image: user.image,
+
+        posts: postsCollection,
+        pageIndex: PageId
     })
 })
 
