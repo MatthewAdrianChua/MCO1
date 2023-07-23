@@ -12,10 +12,11 @@
                     </svg>
                 </button>
             </span>
+            {{#if profileImage}}
             <span class="profile">
                 <div class="dropdown">
                     <button class="profileBtn">
-                    <img src={{image}} alt="profilepic" id="profilePic">
+                    <img src={{profileImage}} alt="profilepic" id="profilePic">
                     </button>
                     <div class="dropdown-content">
                         <ul>
@@ -26,6 +27,11 @@
                     </div>
                 </div>
             </span>
+            {{else}}
+            <span class="logreg">
+                <button id="logregbtn" name="logregbutton" type="button">Login/Register</button>
+            </span>
+            {{/if}}
         </div>
         <div class="profile-box">
             <div class="top-section">
@@ -51,13 +57,62 @@
                     {{/unless}}
                 {{/each}}               
             </div>
+            <button type="button" id="morePosts" data-index={{ID}}>View all posts</button>
 
                 <!--- COMMENTS-->
                 <div class="post-footer">
                     {{#each comments}}
                         {{#unless (eq3 isDeleted)}}
-                            {{> profileComments-other this}}
+                            {{> profileComments-other this name=(lookup ../userArr @index )}}
                         {{/unless}}
                     {{/each}}
                 </div>
+                <button type="button" id="moreComments" data-index={{ID}}>View all comments</button>
+        </div>
+
+        <div class="wrapper">
+            <button class="closelogreg" type="button">X</button>
+            <div class="formbox log">
+                <h2>Login</h2>
+                <form action="#">
+                    <div class="inputbox">
+                        <input type="email" id="logemail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id = "logpassword" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox">
+                        Remember me</label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="submitbtnlog">Login</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="formbox reg">
+                <h2>Register</h2>
+                <form action="#">
+                    <div class="inputbox">
+                        <input type="text" id="regname" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="email" id="regemail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id="regpassword" required>
+                        <label>Password</label>
+                    </div>
+                    <button type="submit" class="submitbtnreg">Register</button>
+                    <div class="login-register">
+                        <p>Already have an Account? <a href="#" class="login-link">Login</a></p>
+                    </div>
+                </form>
+            </div>
         </div>

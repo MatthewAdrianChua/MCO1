@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/static/css/profile.css">
-    
+<link rel="stylesheet" href="/static/css/allPosts.css">    
+
     <div class="firsthead">
             <span class="logo">
                 <img class="header_logo">
@@ -12,10 +12,11 @@
                     </svg>
                 </button>
             </span>
+            {{#if profileImage}}
             <span class="profile">
                 <div class="dropdown">
                     <button class="profileBtn">
-                    <img src={{image}} alt="profilepic" id="profilePic">
+                    <img src={{profileImage}} alt="profilepic" id="profilePic">
                     </button>
                     <div class="dropdown-content">
                         <ul>
@@ -26,65 +27,31 @@
                     </div>
                 </div>
             </span>
+            {{else}}
+            <span class="logreg">
+                <button id="logregbtn" name="logregbutton" type="button">Login/Register</button>
+            </span>
+            {{/if}}
         </div>
         <div class="profile-box">
             <div class="top-section">
-                <button class="profile-pic">
-                    <img src={{image}} alt="profilepic" id="profilePic" preload>
-                </button>
+                
+                <img src={{profileImage}} alt="profilepic" id="profilePic" preload>
+                
                 <div class="profile-info">
-                    <h1>{{name}}</h1>
+                    <h1>All Posts of: {{name}}</h1>
                 </div>
-                <form id="pictureUpload" name="pictureUpload">
-                    <input type="file" id="newProfilePic" name="newProfilePic">
-                    <button type="button" id="savePic">Save</button>
-                </form>
-            </div>
-            <div class="bottom-section">
-                <p>{{bio}}</p>
-                <h2>Birthday: {{birthday}}</h2>
-                <h2>Posts: 0</h2>
-                <button id="editProfile" >Edit Profile</button>
-            </div>
-        </div>
-        <div id="editProfileModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form id="editProfileForm">
-                    <label for="newUsername">Username:</label><br>
-                    <input type="text" id="newUsername" name="newUsername" placeholder="Username"><br>
-                    <label for="newBio">Bio:</label><br>
-                    <textarea id="newBio" name="newBio" placeholder="Bio"></textarea><br>
-                    <label for="newBday">Birthday:</label><br>
-                    <input type="date" id="newBday" name="newBday"><br>
-                    <label for="newProfilePic">Profile Picture:</label><br>
-                    <!--<input type="file" id="newProfilePic" name="newProfilePic"><br>-->
-                    <button type="button" id="saveChanges">Save</button>
-                </form>
             </div>
         </div>
 
-
-        
-        <div class = "body-container">
+        <div class="body-container">
             <div class="post-container">
                 {{#each posts}}
                     {{#unless (eq3 isDeleted)}}
                         {{> profilePosts this}}
                     {{/unless}}
-                {{/each}}               
+                {{/each}}
             </div>
-            <button type="button" id="morePosts" data-index={{ID}}>View all posts</button>
-
-                <!--- COMMENTS-->
-                <div class="post-footer">
-                    {{#each comments}}
-                        {{#unless (eq3 isDeleted)}}
-                            {{> profileComments this name=(lookup ../userArr @index )}}
-                        {{/unless}}
-                    {{/each}}
-                </div>
-                <button type="button" id="moreComments" data-index={{ID}}>View all comments</button>
         </div>
 
         <div class="editDiv">

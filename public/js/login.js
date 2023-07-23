@@ -102,3 +102,32 @@ logout.addEventListener('click', async (e) => {
     else
         console.log("Logout failed");
 })
+
+const searchPostBtn = document.querySelector("#searchsubmit");
+
+searchPostBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const searchText = document.querySelector("#searchbar").value;
+
+    console.log("index.js data", searchText);
+    const jString = JSON.stringify({searchText});
+
+    const response = await fetch("/searchquery", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    window.location.href= "/searchl";
+    if(response.status == 200){
+        console.log("Search Success")
+    }
+})
+
+const logoBtn = document.querySelector(".logo");
+
+logoBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    window.location.href = "/loggedIn";
+})

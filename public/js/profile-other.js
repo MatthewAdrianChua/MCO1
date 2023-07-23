@@ -2,66 +2,186 @@ const profileBtn = document.querySelector('.profileBtn');
 const dropdownContent = document.querySelector('.dropdown');
 const postie = document.querySelector('.header_text');
 
-profileBtn.addEventListener('click', e => {
-    dropdownContent.classList.toggle('show-menu');
-}); 
+const wrapper = document.querySelector('.wrapper');
+const loginLink = document.querySelector('.login-link');
+const registerLink = document.querySelector('.register-link');
+const btnPopup = document.querySelector('#logregbtn');
+const wrapperBtnClose = document.querySelector('.closelogreg');
 
-postie.addEventListener('click', e => {
-  e.preventDefault();
-  window.location.href = "/loggedIn";
-});
+function search(){
+  const searchPostBtn = document.querySelector("#searchsubmit");
 
+  searchPostBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const searchText = document.querySelector("#searchbar").value;
 
-btn.onclick = function() {
-    modal.style.display = "block";
+      console.log("index.js data", searchText);
+      const jString = JSON.stringify({searchText});
+
+      const response = await fetch("/searchquery", {
+          method: "POST",
+          body: jString,
+          headers: {
+              "Content-Type": "application/json"
+          }
+      });
+      window.location.href= "/search";
+      if(response.status == 200){
+          console.log("Search Success")
+      }
+  })
+
+  const logoBtn = document.querySelector(".logo");
+
+  logoBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      window.location.href = "/";
+  })
 }
 
-span.onclick = function() {
-    modal.style.display = "none";
+function search1(){
+  const searchPostBtn = document.querySelector("#searchsubmit");
+
+  searchPostBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const searchText = document.querySelector("#searchbar").value;
+
+      console.log("index.js data", searchText);
+      const jString = JSON.stringify({searchText});
+
+      const response = await fetch("/searchquery", {
+          method: "POST",
+          body: jString,
+          headers: {
+              "Content-Type": "application/json"
+          }
+      });
+      window.location.href= "/searchl";
+      if(response.status == 200){
+          console.log("Search Success")
+      }
+  })
+
+  const logoBtn = document.querySelector(".logo");
+
+  logoBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      window.location.href = "/loggedIn";
+  })
 }
 
-modal.addEventListener('mousedown', function(event) {
-    isMouseDownInModal = event.target == modal;
-});
+async function loadProfile(){//if statement to load either the login/register button or the profile icon
+  const response = await fetch("/getCurrentUser", {
+    method: "GET"
+    })
 
-window.addEventListener('mouseup', function(event) {
-    if (isMouseDownInModal && event.target == modal) {
-        modal.style.display = "none";
+    let currentUser = "";
+
+    if(response.status == 200){
+        currentUser = await response.text();
+    }else{
+        console.error(`An error has occured. Status code = ${response.status}`); 
     }
-    isMouseDownInModal = false;
-});
 
-const editPost = document.querySelectorAll('.edit-post-button');
-const editpostForm = document.querySelector('#editpostform'); 
+    if(currentUser != ""){
+      const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
 
-editPost.forEach(button =>{
-  button.addEventListener('click', (a) => {
-      editpostForm.classList.add('show');
-
-      const exitpostform = document.querySelector('.exit');
-
-      exitpostform.addEventListener('click', (e) => {
-          e.preventDefault();
-          editpostForm.classList.remove('show');
-      })
-
-      const submitPost = document.querySelector('#submit-post');
-
-      const postInstance = a.target.closest('.post-instance');
-      const postID = postInstance.getAttribute('data-ID');
-      console.log("POST INDEX", postID);
-
-      submitPost.addEventListener('click', async (e) => {
+      logout.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const title = document.querySelector('#titlepost').value;
-        const body = document.querySelector('#postbody').value;
-        const sendPostID = parseInt(postID);
+      const response = await fetch("/logout", {
+        method: "GET"
+      });
 
-        console.log({title, body, sendPostID});
-        const jString = JSON.stringify({title, body, sendPostID});
+      if(response.status == 200){
+        console.log("Logout successful");
+        window.location.href = "/";
+      }
+      else
+        console.log("Logout failed");
+      })
 
-        const response = await fetch("/editPost", {
+      postie.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = "/loggedIn"
+      })
+
+      profileBtn.addEventListener('click', e => {
+        dropdownContent2.classList.toggle('show-menu');
+      });
+
+      const clickprofile2 = document.querySelector('.dropdown-content a:first-child');
+
+      clickprofile2.addEventListener('click', async (e) =>{
+        e.preventDefault();
+
+        window.location.href = "/profile/"+currentUser;
+      })
+
+      search1();
+    }else{
+      postie.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = "/"
+      })
+
+      registerLink.addEventListener('click', () => {
+        wrapper.classList.add('active')
+      });
+
+      loginLink.addEventListener('click', () => {
+        wrapper.classList.remove('active')
+      });
+
+      btnPopup.addEventListener('click', ()=> {
+        wrapper.classList.add('active-popup');
+      });
+
+      wrapperBtnClose.addEventListener('click', ()=> {
+        wrapper.classList.remove('active-popup');
+      });
+
+      const registerSumbit = document.querySelectorAll('.submitbtnreg');
+
+      registerSumbit.forEach(button => {
+        button.addEventListener('click', async (e) => {
+            e.preventDefault();
+        
+            const name = document.querySelector('#regname').value;
+            const email = document.querySelector('#regemail').value;
+            const password = document.querySelector('#regpassword').value;
+
+            console.log("in script.js",{name, email, password});
+            const jString = JSON.stringify({name, email, password});
+
+            const response = await fetch("/register", {
+                method: "POST",
+                body: jString,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (response.status == 200)
+                console.log("Register Successful");
+            else
+                console.error(`An error has occurred, Status code = ${response.status}`);
+             
+        })
+      })
+
+      const loginSubmit = document.querySelector('.submitbtnlog');
+
+      loginSubmit.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const email = document.querySelector('#logemail').value;
+        const password = document.querySelector('#logpassword').value;
+
+        console.log("in script.js",{email, password});
+        const jString = JSON.stringify({email, password});
+
+        const response = await fetch("/login", {
             method: "POST",
             body: jString,
             headers: {
@@ -69,204 +189,36 @@ editPost.forEach(button =>{
             }
         });
 
-        editpostForm.classList.remove('show');
-
         if(response.status == 200){
-          console.log("Edit post success");
-          const postID = await response.text()
-          window.location.href = "/postPage/"+postID;
-        }else
-          console.error(`An error has occured. Status code = ${response.status}`);          
+            console.log("Login Successful");
+            window.location.reload(); //not sure if this is the correct way to do redirect after a login
+        }
+        else
+            console.error(`An error has occured, Status code = ${response.status}`);
+
       })
-  })       
-})
 
-/*Opens the editor*/
-var editButton = document.querySelectorAll('.edit-button');
-
-for (let x = 0; x < editButton.length; x++) {
-    editButton[x].addEventListener("click", (e) => {
-      let commentInstance = e.target.closest('.comment-bar');
-      commentInstance.querySelector("#comment-body").style.display = "none";
-      commentInstance.querySelector("#edit-comment-body").value = document.getElementById("comment-body").textContent;
-      commentInstance.querySelector("#edit-comment-body").style.display = "inline-block";
-      commentInstance.querySelector(".save-button").style.display = "inline-block";
-
-      let save = commentInstance.querySelector('.save-button');
-
-      save.addEventListener('click', async() => {
-
-          const postID = commentInstance.getAttribute('data-postID');
-          const commentID = commentInstance.getAttribute('data-commentID');
-          const commentBody = commentInstance.querySelector("#edit-comment-body").value;
-
-          console.log({postID,commentID,commentBody});
-          const jString = JSON.stringify({postID,commentID,commentBody});
-
-          const response = await fetch("/editComment", {
-            method: "POST",
-            body: jString,
-            headers: {
-                "Content-Type": "application/json"
-            }
-          });
-
-          editpostForm.classList.remove('show');
-
-          if(response.status == 200){
-            console.log("Edit post success");
-            const postID = await response.text()
-            window.location.href = "/postPage/"+postID;
-          }else
-            console.error(`An error has occured. Status code = ${response.status}`); 
-   
-      });
-  });
-}
-
-
-saveBtn.onclick = async function() {
-    var newUsername = document.getElementById("newUsername").value;
-    var newBio = document.getElementById("newBio").value;
-    var newBday = document.getElementById("newBday").value;
-  // Here you would typically send the new data to the server and get a response
-
-  const get = await fetch("/getCurrentUser", {
-    method: "GET"
-  });
-
-  let currentUser;
-
-  if(get.status == 200){
-    currentUser = await get.text();
-  }else{
-    console.error(`An error has occured. Status code = ${response.status}`); 
-  }
-
-
-    console.log({newUsername, newBio, newBday, currentUser});
-    const jString = JSON.stringify({newUsername, newBio, newBday, currentUser});
-    
-    const response = await fetch("/editProfile", {
-      method: "POST",
-      body: jString,
-      headers: {
-          "Content-Type": "application/json"
-      }
-    });
-
-    if(response.status == 200){
-      console.log("Edit profile success");
-      window.location.reload();
-    }else
-      console.error(`An error has occured. Status code = ${response.status}`); 
-
-
-
-      /*
-  // For now, we will just update the profile box directly
-    document.querySelector(".profile-info h1").textContent = newUsername;
-    document.querySelector(".bottom-section p").textContent = newBio;
-    document.querySelector(".bottom-section h2").textContent = "Birthday: " + newBday;
-    modal.style.display = "none";
-    */
-
-}
-
-const savePic = document.querySelector('#savePic');
-
-savePic.addEventListener('click', async (e) => {
-  e.preventDefault();
-
-  const imageInput = document.querySelector('#newProfilePic');
-  const image = imageInput.files[0];
-
-  console.log(image);
-
-  const formData = new FormData();
-  formData.append('image', image);
-
-  const response = await fetch("/editPicture", {
-    method: "POST",
-    body: formData
-  })
-
-  if(response.status == 200){
-    console.log("Edit picture success");
-    window.location.reload();
-  }else
-    console.error(`An error has occured. Status code = ${response.status}`); 
-
-})
-
-const deletePost = document.querySelectorAll('.delete-post-button');
-
-for (let x = 0; x < deletePost.length; x++) {
-    deletePost[x].addEventListener("click", async (e) => {
-      const postInstance = e.target.closest('.post-instance');
-      const index = postInstance.getAttribute('data-ID');
-
-      const jString = JSON.stringify({index});
-
-      const response = await fetch("/deletePost", {
-        method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
-      });
-  
-      if(response.status == 200){
-        console.log("Delete Post Success");
-        window.location.reload();
-      }else
-        console.error(`An error has occured. Status code = ${response.status}`); 
-  });
-}
-
-const deleteComment = document.querySelectorAll('.delete-comment-button');
-
-for (let x = 0; x < deleteComment.length; x++) {
-    deleteComment[x].addEventListener("click", async (e) => {
-      const commentInstance = e.target.closest('.comment-bar');
-      const commentID = commentInstance.getAttribute('data-commentID');
-      const postID = commentInstance.getAttribute('data-postID');
-
-      console.log(commentID, postID);
-
-      const jString = JSON.stringify({commentID,postID});
-
-      const response = await fetch("/deleteComment", {
-        method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
-      });
-  
-      if(response.status == 200){
-        console.log("Delete Post Success");
-        window.location.reload();
-      }else
-        console.error(`An error has occured. Status code = ${response.status}`); 
-  });
-}
-
-const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
-
-logout.addEventListener('click', async (e) => {
-    e.preventDefault();
-
-    const response = await fetch("/logout", {
-        method: "GET"
-    });
-
-    if(response.status == 200){
-        console.log("Logout successful");
-        window.location.href = "/";
+      search();
     }
-    else
-        console.log("Logout failed");
+}
+
+loadProfile();
+
+const viewPosts = document.querySelector('#morePosts');
+
+viewPosts.addEventListener('click', async (e) => {
+    const index = viewPosts.dataset.index;
+    console.log(index);
+    window.location.href = '/profilePosts/'+index;
+    
+})
+
+const viewComments = document.querySelector('#moreComments');
+
+viewComments.addEventListener('click', async (e) => {
+    const index = viewPosts.dataset.index;
+    console.log(index);
+    window.location.href = '/profileComments/'+index;   
 })
 
 

@@ -7,6 +7,7 @@ import { GridFSBucket, ObjectId } from 'mongodb';
 import session from 'express-session';
 
 let db = "";
+let currentUser = ""; //since MCO2 does not include session management this is how we keep track of the current user logged in, it stores the user ID as the variable (!WILL BE CHANGED IN MCO3!)
 
 function main(err){
     if(err){
@@ -104,10 +105,10 @@ async function findProfile(comments){
     let userArr = [];
     for(let x = 0; x < comments.length; x++){
         const users = await db.collection('users');
-        console.log("LENGTH", comments.length);
-        console.log("COMMENTS" ,comments[x]);
+        //console.log("LENGTH", comments.length);
+        //console.log("COMMENTS" ,comments[x]);
         const user = await users.findOne({id: comments[x].userID});
-        console.log("USER",user);
+        //console.log("USER",user);
 
         const name = user.name;
         const image = user.image;
@@ -117,6 +118,22 @@ async function findProfile(comments){
         const arr = [name, image, parentUser, id]
 
         userArr.push(arr);
+    }
+    return userArr;
+}
+
+async function findPosts(comments){
+    let userArr = [];
+    for(let x = 0; x < comments.length; x++){
+        const posts = await db.collection('posts');
+        const post = await posts.findOne({id: parseInt(comments[x].postID)});
+
+        const users = await db.collection('users');
+        const user = await users.findOne({id: post.userID});
+
+        const name = user.name;
+
+        userArr.push(name);
     }
     return userArr;
 }
@@ -139,14 +156,14 @@ app.get("/postPage/:postID", async (req, res) => {
         }
     }); //gets the comments for the current post being loaded
 
-    console.log("POST COMMENTS",postComments);
+    //console.log("POST COMMENTS",postComments);
 
     try{
         const post = await posts.findOne({id: parseInt(postID)});
-        console.log(post);
+        //console.log(post);
 
         const userArr = await findProfile(postComments);
-        console.log("USER ARR",userArr);
+        //console.log("USER ARR",userArr);
 
         const users = await db.collection('users');
         const user = await users.findOne({id: parseInt(currentUser)});
@@ -159,6 +176,7 @@ app.get("/postPage/:postID", async (req, res) => {
             title: post.title,
             postBody: post.body,
             likeCount: post.likeCount,
+            isEdited: post.isEdited,
             posterName: poster.name,
             posterID: poster.id,
             script: "/static/js/post.js",
@@ -174,6 +192,7 @@ app.get("/postPage/:postID", async (req, res) => {
             title: post.title,
             postBody: post.body,
             likeCount: post.likeCount,
+            isEdited: post.isEdited,
             posterName: poster.name,
             posterID: poster.id,
 
@@ -202,7 +221,9 @@ app.get("/profile/:userID", async (req, res) => {
         try{
             const users = await db.collection('users');
             const profileUser = await users.findOne({id: parseInt(profileID)});
-            console.log(profileUser);
+            //console.log(profileUser);
+
+            const currentUserDB = await users.findOne({id: parseInt(currentUser)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
 
             if(profileUser){
 
@@ -220,7 +241,37 @@ app.get("/profile/:userID", async (req, res) => {
                     }
                 });
 
-                if (req.session.userID == profileID) {
+                const previewPosts = [];
+                const previewComments = [];
+
+                let x = 0;
+
+                while(postsCollection[postsCollection.length -1 - x] != null && previewPosts.length < 3){
+                    if(postsCollection[postsCollection.length-1  -x ].isDeleted == false){
+                        previewPosts.push(postsCollection[postsCollection.length-1 - x]);
+                        x++;
+                    }else{
+                        x++;
+                    }
+                }
+
+                x = 0;
+
+                while(commentsCollection[commentsCollection.length -1 - x] != null && previewComments.length < 3){
+                    if(commentsCollection[commentsCollection.length-1  -x ].isDeleted == false){
+                        previewComments.push(commentsCollection[commentsCollection.length-1 - x]);
+                        x++;
+                    }else{
+                        x++;
+                    }
+                }
+
+                const userArr = await findPosts(previewComments);
+                console.log(userArr);
+
+                
+
+                if (currentUser == profileID) {
                     // Render 'profile' when viewing own profile
                     res.render("profile", {
                         script: "/static/js/profile.js",
@@ -231,11 +282,13 @@ app.get("/profile/:userID", async (req, res) => {
                         image: profileUser.image,
                         bio: profileUser.bio,
                         birthday: profileUser.birthday,
+                        ID: profileUser.id,
 
-                        posts: postsCollection,
-                        comments: commentsCollection,
+                        posts: previewPosts,
+                        comments: previewComments,
+                        userArr: userArr
                     })
-                }else{
+                }else if(currentUserDB != null){
                     // Render 'profile-other' when viewing another user's profile
                     res.render("profile-other", {
                         script: "/static/js/profile-other.js",
@@ -244,9 +297,29 @@ app.get("/profile/:userID", async (req, res) => {
                         image: profileUser.image,
                         bio: profileUser.bio,
                         birthday: profileUser.birthday,
+                        ID: profileUser.id,
 
-                        posts: postsCollection,
-                        comments: commentsCollection,
+                        profileImage: currentUserDB.image,
+
+                        posts: previewPosts,
+                        comments: previewComments,
+                        userArr: userArr
+
+                    })
+                }else{ //render this when not logged in and  view other profile
+                    res.render("profile-other", {
+                        script: "/static/js/profile-other.js",
+
+                        name: profileUser.name,
+                        image: profileUser.image,
+                        bio: profileUser.bio,
+                        birthday: profileUser.birthday,
+                        ID: profileUser.id,
+
+                        posts: previewPosts,
+                        comments: previewComments,
+                        userArr: userArr
+
                     })
                 }
 
@@ -261,6 +334,145 @@ app.get("/profile/:userID", async (req, res) => {
         }
     }
 });
+
+app.get("/profilePosts/:userID", async (req, res) => {
+    console.log("Profile Posts loaded");
+    console.log("Request received:", req.method, req.url);
+    const profileID = req.params.userID;
+    console.log("Profile ID", profileID);
+
+    if(Number.isInteger(parseInt(profileID))){
+        try{
+            const users = await db.collection('users');
+            const profileUser = await users.findOne({id: parseInt(profileID)});
+
+            const currentUserDB = await users.findOne({id: parseInt(currentUser)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
+
+            if(profileUser){
+
+                const posts = await db.collection('posts');
+                const postsCollection = await posts.find({userID: profileUser.id}).toArray(function(err, documents) {
+                    if(err){
+                        console.error(err);
+                    }
+                });
+
+                if (currentUser == profileID) {
+                    res.render("allPosts", {
+                        script: "/static/js/allPosts.js",
+
+                        name: profileUser.name,
+                        profileImage: profileUser.image,
+                        posts: postsCollection
+                    })
+                }else if(currentUserDB != null){
+                    res.render("allPosts-other", {
+                        script: "/static/js/allPosts-other.js",
+
+                        name: profileUser.name,
+                        profileImage: profileUser.image,
+
+                        image: currentUserDB.image,
+
+                        posts: postsCollection
+
+                    })
+                }else{
+                    res.render("allPosts-other", {
+                        script: "/static/js/allPosts-other.js",
+
+                        name: profileUser.name,
+                        profileImage: profileUser.image,
+                        posts: postsCollection
+
+                    })
+                }
+
+            }else{
+                res.sendStatus("Profile not found");
+                res.sendStatus(404);
+            }
+
+        }catch(err){
+            console.log("Error retrieving data");
+            console.error(err);
+            res.sendStatus(500);
+        }
+    }
+})
+
+app.get("/profileComments/:userID", async (req, res) => {
+    console.log("Profile Comments loaded");
+    console.log("Request received:", req.method, req.url);
+    const profileID = req.params.userID;
+    console.log("Profile ID", profileID);
+
+    if(Number.isInteger(parseInt(profileID))){
+        try{
+            const users = await db.collection('users');
+            const profileUser = await users.findOne({id: parseInt(profileID)});
+
+            const currentUserDB = await users.findOne({id: parseInt(currentUser)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
+
+            if(profileUser){
+
+                const comments = await db.collection('comments');
+                const commentsCollection = await comments.find({userID: profileUser.id}).toArray(function(err, documents) {
+                    if(err){
+                        console.error(err);
+                    }
+                });
+
+                const userArr = await findPosts(commentsCollection);
+
+                if (currentUser == profileID) {
+                    res.render("allComments", {
+                        script: "/static/js/allComments.js",
+
+                        name: profileUser.name,
+                        profileImage: profileUser.image,
+                        comments: commentsCollection,
+                        userArr: userArr
+                    })
+                }else if(currentUserDB != null){
+                    res.render("allComments-other", {
+                        script: "/static/js/allComments-other.js",
+
+                        name: profileUser.name,
+                        profileImage: profileUser.image,
+
+                        image: currentUserDB.image,
+
+                        comments: commentsCollection,
+                        userArr: userArr
+
+                    })
+                }else{
+                    res.render("allComments-other", {
+                        script: "/static/js/allComments-other.js",
+
+                        name: profileUser.name,
+                        profileImage: profileUser.image,
+                        comments: commentsCollection,
+                        userArr: userArr
+
+                    })
+                }
+
+            }else{
+                res.sendStatus("Profile not found");
+                res.sendStatus(404);
+            }
+
+        }catch(err){
+            console.log("Error retrieving data");
+            console.error(err);
+            res.sendStatus(500);
+        }
+    }
+})
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 class userData{
@@ -293,11 +505,11 @@ app.post("/register", async (req, res) => {
 
         try{
             const countRetrieve = await users.countDocuments({}); //adds an id number based on the maximum number of users in database + 1
-            console.log(countRetrieve);
+            //console.log(countRetrieve);
             newUser.id = countRetrieve + 1;
 
             let insertUser = await users.insertOne(newUser);
-            console.log(insertUser);
+            //console.log(insertUser);
             res.sendStatus(200); // successful 
 
         }catch(err){
@@ -312,8 +524,6 @@ app.post("/register", async (req, res) => {
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
-let currentUser = ""; //since MCO2 does not include session management this is how we keep track of the current user logged in, it stores the user ID as the variable (!WILL BE CHANGED IN MCO3!)
-
 app.post("/login", async (req, res) => {
     console.log("Login Request received");
     console.log(req.body);
@@ -325,12 +535,12 @@ app.post("/login", async (req, res) => {
         let loginResult = await users.findOne({email: email, password: password});
         if(loginResult){
             console.log("Login was successful");
-            console.log(loginResult);
+            //console.log(loginResult);
 
             currentUser = loginResult.id;
             console.log("Current User ",currentUser);
 
-            req.session.userID = loginResult.id;
+            req.session.userID = loginResult.id; //currently this has no functionality
             res.redirect('/');
         }else{
             console.log("Incorrect email or password");
@@ -372,11 +582,11 @@ app.post("/post", async (req, res) => {
 
         try{
             const postCountRetrieve = await posts.countDocuments({}); //adds an id number based on the maximum number of posts in database + 1
-            console.log(postCountRetrieve);
+            //console.log(postCountRetrieve);
             post.id = postCountRetrieve + 1;
 
             const createPost = await posts.insertOne(post);
-            console.log(createPost);
+            //console.log(createPost);
             res.status(200).send(post.id.toString()); //sends the status message 200 and sends the post.id pertaining to the newly created post so that in redirection it can be appended to the url
             
         }catch(err){
@@ -404,7 +614,7 @@ app.post("/like", async (req, res) =>{
             }
         );
 
-        console.log(edit);
+        //console.log(edit);
         res.sendStatus(200);
     }catch(err){
         console.log("Error liking post");
@@ -429,7 +639,7 @@ app.post("/dislike", async (req, res) =>{
             }
         );
 
-        console.log(edit);
+        //console.log(edit);
         res.sendStatus(200);
     }catch(err){
         console.log("Error liking post");
@@ -467,11 +677,11 @@ app.post("/comment", async (req, res) => {
 
         try{
             const commentCountRetrieve = await comments.countDocuments({postID: comment.postID});
-            console.log(commentCountRetrieve + 1);
+            //console.log(commentCountRetrieve + 1);
             comment.commentID = commentCountRetrieve + 1;
 
             const createComment = await comments.insertOne(comment);
-            console.log(createComment);
+            //console.log(createComment);
 
             const edit = await posts.updateOne({id: parseInt(postID)},
             {$inc: {
@@ -480,7 +690,7 @@ app.post("/comment", async (req, res) => {
             }
         );
 
-        console.log(edit); 
+        //console.log(edit); 
 
             res.sendStatus(200);
         }catch(err){
@@ -511,7 +721,7 @@ app.post("/editPost", async (req,res) => {
                 }
             );
 
-            console.log(edit);
+            //console.log(edit);
             res.status(200).send(sendPostID.toString());
         }catch(err){
             console.log("Error editing post");
@@ -538,7 +748,7 @@ app.post("/editComment", async (req,res) => {
                     }                
                 }     
             );
-            console.log(edit);
+            //console.log(edit);
             res.status(200).send(postID.toString());
         }catch(err){
             console.log("Error editing comment");
@@ -566,7 +776,7 @@ app.post("/editProfile", async (req,res) => {
     
     if(newUsername){
         const users = await db.collection('users');
-        console.log(await users.findOne({id: parseInt(currentUser)}));
+        //console.log(await users.findOne({id: parseInt(currentUser)}));
 
         try{
             const edit = await users.updateOne({id: parseInt(currentUser)},
@@ -577,7 +787,7 @@ app.post("/editProfile", async (req,res) => {
                     }                
                 }     
             );
-            console.log(edit);
+            //console.log(edit);
             res.sendStatus(200)
         }catch(err){
             console.log("Error editing profile");
@@ -595,7 +805,7 @@ app.post("/editPicture",upload.single('image'), async (req, res) =>{
 
     const users = await db.collection('users');
     const user = await users.findOne({id: parseInt(currentUser)});
-    console.log("EDIT PICTURE USER", user);
+    //console.log("EDIT PICTURE USER", user);
 
     try{
         const bucket = new GridFSBucket(db);
@@ -617,7 +827,7 @@ app.post("/editPicture",upload.single('image'), async (req, res) =>{
                     }                
                 }     
             );
-            console.log(edit);
+            //console.log(edit);
                   
         });
 
@@ -671,10 +881,11 @@ app.post('/deletePost', async(req, res) => {
     try{
         const post = await posts.updateOne({id: parseInt(index)},
         {$set: {
+            body: "--Deleted by User--",
             isDeleted: true
             }                
         });
-        console.log(post);
+        //console.log(post);
         res.sendStatus(200);
         console.log("Post Deleted");
     }catch(err){
@@ -696,13 +907,78 @@ app.post('/deleteComment', async(req, res) => {
             isDeleted: true
             }                
         });
-        console.log(comment);
+        //console.log(comment);
         res.sendStatus(200);
         console.log("Comment Deleted");
     }catch(err){
         res.sendStatus(400);
         console.log("Comment not deleted");
     }
+})
+
+app.get("/logout", (req, res) => {
+    console.log("logout request received");
+    currentUser = "";
+
+    res.sendStatus(200);
+})
+
+/*------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+app.get("/search", async (req, res) => {
+    console.log("Search page loaded");
+    console.log("help", searchText);
+    const regex = new RegExp(searchText, 'i');
+    const posts = await db.collection('posts');
+    const searchCollection = await posts.find({title: { $regex: regex }}).toArray(function(err, documents){
+        if(err){
+            console.error(err);
+        }
+    });
+    res.render("index", {
+        script: "static/js/script.js",
+
+        posts: searchCollection
+    });
+
+})
+
+app.get("/searchl", async (req, res) => {
+    console.log("Search page loaded");
+    console.log("help", searchText);
+    const regex = new RegExp(searchText, 'i');
+    const posts = await db.collection('posts');
+    const searchCollection = await posts.find({title: { $regex: regex }}).toArray(function(err, documents){
+        if(err){
+            console.error(err);
+        }
+    });
+    const users = await db.collection('users');
+    const user = await users.findOne({id: parseInt(currentUser)});
+
+    res.render("indexLogin", {
+        title: "Login",
+        script: "static/js/login.js",
+        image: user.image,
+
+        posts: searchCollection
+    })
+})
+
+let searchText = "";
+
+app.post("/searchquery", async (req, res) => {
+    console.log("Search Request Recieved");
+    console.log("help", req.body.searchText);
+    try{
+        searchText = req.body.searchText;
+    }
+    catch(err){
+        console.log("err")
+        console.error(err);
+    }
+    res.sendStatus(200);
 })
   
   
