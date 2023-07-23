@@ -16,6 +16,68 @@ const wrapperBtnClose = document.querySelector('.closelogreg');
 const likeBtn = document.querySelector('.like');
 const dislikeBtn = document.querySelector('.dislike');
 
+function search(){
+    const searchPostBtn = document.querySelector("#searchsubmit");
+
+    searchPostBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const searchText = document.querySelector("#searchbar").value;
+
+        console.log("index.js data", searchText);
+        const jString = JSON.stringify({searchText});
+
+        const response = await fetch("/searchquery", {
+            method: "POST",
+            body: jString,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        window.location.href= "/search";
+        if(response.status == 200){
+            console.log("Search Success")
+        }
+    })
+
+    const logoBtn = document.querySelector(".logo");
+
+    logoBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        window.location.href = "/";
+    })
+}
+
+function search1(){
+    const searchPostBtn = document.querySelector("#searchsubmit");
+
+    searchPostBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const searchText = document.querySelector("#searchbar").value;
+
+        console.log("index.js data", searchText);
+        const jString = JSON.stringify({searchText});
+
+        const response = await fetch("/searchquery", {
+            method: "POST",
+            body: jString,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        window.location.href= "/searchl";
+        if(response.status == 200){
+            console.log("Search Success")
+        }
+    })
+
+    const logoBtn = document.querySelector(".logo");
+
+    logoBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        window.location.href = "/loggedIn";
+    })
+}
+
 async function loadProfile(){ //this function will load the profile icon with drop down if a user is logged in if not otherwise it will load the login/register button
     const response = await fetch("/getCurrentUser", {
     method: "GET"
@@ -176,6 +238,26 @@ async function loadProfile(){ //this function will load the profile icon with dr
             }else
                 console.error(`An error has occured. Status code = ${response.status}`);
         })
+
+        const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
+
+        logout.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+        const response = await fetch("/logout", {
+            method: "GET"
+        });
+
+        if(response.status == 200){
+            console.log("Logout successful");
+            window.location.href = "/";
+        }
+        else
+            console.log("Logout failed");
+        })
+
+        search1();
+        
     }else{
         /*-------------------------Registering user/logging in--------------------------------------*/
 
@@ -276,6 +358,9 @@ async function loadProfile(){ //this function will load the profile icon with dr
             e.preventDefault
             wrapper.classList.add('active-popup');
         })
+
+        search();
+
     }
 }
 loadProfile();
@@ -298,23 +383,6 @@ posterInfo.addEventListener('click', (e) => {
     const index = posterInfo.dataset.index;
 
     window.location.href = "/profile/"+index;
-})
-
-const logout = document.querySelector('.dropdown-content ul li:nth-child(3)');
-
-logout.addEventListener('click', async (e) => {
-    e.preventDefault();
-
-    const response = await fetch("/logout", {
-        method: "GET"
-    });
-
-    if(response.status == 200){
-        console.log("Logout successful");
-        window.location.href = "/";
-    }
-    else
-        console.log("Logout failed");
 })
 
   

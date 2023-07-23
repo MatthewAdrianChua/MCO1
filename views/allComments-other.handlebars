@@ -1,5 +1,5 @@
-<link rel = "stylesheet" href = "/static/css/post.css">    
-    
+<link rel="stylesheet" href="/static/css/allComments-other.css">    
+
     <div class="firsthead">
             <span class="logo">
                 <img class="header_logo">
@@ -33,64 +33,23 @@
             </span>
             {{/if}}
         </div>
-        <div class="post-container">
-            <div class="header">
-                <div class="likes">
-                    <button class="like"></button>
-                    <div class="counter">{{likeCount}}</div>
-                    <button class="dislike"></button>
-                </div>
-                <div class="post-info">
-                    <div class="posterAndEdited">
-                        <span class="posterInfo" data-index={{posterID}}>--Posted by {{posterName}}</span>
-                        {{#if (eq3 isEdited)}}
-                            <span class="isEdited"> ● edited</span>
-                        {{/if}}
-                    </div>
-                    <span class="post-title">{{title}}</span>
+        <div class="profile-box">
+            <div class="top-section">
+                
+                <img src={{profileImage}} alt="profilepic" id="profilePic" preload>
+                
+                <div class="profile-info">
+                    <h1>All Comments of: {{name}}</h1>
                 </div>
             </div>
+        </div>
 
-            <div class="body">
-                {{postBody}}
-            </div>
-
-            <div class="comments">
-                <div class="add-comment">
-                    <p>add a comment</p>
-                    <form id="commentform" name="commentform">
-                        <input id="comment-input" name="comment-input" type="text" placeholder="comment"></input>
-                        <input id="submit-comment" type="button" value="Submit">     
-                    </form>
-                </div>
-
-                <div class="divider">
-                    <hr class="line">
-                    Comments
-                </div>
-
-                <div id="comment-section">
-                    {{#each comments}}
-                        {{#if (eq parent "")}}
-                            <div class="comment-thread">
-                                <div class="comment-instance" data-index={{commentID}}>
-                                {{#unless (eq2 (lookup ../userArr @index) 2)}}
-                                {{> comment this name=(eq2 (lookup ../userArr @index) 0) image=(eq2 (lookup ../userArr @index) 1) id=(eq2 (lookup ../userArr @index) 3) edited=(eq3 isEdited)}}
-                                {{/unless}}
-                                    <div>
-                                        <button class="reply-button">Reply</button>
-                                        {{#each ../comments}}
-                                        {{#if (eq parent ../commentID)}}           
-                                            {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3) edited=(eq3 isEdited)}}  
-                                        {{/if}}
-                                        {{/each}}
-                                    </div>
-                                </div>
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                </div>
-            </div>                          
+        <div class="post-footer">
+            {{#each comments}}
+                {{#unless (eq3 isDeleted)}}
+                    {{> profileComments-other this name=(lookup ../userArr @index )}}
+                {{/unless}}
+            {{/each}}
         </div>
 
         <div class="wrapper">

@@ -13,6 +13,7 @@ body{
     top: 0px;
     background-color: #0081A7;
     display: flex;
+    justify-content: space-between;
     height: 4rem;
     z-index: 2; 
 }
@@ -250,19 +251,25 @@ ul{
 
 /* imported from index.css*/
 
+.postDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 #createpost-form{
     visibility: hidden;
-    position: absolute;
+    position: fixed;
+    top: 40%;
     width: 1000px;
     height: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    top: 15%;
+    margin: auto;
     background-color: #3bc98e;
-    border: 4px solid black;
+    border: 4px solid #249e6b;
     border-radius: 25px;
     bottom: 300px;
-    z-index: 998;
+    z-index: 2;
 }
 
 .header-post{
@@ -349,7 +356,7 @@ ul{
     align-items: center;
     z-index: 0;
     border: solid 3px ;
-    margin: 30px;
+    margin: 15px;
     font-size: 30px;
     border-radius: 50px;
     background-color: #3bc98e;
@@ -426,11 +433,11 @@ ul{
 
 #editpostform{
     visibility: hidden;
-    position: relative;
+    position: fixed;
+    top: 40%;
     width: 1000px;
     height: 650px;
     margin: auto;
-    top: 15%;
     background-color: #3bc98e;
     border: 4px solid #249e6b;
     border-radius: 25px;
@@ -441,6 +448,13 @@ ul{
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
+}
+
+.editDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DEREK'S CSS ELEMENTS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -478,11 +492,33 @@ ul{
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+#morePosts{
+    width: 100%;
+    background-color: white;
+    border: none;
+    border-radius: 25px;
+}
+
+#moreComments{
+    width: 100%;
+    background-color: white;
+    border: none;
+    border-radius: 25px;
+}
+
+#morePosts:hover{
+    background-color: lightgray;
+}
+
+#moreComments:hover{
+    background-color: lightgray;
+}
+
 div.post-footer {
     margin-top: 5px;
 	padding: 16px;
-    background-color: darkgrey;
     border-radius: 10px;
+    outline: 2px solid black;
 }
 
 .comment-bar {
@@ -494,6 +530,7 @@ div.post-footer {
     min-height: 50px; /* Or whatever height is appropriate */
     overflow: auto;
     flex-wrap: wrap;
+    margin-top: 15px;
 }
 
 
@@ -579,8 +616,7 @@ div.edit{
 
 div.post-container{
 	margin: auto;
-	background-color:grey;
-	border: 1px solid black;
+	border: 2px solid black;
 	font-size: 14px;
 	box-sizing: border-box;
     padding: 5px;
@@ -712,4 +748,188 @@ div.post-header {
     border-radius: 50px;
     background-color: lightgray;
 	width: 200px;
+}
+
+/*---------------------------------REGISTER/LOGIN---------------------*/
+
+#logregbtn {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: right;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
+#logregbtn:hover{
+    cursor: pointer;
+}
+
+
+.wrapper {
+    display:flex;
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    background-color: #3bc98e;
+    width: 440px;
+    height: 440px;
+    border: 4px solid #249e6b;
+    border-radius: 1.625rem;
+    overflow:hidden;
+    z-index: 999;
+    transform: scale(0);
+    transition: transform .5s , height .2s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1);
+}
+
+
+.closelogreg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width:45px;
+    height: 45px;
+    font-weight: 1000;
+    z-index: 1;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.closelogreg:hover {
+    cursor: pointer;
+}
+
+.wrapper .formbox {
+    width: 100%;
+    padding: 40px;
+}
+
+
+.wrapper .formbox.log {
+    position: flex;
+    transition: transform .18s ease;
+    transform: translateX(0px);
+}
+
+.wrapper.active .formbox.log{
+    transition: none;
+    transform: translateX(-500px)
+}
+
+.wrapper .formbox.reg{
+    position:absolute;
+    transition: none;
+    transform: translateX(500px);
+}
+
+.wrapper.active .formbox.reg{
+    position: flex;
+    transition: transform .18s ease;
+    transform: translateX(0px);
+}
+
+.formbox h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.inputbox {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid;
+    margin: 30px 0;
+}
+
+.inputbox label {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.inputbox input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.submitbtn {
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1em;
+    transition: .5s;
+}
+
+.submitbtn:hover {
+    background-color: black;
+    color: white;
+}
+
+.login-register {
+    font-size: .9em;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    text-decoration: none;
+    font-weight: 600px;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+.posterAndEdited{
+    display: flex;
+}
+
+.isEdited{
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 11px;
+    font-weight: 700;
 }

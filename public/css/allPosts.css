@@ -5,8 +5,6 @@
 }
 
 body{
-    background-color: #66c0db;
-    color: black;
     margin: 0px;
 }
 .navbar{
@@ -63,205 +61,6 @@ body{
     background: #f5f5f5;
 }
 
-.profile{
-    background-color:#0081A7;
-    border: none;
-    height: 40px;
-    margin: 0px;
-    margin-top: 5px;
-    margin-right: 1px;
-}
-
-.profile-pic{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    margin: 0px;
-}
-
-.post-container{
-    background-color: white;
-    margin-left: 200px;
-    margin-right: 200px;
-    height: 100%;
-}
-
-.header{
-    display: flex;
-    height: 1%;
-    margin: 20px;
-}
-
-.likes{
-    width: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.like{
-    display: inline-block;
-    background-image: url("/static/images/sprites2.png");
-    width: 50px;
-    height: 30px;
-    background-position: -550px -520px;
-    background-size: 900px 786px;
-    margin-top: 10px;
-    background-color: white;
-    border: none;
-}
-
-.like:hover{
-    background-color: #f5f5f5;
-}
-
-.counter{
-    font-size: 18px;
-    text-align: center;
-}
-
-.dislike{
-    display: inline-block;
-    background-image: url("/static/images/sprites2.png");
-    width: 50px;
-    height: 30px;
-    background-position: -331px -520px;
-    background-size: 900px 786px;
-    margin-top: 0px;
-    background-color: white;
-    border: none;
-}
-
-.dislike:hover{
-    background-color: #f5f5f5;
-}
-
-.post-title{
-    margin-left: 10px;
-    margin-top: 0px;
-    padding-top: 10px;
-    font-size: 25px;
-}
-
-.body{
-    font-size: 18px;
-    margin-left: 100px;
-    padding-bottom: 10px;
-}
-
-.divider{
-    text-align: center;
-}
-
-.line{
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.comments{
-    margin: 20px;
-    font-size: 18px;
-    margin-left: 20px;
-    padding-bottom: 10px;
-}
-
-
-.add-comment{
-    margin-left: 10px;
-    margin-bottom: 15px;
-}
-
-.add-comment p{
-    font-size: 18px;
-}
-
-#comment-input{
-    margin-top: 0px;
-    background-color: #f5f5f5;
-    border: none;
-    color: black;
-    margin-top: 1px;
-    height: 100px;
-    width: 100%;
-    text-align: center;
-}
-
-.comment-thread{
-    
-}
-.comment-header{
-    display: flex;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.comment-profile{
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
-.comment-name{
-    margin-left: 10px;
-    padding-top: 5px;
-}
-
-.comment-body{
-    margin-left: 80px;
-    font-size: 18px;
-}
-
-.comment-body + div{
-    margin-left: 100px;
-    padding-bottom: 5px;
-}
-
-.reply-button{
-    height: 30px;
-    background-color: white;
-    border: none;
-    color: black;
-    margin-top: 10px;
-    font-size: 15px;
-    
-}
-
-.reply-button:hover{
-    background-color: #f5f5f5;
-}
-
-.reply-input{
-    background-color: #f5f5f5;
-    border: none;
-    color: black;
-    margin-top: 1px;
-    height: 180px;
-    width: 50%;
-    text-align: center;
-    padding-bottom: 10px;
-    margin-left: 100px;
-}
-
-#submit-comment ,.submit-reply{
-    margin-left: 10px;
-    border: none;
-    background-color: white;
-    font-family: 'Roboto Mono', monospace;
-}
-
-.submit-reply{
-    margin-left: 100px;
-}
-
-#submit-comment:hover ,.submit-reply:hover{
-    margin-left: 10px;
-    border: none;
-    background-color: #f5f5f5;
-}
-
-.submit-reply:hover{
-    margin-left: 100px;
-}
-
 .firsthead {
     position: sticky;
     top: 0px;
@@ -294,28 +93,6 @@ body{
     cursor: pointer;
 }
 
-.search {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: auto;
-}
-
-#searchbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: auto;
-    padding: 9px;
-    border: none;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    font-size: 17px;
-    border-radius: 1.625rem;
-    outline: none;
-    background: #f5f5f5;
-}
-
 #searchsubmit {
     background: none;
     border: none;
@@ -337,7 +114,7 @@ body{
     border: 1px solid black;
     width: 50px;
     height: 50px;
-    margin: 0px 10px 0px 0px;
+    margin: 3px 10px 0px 0px;
 }
 
 .profileBtn {
@@ -566,13 +343,237 @@ ul{
     text-decoration: underline;
 }
 
-.posterAndEdited{
+/*----------------------------------------------*/
+
+.profile-box {
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 85%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-pic img {
+    width: 80px; 
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.body-container {
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 85%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-instance{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 0;
+    border: solid 3px ;
+    margin: 15px;
+    font-size: 30px;
+    border-radius: 50px;
+    background-color: #3bc98e;
+    pointer-events: none;
+    transition: 0.5s;
+  
+}
+
+.interactions{
+    display: flex;
+    margin-left: 20px;
+}
+
+.like-sprite{
+    display: inline-block;
+    background-image: url("/static/images/sprites2.png");
+    width: 50px;
+    height: 30px;
+    background-position: -605px -520px;
+    background-size: 900px 786px;
+    margin-top: 10px;
+    background-color: yellow;
+    border: none;
+}
+
+.like-count{
+    padding-top: 4px;
+    padding-left: 10px;
+    font-size: 2rem;
+}
+
+.comment-sprite{
+    display: inline-block;
+    background-image: url("/static/images/sprites2.png");
+    width: 50px;
+    height: 30px;
+    background-position: -211px -785px;
+    background-size: 700px 450px;
+    margin-top: 10px;
+    background-color: yellow;
+    border: none;
+    margin-left: 10px;
+}
+
+.index-title{
+    margin-left: 100px;
+    font-size: 20px;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-top: 4px;
+    pointer-events: auto;
+}
+
+.comment-count{
+    padding-left: 10px;
+    padding-top: 4px;
+    font-size: 2rem;
+}
+
+.post-instance:hover{
+    background-color: #249e6b;
+}
+
+
+.post-button {
+    font-size: 2rem;
+    align-items: center;
+    font-family: 'Roboto Mono', monospace;
+    margin: auto;
+    border: none;
+    background: none;
+    pointer-events: auto;
+}
+
+.post-button {
+    font-size: 2rem;
+    align-items: center;
+    font-family: 'Roboto Mono', monospace;
+    margin: auto;
+    border: none;
+    background: none;
+    pointer-events: auto;
+}
+
+#editpostform{
+    visibility: hidden;
+    position: fixed;
+    top: 40%;
+    width: 1000px;
+    height: 650px;
+    margin: auto;
+    background-color: #3bc98e;
+    border: 4px solid #249e6b;
+    border-radius: 25px;
+    bottom: 300px;
+}
+
+#editpostform.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.header-post{
     display: flex;
 }
 
-.isEdited{
-    font-size: 12px;
-    padding-left: 10px;
-    padding-top: 11px;
+.header{
+    margin-left: 370px;
+    font-size: 2rem;
+}
+
+.exit{
+    margin-left: auto;
+    font-size: 1rem;
     font-weight: 700;
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: #3bc98e;
+    border: none;
+}
+
+.exit:hover{
+    background-color: #249e6b;
+}
+
+#titlepost{
+    margin-top: 1%;
+    width: 950px;
+    height: 80px;
+    background-color: #3bc98e;
+    margin-left: 2%;
+    border-radius: 25px;
+    border: solid #249e6b;
+    font-size: 17px;
+}
+
+#postbody{
+    margin-top: 1%;
+    margin-left: 1%;
+    width: 950px;
+    height: 400px;
+    background-color: #3bc98e;
+    border: solid #249e6b;
+    border-radius: 25px;
+    font-size: 17px;
+    padding: 10px;
+    overflow: hidden;
+    resize: none;
+}
+
+#submit-post{
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    border: 2px solid black;
+    margin-left: 40%;
+    margin-top: 20px;
+    background-color: white;
+}
+
+#submit-post:hover{
+    background-color: #f5f5f5;
+}
+
+#createpost-form.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.editDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
