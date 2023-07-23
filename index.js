@@ -564,6 +564,8 @@ class post_data{
         this.userID = 0;
         this.isDeleted = false;
         this.isEdited = false;
+        this.likedBy = [];
+        this.dislikedBy = [];
     }
 }
 
@@ -598,55 +600,57 @@ app.post("/post", async (req, res) => {
     }
 })
 
-app.post("/like", async (req, res) =>{
+app.post("/like", async (req, res) => {
     console.log("Like request received");
-    console.log(req.body);
-
     const {value} = req.body;
-
     const posts = await db.collection('posts');
-
     try{
-        const edit = await posts.updateOne({id: parseInt(value)},
-            {$inc: {
-                likeCount: 1
-                }
-            }
-        );
-
-        //console.log(edit);
+        const post = await posts.findOne({id: parseInt(value)});
+        if(post.likedBy.includes(currentUser)){
+            // User has already liked this post, so we remove their like
+            await posts.updateOne({id: parseInt(value)},
+                {$inc: {likeCount: -1}, $pull: {likedBy: currentUser}});
+        } else {
+            // User hasn't liked this post yet, so we add their like
+            // We also need to check if they've previously disliked this post
+            const updateQuery = post.dislikedBy.includes(currentUser)
+                ? {$inc: {likeCount: 2}, $push: {likedBy: currentUser}, $pull: {dislikedBy: currentUser}}
+                : {$inc: {likeCount: 1}, $push: {likedBy: currentUser}};
+            await posts.updateOne({id: parseInt(value)}, updateQuery);
+        }
         res.sendStatus(200);
-    }catch(err){
+    } catch(err){
         console.log("Error liking post");
         console.error(err);
+        res.sendStatus(500);
     }
+});
 
-})
-
-app.post("/dislike", async (req, res) =>{
-    console.log("Like request received");
-    console.log(req.body);
-
+app.post("/dislike", async (req, res) => {
+    console.log("Dislike request received");
     const {value} = req.body;
-
     const posts = await db.collection('posts');
-
     try{
-        const edit = await posts.updateOne({id: parseInt(value)},
-            {$inc: {
-                likeCount: -1
-                }
-            }
-        );
-
-        //console.log(edit);
+        const post = await posts.findOne({id: parseInt(value)});
+        if(post.dislikedBy.includes(currentUser)){
+            // User has already disliked this post, so we remove their dislike
+            await posts.updateOne({id: parseInt(value)},
+                {$inc: {likeCount: 1}, $pull: {dislikedBy: currentUser}});
+        } else {
+            // User hasn't disliked this post yet, so we add their dislike
+            // We also need to check if they've previously liked this post
+            const updateQuery = post.likedBy.includes(currentUser)
+                ? {$inc: {likeCount: -2}, $push: {dislikedBy: currentUser}, $pull: {likedBy: currentUser}}
+                : {$inc: {likeCount: -1}, $push: {dislikedBy: currentUser}};
+            await posts.updateOne({id: parseInt(value)}, updateQuery);
+        }
         res.sendStatus(200);
-    }catch(err){
-        console.log("Error liking post");
+    } catch(err){
+        console.log("Error disliking post");
         console.error(err);
+        res.sendStatus(500);
     }
-
-})
+});
 
 class commentData{
     constructor(){
@@ -657,6 +661,8 @@ class commentData{
         this.parent = ""; //the parent of the comment if the comment is a reply the commentID of the main comment will be placed here
         this.isDeleted = false;
         this.isEdited = false;
+        this.likedBy = [];
+        this.dislikedBy = [];
     }
 }
 
