@@ -500,3 +500,7 @@ ul{
 .wrongRegister.show{
     visibility: visible;
 }
+
+.formbox.reg{
+    padding: 0px;
+}

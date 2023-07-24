@@ -1,12 +1,84 @@
 [{
   "_id": {
-    "$oid": "64b4984824a06d466ddf8dda"
+    "$oid": "64be1af240374b5e34ba09d6"
   },
   "id": 1,
-  "likeCount": 5,
-  "commentCount": 5,
-  "title": "This is a post",
-  "body": "body",
+  "likeCount": 1,
+  "commentCount": 3,
+  "title": "Hello postiee Im Matt!",
+  "body": "Hello everyone!",
   "userID": 1,
-  "isDeleted": false
+  "isDeleted": false,
+  "isEdited": true,
+  "likedBy": [
+    1,
+    3
+  ],
+  "dislikedBy": [
+    2
+  ]
+},
+{
+  "_id": {
+    "$oid": "64be269475f1cb20fc97ebdb"
+  },
+  "id": 2,
+  "likeCount": 0,
+  "commentCount": 5,
+  "title": "Need help my gpu is not working",
+  "body": "The pc turns on but there is no display",
+  "userID": 1,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be27b475f1cb20fc97ebe2"
+  },
+  "id": 3,
+  "likeCount": 1,
+  "commentCount": 2,
+  "title": "Places to eat in taft?",
+  "body": "Im getting tired of eating mcdo everyday ",
+  "userID": 2,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    2
+  ],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be286375f1cb20fc97ebe6"
+  },
+  "id": 4,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "LOL clash team need one more person",
+  "body": "We need one more player for our clash team in league preferably support",
+  "userID": 4,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be297e75f1cb20fc97ebe8"
+  },
+  "id": 5,
+  "likeCount": 1,
+  "commentCount": 2,
+  "title": "Can seer please be removed from the apex",
+  "body": "long silence that travels a long distance that also stuns you and reveals you, why even play rev or valk at this point, getting hit by you might as well leave the lobby cause your already dead",
+  "userID": 3,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    2
+  ],
+  "dislikedBy": []
 }]

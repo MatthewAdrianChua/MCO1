@@ -1,25 +1,48 @@
 [{
   "_id": {
-    "$oid": "64b497cf98c817df91f8b221"
+    "$oid": "64be16e274a9addb3888739e"
   },
   "id": 1,
-  "name": "Matthew Chua",
-  "email": "matthewadrianchua@yahoo.com",
+  "name": "Matt",
+  "email": "matt@email.com",
   "password": "12345",
-  "image": "http://localhost:3000/image/64b4887c56db8478142667c4",
-  "bio": "",
-  "birthday": "",
-  "commentCount": 2
+  "image": "http://localhost:3000/image/64be2b3d75f1cb20fc97ebec",
+  "bio": "Hello Im Matt!",
+  "birthday": "2009-05-09"
 },
 {
   "_id": {
-    "$oid": "64b49ba54d97cb09698bd36e"
+    "$oid": "64be25c775f1cb20fc97ebd8"
   },
   "id": 2,
-  "name": "John",
-  "email": "John@email.com",
+  "name": "Michael",
+  "email": "michael@email.com",
   "password": "12345",
-  "image": "http://localhost:3000/image/64b49c507c528562d83a6557",
+  "image": "http://localhost:3000/image/64be2b8175f1cb20fc97ebfa",
+  "bio": "",
+  "birthday": ""
+},
+{
+  "_id": {
+    "$oid": "64be26b175f1cb20fc97ebdc"
+  },
+  "id": 3,
+  "name": "Derek",
+  "email": "derek@email.com",
+  "password": "12345",
+  "image": "http://localhost:3000/image/64be2efa75f1cb20fc97ebfe",
+  "bio": "",
+  "birthday": ""
+},
+{
+  "_id": {
+    "$oid": "64be27ca75f1cb20fc97ebe3"
+  },
+  "id": 4,
+  "name": "JonathanL",
+  "email": "jonathan@email.com",
+  "password": "12345",
+  "image": "/static/images/noProfile.jpg",
   "bio": "",
   "birthday": ""
 }]
