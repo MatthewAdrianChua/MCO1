@@ -227,6 +227,9 @@ body .wrapper {
 .formbox h2 {
     font-size: 2rem;
     text-align: center;
+    height: 2rem;
+    padding: 10px;
+    margin: 0px;
 }
 
 .inputbox {
@@ -403,6 +406,28 @@ body .wrapper {
     margin: 0px;
     float: right;
     cursor: pointer;
+}
+
+.wrongCredentials{
+    visibility: hidden;
+    color: red;
+    margin-left: 35px;
+    margin-top: 0px;
+}
+
+.wrongCredentials.show{
+    visibility: visible;
+}
+
+.wrongRegister{
+    visibility: hidden;
+    color: red;
+    margin-left: 130px;
+    margin-top: 0px;
+}
+
+.wrongRegister.show{
+    visibility: visible;
 }
 
 

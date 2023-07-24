@@ -5,7 +5,8 @@ const btnPopup = document.querySelector('#logregbtn');
 const wrapperBtnClose = document.querySelector('.closelogreg');
 const createPost = document.querySelector('#createpost');
 
-const channel4 = new BroadcastChannel('myChannel');
+const wrongCredentials = document.querySelector('.wrongCredentials');
+const wrongRegister = document.querySelector('.wrongRegister');
 
 registerLink.addEventListener('click', () => {
     wrapper.classList.add('active')
@@ -48,10 +49,14 @@ registerSumbit.forEach(button => {
             }
         });
 
-        if (response.status == 200)
+        if (response.status == 200){
             console.log("Register Successful");
-        else
+            wrongRegister.classList.remove('show');
+        }
+        else{
             console.error(`An error has occurred, Status code = ${response.status}`);
+            wrongRegister.classList.add('show');
+        }
              
     })
 })
@@ -77,10 +82,13 @@ loginSubmit.addEventListener('click', async (e) => {
 
     if(response.status == 200){
         console.log("Login Successful");
+        wrongCredentials.classList.remove('show');
         window.location.href = "/loggedIn"; //not sure if this is the correct way to do redirect after a login
     }
-    else
+    else{
         console.error(`An error has occured, Status code = ${response.status}`);
+        wrongCredentials.classList.add('show');
+    }
 
 })
 

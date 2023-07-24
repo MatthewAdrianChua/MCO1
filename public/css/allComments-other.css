@@ -258,6 +258,8 @@ ul{
 .formbox h2 {
     font-size: 2rem;
     text-align: center;
+    padding: 10px;
+    margin: 0px;
 }
 
 .inputbox {
@@ -491,4 +493,25 @@ div.post-footer {
     margin: auto;
     margin-top: 40px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wrongCredentials{
+    visibility: hidden;
+    color: red;
+    margin-left: 35px;
+}
+
+.wrongCredentials.show{
+    visibility: visible;
+}
+
+.wrongRegister{
+    visibility: hidden;
+    color: red;
+    margin-left: 130px;
+    margin-top: 0px;
+}
+
+.wrongRegister.show{
+    visibility: visible;
 }
