@@ -1,4 +1,4 @@
-// Last Edited 24/07/2023 5:57pm
+
 
 import 'dotenv/config';
 import { connectToMongo, getDb } from './db/conn.js';
