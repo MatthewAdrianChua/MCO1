@@ -216,6 +216,22 @@ ul{
     cursor:pointer;
 }
 
+#prevPage{
+    visibility: hidden;
+}
+
+#prevPage.show{
+    visibility: visible;
+}
+
+#nextPage{
+    visibility: hidden;
+}
+
+#nextPage.show{
+    visibility: visible;
+}
+
 .profile-box {
     
     border: 2px solid #000000; 
@@ -603,6 +619,11 @@ div.post-footer {
     overflow: auto;
     flex-wrap: wrap;
     margin-top: 15px;
+    transition: 0.5s;
+}
+
+.comment-bar:hover{
+    background-color: #0081A7;
 }
 
 #comment-edit-body{

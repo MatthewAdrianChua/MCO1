@@ -141,6 +141,22 @@ body .wrapper {
     cursor:pointer;
 }
 
+#prevPage{
+    visibility: hidden;
+}
+
+#prevPage.show{
+    visibility: visible;
+}
+
+#nextPage{
+    visibility: hidden;
+}
+
+#nextPage.show{
+    visibility: visible;
+}
+
 .wrapper {
     display:flex;
     position: fixed;

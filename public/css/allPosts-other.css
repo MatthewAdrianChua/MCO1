@@ -384,8 +384,9 @@ ul{
 }
 
 .post-instance{
+    padding: 5px;
     display:flex;
-    flex-direction: row;
+    flex-wrap: row;
     align-items: center;
     z-index: 0;
     border: solid 3px ;
@@ -393,7 +394,7 @@ ul{
     font-size: 30px;
     border-radius: 50px;
     background-color: #3bc98e;
-    pointer-events: none;
+    /*pointer-events: none;*/
     transition: 0.5s;
   
 }
@@ -404,6 +405,7 @@ ul{
 }
 
 .like-sprite{
+    border-radius: 50px;
     display: inline-block;
     background-image: url("/static/images/sprites2.png");
     width: 50px;
@@ -411,7 +413,7 @@ ul{
     background-position: -605px -520px;
     background-size: 900px 786px;
     margin-top: 10px;
-    background-color: yellow;
+    background-color: white;
     border: none;
 }
 
@@ -422,6 +424,7 @@ ul{
 }
 
 .comment-sprite{
+    border-radius: 50px;
     display: inline-block;
     background-image: url("/static/images/sprites2.png");
     width: 50px;
@@ -429,18 +432,19 @@ ul{
     background-position: -211px -785px;
     background-size: 700px 450px;
     margin-top: 10px;
-    background-color: yellow;
+    background-color: white;
     border: none;
     margin-left: 10px;
 }
 
 .index-title{
-    margin-left: 100px;
-    font-size: 20px;
+    margin-left: 0px;
     font-weight: 700;
     font-size: 2rem;
     margin-top: 4px;
     pointer-events: auto;
+    text-align: center;
+    flex-grow: 1;
 }
 
 .comment-count{
@@ -453,6 +457,16 @@ ul{
     background-color: #249e6b;
 }
 
+.post-button {
+    font-size: 2rem;
+    align-items: center;
+    font-family: 'Roboto Mono', monospace;
+    margin: auto;
+    border: none;
+    background: none;
+    pointer-events: auto;
+    flex-grow: 1;
+}
 
 .post-button {
     font-size: 2rem;
