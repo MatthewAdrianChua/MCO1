@@ -203,3 +203,16 @@ async function loadProfile(){//if statement to load either the login/register bu
   }
   
   loadProfile();
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('post-button')) {
+        e.preventDefault();
+  
+        postIntance = e.target.closest('.post-instance');
+        const index = postIntance.getAttribute('data-ID');
+        console.log("POST INDEX", index);
+  
+        window.location.href = "/postPage/"+index;
+  
+    }
+  });

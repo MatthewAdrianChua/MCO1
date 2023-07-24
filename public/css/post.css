@@ -182,7 +182,8 @@ body{
     margin-top: 1px;
     height: 100px;
     width: 100%;
-    text-align: center;
+    text-align: start;
+    padding-left: 10px;
 }
 
 .comment-thread{

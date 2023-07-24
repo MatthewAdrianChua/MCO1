@@ -203,3 +203,16 @@ async function loadProfile(){//if statement to load either the login/register bu
   }
   
   loadProfile();
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('comment-body')) {
+        e.preventDefault();
+  
+        commentIntance = e.target.closest('.comment-bar');
+        const index = commentIntance.getAttribute('data-postID');
+        console.log("POST INDEX", index);
+  
+        window.location.href = "/postPage/"+index;
+  
+    }
+  });

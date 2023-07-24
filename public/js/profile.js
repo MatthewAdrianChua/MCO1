@@ -342,6 +342,32 @@ pictureHolder.addEventListener('change', (e) => {
 
 });
 
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('post-button')) {
+      e.preventDefault();
+
+      postIntance = e.target.closest('.post-instance');
+      const index = postIntance.getAttribute('data-ID');
+      console.log("POST INDEX", index);
+
+      window.location.href = "/postPage/"+index;
+
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('comment-body')) {
+      e.preventDefault();
+
+      commentIntance = e.target.closest('.comment-bar');
+      const index = commentIntance.getAttribute('data-postID');
+      console.log("POST INDEX", index);
+
+      window.location.href = "/postPage/"+index;
+
+  }
+});
+
 
 
 

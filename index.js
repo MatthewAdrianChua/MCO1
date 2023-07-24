@@ -56,7 +56,7 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-const pageLimit = 2;
+const pageLimit = 20;
 
 app.get("/", async (req,res) => {
     console.log("Index page loaded");
@@ -69,11 +69,32 @@ app.get("/", async (req,res) => {
             console.error(err);
         }
     });
+
+    const testNext = await posts.find({isDeleted: false}).skip((pageIndex + 1) * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    if(testNext.length == 0)
+        nextPage = false;
+    else
+        nextPage = true;
+
+    if(pageIndex == 0)
+        prevPage = false;
+    else    
+        prevPage = true;
+
+    console.log(nextPage);
+    console.log(prevPage);
     
     res.render("index", {
         script: "static/js/script.js",
 
-        posts: postsCollection
+        posts: postsCollection,
+        nextPage: nextPage,
+        prevPage: prevPage
     });
     
 
@@ -94,12 +115,33 @@ app.get("/loggedIn", async (req, res) => {
     const users = await db.collection('users');
     const user = await users.findOne({id: parseInt(currentUser)});
 
+    const testNext = await posts.find({isDeleted: false}).skip((pageIndex + 1) * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    if(testNext.length == 0)
+        nextPage = false;
+    else
+        nextPage = true;
+
+    if(pageIndex == 0)
+        prevPage = false;
+    else    
+        prevPage = true;
+
+    console.log(nextPage);
+    console.log(prevPage);
+
     res.render("indexLogin", {
         title: "Login",
         script: "static/js/login.js",
         image: user.image,
 
-        posts: postsCollection
+        posts: postsCollection,
+        nextPage: nextPage,
+        prevPage: prevPage
     })
 })
 
@@ -998,26 +1040,49 @@ app.post("/searchquery", async (req, res) => {
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
+let nextPage = true;
+let prevPage = true;
 
 app.get("/page", async (req, res) => {
     console.log("Pages Loaded");
     const posts = await db.collection('posts');
-    const pageCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+    const pageCollection = await posts.find({isDeleted: false}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
         if (err) {
             console.error(err);
         }
     });
+
+    const testNext = await posts.find({isDeleted: false}).skip((pageIndex + 1) * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    if(testNext.length == 0)
+        nextPage = false;
+    else
+        nextPage = true;
+
+    if(pageIndex == 0)
+        prevPage = false;
+    else    
+        prevPage = true;
+
+    console.log(nextPage);
+    console.log(prevPage);
     
     res.render("index", {
         script: "static/js/script.js",
-        posts: pageCollection
+        posts: pageCollection,
+        nextPage: nextPage,
+        prevPage: prevPage
     });
 })
 
 app.get("/pagel", async (req, res) => {
     console.log("Pages Loaded");
     const posts = await db.collection('posts');
-    const pageCollection = await posts.find({}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+    const pageCollection = await posts.find({isDeleted: false}).skip(pageIndex * pageLimit).limit(pageLimit).toArray(function (err, documents) {
         if (err) {
             console.error(err);
         }
@@ -1026,12 +1091,33 @@ app.get("/pagel", async (req, res) => {
     const users = await db.collection('users');
     const user = await users.findOne({id: parseInt(currentUser)});
 
+    const testNext = await posts.find({isDeleted: false}).skip((pageIndex + 1) * pageLimit).limit(pageLimit).toArray(function (err, documents) {
+        if (err) {
+            console.error(err);
+        }
+    });
+
+    if(testNext.length == 0)
+        nextPage = false;
+    else
+        nextPage = true;
+
+    if(pageIndex == 0)
+        prevPage = false;
+    else    
+        prevPage = true;
+
+    console.log(nextPage);
+    console.log(prevPage);
+
     res.render("indexLogin", {
         title: "Login",
         script: "static/js/login.js",
         image: user.image,
 
-        posts: pageCollection
+        posts: pageCollection,
+        nextPage: nextPage,
+        prevPage: prevPage
     })
 })
 

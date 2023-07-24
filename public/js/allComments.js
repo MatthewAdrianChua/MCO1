@@ -151,3 +151,16 @@ logout.addEventListener('click', async (e) => {
     else
         console.log("Logout failed");
 })
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('comment-body')) {
+        e.preventDefault();
+  
+        commentIntance = e.target.closest('.comment-bar');
+        const index = commentIntance.getAttribute('data-postID');
+        console.log("POST INDEX", index);
+  
+        window.location.href = "/postPage/"+index;
+  
+    }
+  });

@@ -159,3 +159,20 @@ prevPageBtn.addEventListener('click', async (e) => {
     window.location.href = "/page";
 })
 
+const showNext = nextPageBtn.getAttribute('data-next');
+const showPrev = prevPageBtn.getAttribute('data-prev');
+
+console.log(showNext);
+
+if(showNext == "true"){
+    nextPageBtn.classList.add('show');
+}else{
+    nextPageBtn.classList.remove('show');
+}
+
+if(showPrev == "true"){
+    prevPageBtn.classList.add('show');
+}else{
+    prevPageBtn.classList.remove('show');
+}
+
