@@ -1,55 +1,168 @@
 [{
   "_id": {
-    "$oid": "64b4985124a06d466ddf8ddb"
+    "$oid": "64be25d975f1cb20fc97ebd9"
   },
-  "commentBody": "This is a comment",
+  "commentBody": "Welcome to postiee!",
   "postID": "1",
+  "userID": 2,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be25f675f1cb20fc97ebda"
+  },
+  "commentBody": "Nice to meet you!",
+  "postID": "1",
+  "userID": 1,
+  "commentID": 2,
+  "parent": "1",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be26f175f1cb20fc97ebde"
+  },
+  "commentBody": "Hello!",
+  "postID": "1",
+  "userID": 3,
+  "commentID": 3,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be26f975f1cb20fc97ebdf"
+  },
+  "commentBody": "did you check if the pci port is properly seated?",
+  "postID": "2",
+  "userID": 3,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be274975f1cb20fc97ebe0"
+  },
+  "commentBody": "yeah I even tried removing it and plugging it again",
+  "postID": "2",
+  "userID": 1,
+  "commentID": 2,
+  "parent": "1",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be276c75f1cb20fc97ebe1"
+  },
+  "commentBody": "nevermind I fixed it",
+  "postID": "2",
+  "userID": 2,
+  "commentID": 3,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": true,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be27f675f1cb20fc97ebe4"
+  },
+  "commentBody": "The tokyo tokyo in front of DLSU is good and the place is pretty chill too",
+  "postID": "3",
+  "userID": 4,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be281b75f1cb20fc97ebe5"
+  },
+  "commentBody": "Bon chon is good in U mall however it always smells like there's a dead body there",
+  "postID": "3",
+  "userID": 1,
+  "commentID": 2,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be287d75f1cb20fc97ebe7"
+  },
+  "commentBody": "you guys still have a slot?",
+  "postID": "4",
+  "userID": 3,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be29ad75f1cb20fc97ebe9"
+  },
+  "commentBody": "--Deleted by User--",
+  "postID": "5",
   "userID": 1,
   "commentID": 1,
   "parent": "",
-  "isDeleted": false
+  "isDeleted": true,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
 },
 {
   "_id": {
-    "$oid": "64b49bbc4d97cb09698bd36f"
+    "$oid": "64be29cf75f1cb20fc97ebea"
   },
-  "commentBody": "This is a comment by John",
-  "postID": "1",
+  "commentBody": "woah thats not nice",
+  "postID": "5",
   "userID": 2,
   "commentID": 2,
-  "parent": "",
-  "isDeleted": false
-},
-{
-  "_id": {
-    "$oid": "64b49bc64d97cb09698bd370"
-  },
-  "commentBody": "This is a reply by John",
-  "postID": "1",
-  "userID": 2,
-  "commentID": 3,
   "parent": "1",
-  "isDeleted": false
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
 },
 {
   "_id": {
-    "$oid": "64b4a623738e57088aea1be0"
+    "$oid": "64be2a2075f1cb20fc97ebeb"
   },
-  "commentBody": "comment again",
-  "postID": "1",
+  "commentBody": "howw??",
+  "postID": "2",
   "userID": 1,
   "commentID": 4,
-  "parent": "",
-  "isDeleted": false
-},
-{
-  "_id": {
-    "$oid": "64b4a664c194f43637959f70"
-  },
-  "commentBody": "Another reply",
-  "postID": "1",
-  "userID": 1,
-  "commentID": 5,
-  "parent": "4",
-  "isDeleted": false
+  "parent": "3",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
 }]

@@ -1,22 +1,33 @@
 [{
   "_id": {
-    "$oid": "64b4887c56db8478142667c4"
+    "$oid": "64be2b3d75f1cb20fc97ebec"
   },
-  "length": 17165,
+  "length": 3297427,
   "chunkSize": 261120,
   "uploadDate": {
-    "$date": "2023-07-17T00:17:00.948Z"
+    "$date": "2023-07-24T07:41:49.345Z"
   },
-  "filename": "noProfile.jpg"
+  "filename": "Chua, Matthew Adrian U._5DM49175 copy.jpg"
 },
 {
   "_id": {
-    "$oid": "64b49c507c528562d83a6557"
+    "$oid": "64be2b8175f1cb20fc97ebfa"
   },
-  "length": 4269,
+  "length": 670842,
   "chunkSize": 261120,
   "uploadDate": {
-    "$date": "2023-07-17T01:41:36.776Z"
+    "$date": "2023-07-24T07:42:57.033Z"
   },
-  "filename": "profile2.jpg"
+  "filename": "133733088_10207498122567476_8023376155689433921_n.jpg"
+},
+{
+  "_id": {
+    "$oid": "64be2efa75f1cb20fc97ebfe"
+  },
+  "length": 103761,
+  "chunkSize": 261120,
+  "uploadDate": {
+    "$date": "2023-07-24T07:57:46.507Z"
+  },
+  "filename": "38745585_2288041077878006_1988561246638571520_n.jpg"
 }]
