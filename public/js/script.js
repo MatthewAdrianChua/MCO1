@@ -51,11 +51,15 @@ registerSumbit.forEach(button => {
 
         if (response.status == 200){
             console.log("Register Successful");
-            wrongRegister.classList.remove('show');
+            wrongRegister.classList.add('show');
+            wrongRegister.textContent = 'Registering Success!'
+            wrongRegister.style.color = "#0081A7";
         }
         else{
             console.error(`An error has occurred, Status code = ${response.status}`);
             wrongRegister.classList.add('show');
+            wrongRegister.textContent = 'Registering Failed'
+            wrongRegister.style.color = "red";
         }
              
     })
