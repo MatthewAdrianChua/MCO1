@@ -1077,5 +1077,9 @@ div.post-header {
     visibility: visible;
 }
 
+.formbox.reg{
+    padding: 0px;
+}
+
 
 

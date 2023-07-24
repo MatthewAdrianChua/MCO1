@@ -63,7 +63,7 @@ app.get("/", async (req,res) => {
 
     const posts = await db.collection('posts');
 
-    const postsCollection = await posts.find({}).limit(pageLimit).toArray(function(err, documents) {
+    const postsCollection = await posts.find({isDeleted: false}).limit(pageLimit).toArray(function(err, documents) {
 
         if(err){
             console.error(err);
@@ -105,7 +105,7 @@ app.get("/loggedIn", async (req, res) => {
 
     const posts = await db.collection('posts');
 
-    const postsCollection = await posts.find({}).limit(pageLimit).toArray(function(err, documents) {
+    const postsCollection = await posts.find({isDeleted: false}).limit(pageLimit).toArray(function(err, documents) {
 
         if(err){
             console.error(err);
