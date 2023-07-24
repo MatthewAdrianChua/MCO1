@@ -10,11 +10,34 @@ profileBtn.addEventListener('click', e => {
     dropdownContent.classList.toggle('show-menu');
 }); 
 
+const postSubmit = document.querySelector('#submit-post');
+
 createPost.addEventListener('click', (e)=> {
     createpostForm.classList.add('show');
+    postSubmit.disabled = true;
+    postSubmit.value = "Fill out all inputs!";
+    postSubmit.style.color = "red";
 });
 
-const postSubmit = document.querySelector('#submit-post');
+const title = document.querySelector('#titlepost');
+const body = document.querySelector('#postbody');
+
+let canSubmit = 0;
+
+function checkInputs() {
+    if(title.value.trim() !== '' && body.value.trim() !== ''){
+        postSubmit.disabled = false;
+        postSubmit.value = "Submit";
+        postSubmit.style.color = "black";
+    }else{
+        postSubmit.disabled = true;
+        postSubmit.value = "Fill out all inputs!";
+        postSubmit.style.color = "red";
+    }
+}
+
+title.addEventListener('input', checkInputs);
+body.addEventListener('input', checkInputs);
 
 postSubmit.addEventListener('click', async (e) => {
     e.preventDefault();

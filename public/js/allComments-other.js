@@ -166,12 +166,16 @@ async function loadProfile(){//if statement to load either the login/register bu
               });
   
               if (response.status == 200){
-                  console.log("Register Successful");
-                  wrongRegister.classList.remove('show');
+                console.log("Register Successful");
+                wrongRegister.classList.add('show');
+                wrongRegister.textContent = 'Registering Success!'
+                wrongRegister.style.color = "#0081A7";
               }
               else{
-                  console.error(`An error has occurred, Status code = ${response.status}`);
-                  wrongRegister.classList.add('show');
+                console.error(`An error has occurred, Status code = ${response.status}`);
+                wrongRegister.classList.add('show');
+                wrongRegister.textContent = 'Registering Failed'
+                wrongRegister.style.color = "red";
               }
                
           })
