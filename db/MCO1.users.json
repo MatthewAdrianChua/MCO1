@@ -45,4 +45,16 @@
   "image": "/static/images/noProfile.jpg",
   "bio": "",
   "birthday": ""
+},
+{
+  "_id": {
+    "$oid": "64be3ed29f8fff3562ec80f9"
+  },
+  "id": 5,
+  "name": "John Doe",
+  "email": "john@email.com",
+  "password": "12345",
+  "image": "/static/images/noProfile.jpg",
+  "bio": "I play league",
+  "birthday": "2014-02-11"
 }]

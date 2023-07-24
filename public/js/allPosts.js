@@ -66,9 +66,34 @@ clickprofile.addEventListener('click', async (e) =>{
     window.location.href = "/profile/"+currentUser;
 })
 
+const submitPost = document.querySelector('#submit-post');
+
+const title = document.querySelector('#titlepost');
+const body = document.querySelector('#postbody');
+
+let canSubmit = 0;
+
+function checkInputs() {
+    if(title.value.trim() !== '' && body.value.trim() !== ''){
+        submitPost.disabled = false;
+        submitPost.value = "Submit";
+        submitPost.style.color = "black";
+    }else{
+        submitPost.disabled = true;
+        submitPost.value = "Fill out all inputs!";
+        submitPost.style.color = "red";
+    }
+}
+
+title.addEventListener('input', checkInputs);
+body.addEventListener('input', checkInputs);
+
 editPost.forEach(button =>{
   button.addEventListener('click', (a) => {
       editpostForm.classList.add('show');
+      submitPost.disabled = true;
+      submitPost.value = "Fill out all inputs!";
+      submitPost.style.color = "red";
 
       const exitpostform = document.querySelector('.exit');
 
@@ -76,8 +101,6 @@ editPost.forEach(button =>{
           e.preventDefault();
           editpostForm.classList.remove('show');
       })
-
-      const submitPost = document.querySelector('#submit-post');
 
       const postInstance = a.target.closest('.post-instance');
       const postID = postInstance.getAttribute('data-ID');
