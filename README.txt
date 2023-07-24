@@ -1,3 +1,5 @@
+Last Edited: 24/07/2023 6:07pm
+
 install monngodb from 
 "https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/"
 
@@ -15,7 +17,7 @@ npm i express-session
 npm i dotenv
 npm i multer
 
-then created a .env file with and copy paste this block of code:
+then if the .env file is not present create a .env file with and copy paste this block of code:
 "
 MONGO_URI=mongodb://127.0.0.1:27017
 SERVER_PORT=3000

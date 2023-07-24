@@ -83,4 +83,274 @@
     1
   ],
   "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6171821df2b97d44e5de"
+  },
+  "id": 6,
+  "likeCount": -1,
+  "commentCount": 0,
+  "title": "is this website just reddit but color blue?",
+  "body": "it looks the same",
+  "userID": 5,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": [
+    5
+  ]
+},
+{
+  "_id": {
+    "$oid": "64be624d821df2b97d44e5df"
+  },
+  "id": 7,
+  "likeCount": 1,
+  "commentCount": 1,
+  "title": "DLSU STALGCM application/use?",
+  "body": "seems like I'm just drawing circles and arrows don't know how this is useful for getting a job.",
+  "userID": 5,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    5
+  ],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6297821df2b97d44e5e0"
+  },
+  "id": 8,
+  "likeCount": 1,
+  "commentCount": 3,
+  "title": "Should I stick with my 3080 or buy a 40 series?",
+  "body": "I've been thinking about getting an upgrade but I heard that it's not worth it and 30 series is overall better",
+  "userID": 1,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    6
+  ],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6570821df2b97d44e5e9"
+  },
+  "id": 9,
+  "likeCount": 0,
+  "commentCount": 0,
+  "title": "Places to go in Japan?",
+  "body": "Me and my friends are going to japan this coming week and we are looking for suggestions as to where we can go, we like temples and shrines",
+  "userID": 6,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be65b5821df2b97d44e5ea"
+  },
+  "id": 10,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "Just Adopted This Little Furball! Meet Luna 🐾",
+  "body": "My heart melted when I saw her in the shelter, and now she's finally part of my family. Luna is such a playful and affectionate kitten. I'm excited for this new chapter with her! ",
+  "userID": 6,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be65f0821df2b97d44e5ec"
+  },
+  "id": 11,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "Recipe: Creamy Garlic Butter Shrimp 🍤🧄",
+  "body": "Just tried this mouthwatering shrimp recipe, and it's a game-changer! The combination of creamy garlic butter sauce with tender shrimp is pure perfection. Check out the recipe in the comments below. Bon appétit! 🍽️👩‍🍳",
+  "userID": 2,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6622821df2b97d44e5ee"
+  },
+  "id": 12,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "Awe-Inspiring Sunrise Over the Mountains 🌄",
+  "body": " Witnessed this stunning sunrise while hiking in the Rockies. The way the sun paints the sky with hues of orange and pink is simply breathtaking. Nature's beauty never disappoints!",
+  "userID": 4,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6648821df2b97d44e5f0"
+  },
+  "id": 13,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "Just Finished Reading 'Dune' - Mind-Blown 📚🌌",
+  "body": "After hearing so much praise for 'Dune,' I finally read it, and wow, what an epic journey! The world-building, political intrigue, and complex characters are out of this world. Can't wait for the movie adaptation now! Let's discuss our thoughts on this masterpiece in the comments. 🏜️🚀",
+  "userID": 1,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6694821df2b97d44e5f2"
+  },
+  "id": 14,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "Exploring Ancient Ruins in Peru 🇵🇪🏛️",
+  "body": "ust returned from an unforgettable trip to Peru, where I explored the mysterious Machu Picchu and other ancient Incan ruins. The history and architecture left me in awe. ",
+  "userID": 3,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be66bf821df2b97d44e5f4"
+  },
+  "id": 15,
+  "likeCount": 2,
+  "commentCount": 2,
+  "title": "Gaming Marathon with Friends! 🎮🎉",
+  "body": "Spent the entire weekend gaming with my buddies, and it was a blast! From epic battles to hilarious moments, gaming with friends is always a great time.",
+  "userID": 5,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    1,
+    6
+  ],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be66f1821df2b97d44e5f6"
+  },
+  "id": 16,
+  "likeCount": 0,
+  "commentCount": 0,
+  "title": "Stunning Street Art in Berlin 🎨",
+  "body": "Berlin's street art scene is truly one of a kind. I stumbled upon this vibrant and thought-provoking mural while exploring the city. The artists' creativity knows no bounds! ",
+  "userID": 6,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6709821df2b97d44e5f7"
+  },
+  "id": 17,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "My Grandmother's Secret Cookie Recipe",
+  "body": " My grandma passed down her famous cookie recipe, and today, I tried baking them for the first time. They turned out delicious and nostalgic! Here's the recipe in the comments. I hope it brings back fond memories for others too! Enjoy! 🍪👵",
+  "userID": 6,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6730821df2b97d44e5f9"
+  },
+  "id": 18,
+  "likeCount": 1,
+  "commentCount": 2,
+  "title": "Caught the Meteor Shower Last Night! 🌠✨",
+  "body": "Last night, I stayed up to witness the annual meteor shower, and it was magical! The shooting stars were so numerous and bright.",
+  "userID": 1,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    1
+  ],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6763821df2b97d44e5fb"
+  },
+  "id": 19,
+  "likeCount": 0,
+  "commentCount": 0,
+  "title": "Incredible Acrobatic Performance at the Circus ",
+  "body": "Attended a mind-blowing circus show last night, and the acrobats were beyond amazing! Their gravity-defying stunts and flawless coordination left everyone in the audience in awe",
+  "userID": 3,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6782821df2b97d44e5fc"
+  },
+  "id": 20,
+  "likeCount": 0,
+  "commentCount": 1,
+  "title": "Cozy Reading Corner Transformation 📚🪑",
+  "body": "Finally created my dream reading corner! With a comfy chair, warm lighting, and shelves filled with my favorite books, it's the perfect escape. Can't wait to spend hours lost in literary worlds.",
+  "userID": 3,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be67bc821df2b97d44e5fe"
+  },
+  "id": 21,
+  "likeCount": 1,
+  "commentCount": 1,
+  "title": "First Solo Backpacking Adventure - Unforgettable 🌏🎒",
+  "body": "ust returned from my first solo backpacking trip across Europe, and it was life-changing! Met incredible people, experienced diverse cultures, and saw breathtaking landscapes.",
+  "userID": 4,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    2
+  ],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6827821df2b97d44e600"
+  },
+  "id": 22,
+  "likeCount": 1,
+  "commentCount": 1,
+  "title": "Overcoming Challenges and Finding Strength 💪🌟",
+  "body": " Life has thrown many obstacles my way, but I'm proud to say that I'm pushing through and finding strength I never knew I had. It hasn't been easy, but every challenge has taught me valuable lessons and shaped who I am today. To anyone facing hardships, remember that you are stronger than you think. Keep going, and don't give up! We're all in this together. 🌟",
+  "userID": 2,
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [
+    6
+  ],
+  "dislikedBy": []
 }]

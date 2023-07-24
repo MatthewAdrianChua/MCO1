@@ -63,6 +63,7 @@ const pageLimit = 20;
 app.get("/", async (req,res) => {
     console.log("Index page loaded");
 
+    pageIndex = 0;
     const posts = await db.collection('posts');
 
     const postsCollection = await posts.find({isDeleted: false}).limit(pageLimit).toArray(function(err, documents) {
@@ -104,6 +105,8 @@ app.get("/", async (req,res) => {
 
 app.get("/loggedIn", async (req, res) => {
     console.log("Logged In Page loaded")
+
+    pageIndex = 0;
 
     const posts = await db.collection('posts');
 
