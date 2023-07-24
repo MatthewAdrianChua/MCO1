@@ -380,7 +380,7 @@ ul{
     align-items: center; /* Aligns items at the start of the container */
     padding: 20px; /* add some padding */
     border-radius: 50px;
-    background-color: lightgray;
+    background-color: rgb(91, 181, 219);
     min-height: 50px; /* Or whatever height is appropriate */
     overflow: auto;
     flex-wrap: wrap;
@@ -456,9 +456,26 @@ div.edit{
     align-items: center;
 }
 
+.edit-button:hover, .delete-comment-button:hover{
+    background-color: #0081A7;
+}
+
+.edit-button, .delete-comment-button{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.2rem;
+    padding: 0px;
+    border-radius: 50px;
+    background-color: lightgray;
+	width: 200px;
+    margin-right: 5px;
+}
+
+.delete-comment-button{
+	width: 100px;
+}
+
 .content-text{
     margin: 0 6px;
-	
 }
 
 div.post-footer {

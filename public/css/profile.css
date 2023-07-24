@@ -152,6 +152,10 @@ body{
     border: 3px solid #0081A7;
 }
 
+#profilePic2:hover{
+    border-color: #0081A7;
+}
+
 .pictureUpload{
     margin-left: 1rem;
     margin: 5px;
@@ -414,8 +418,9 @@ ul{
 }
 
 .post-instance{
+    padding: 5px;
     display:flex;
-    flex-direction: row;
+    flex-wrap: row;
     align-items: center;
     z-index: 0;
     border: solid 3px ;
@@ -423,7 +428,7 @@ ul{
     font-size: 30px;
     border-radius: 50px;
     background-color: #3bc98e;
-    pointer-events: none;
+    /*pointer-events: none;*/
     transition: 0.5s;
   
 }
@@ -434,6 +439,7 @@ ul{
 }
 
 .like-sprite{
+    border-radius: 50px;
     display: inline-block;
     background-image: url("/static/images/sprites2.png");
     width: 50px;
@@ -441,7 +447,7 @@ ul{
     background-position: -605px -520px;
     background-size: 900px 786px;
     margin-top: 10px;
-    background-color: yellow;
+    background-color: white;
     border: none;
 }
 
@@ -452,6 +458,7 @@ ul{
 }
 
 .comment-sprite{
+    border-radius: 50px;
     display: inline-block;
     background-image: url("/static/images/sprites2.png");
     width: 50px;
@@ -459,18 +466,19 @@ ul{
     background-position: -211px -785px;
     background-size: 700px 450px;
     margin-top: 10px;
-    background-color: yellow;
+    background-color: white;
     border: none;
     margin-left: 10px;
 }
 
 .index-title{
-    margin-left: 100px;
-    font-size: 20px;
+    margin-left: 0px;
     font-weight: 700;
     font-size: 2rem;
     margin-top: 4px;
     pointer-events: auto;
+    text-align: center;
+    flex-grow: 1;
 }
 
 .comment-count{
@@ -483,7 +491,6 @@ ul{
     background-color: #249e6b;
 }
 
-
 .post-button {
     font-size: 2rem;
     align-items: center;
@@ -492,6 +499,7 @@ ul{
     border: none;
     background: none;
     pointer-events: auto;
+    flex-grow:1;
 }
 
 #editpostform{
@@ -586,20 +594,29 @@ div.post-footer {
 }
 
 .comment-bar {
-    display: flex; /* This turns comment-bar into a flex container */
-    align-items: center; /* Aligns items at the start of the container */
-    padding: 20px; /* add some padding */
+    display: flex; 
+    align-items: center; 
+    padding: 20px; 
     border-radius: 50px;
-    background-color: lightgray;
-    min-height: 50px; /* Or whatever height is appropriate */
+    background-color: rgb(91, 181, 219);
+    min-height: 50px;
     overflow: auto;
     flex-wrap: wrap;
     margin-top: 15px;
 }
 
+#comment-edit-body{
+    margin-top: 1%;
+    width: 950px;
+    height: 80px;
+    background-color: #3bc98e;
+    margin-left: 2%;
+    border-radius: 25px;
+    border: solid #249e6b;
+    font-size: 17px;
+}
 
-
-.comment-body {
+.comment-body{
     flex-grow: 1;
     overflow: auto;
 }
@@ -614,6 +631,13 @@ span.comment-title {
 	min-width: 200px;
 	
 }
+
+#edit-comment-body{
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 50px;
+}
+
 
 .comment-body p{
     white-space: pre-wrap;
@@ -684,7 +708,6 @@ div.post-container{
 	font-size: 14px;
 	box-sizing: border-box;
     padding: 5px;
-	
 }
 
 
@@ -800,16 +823,22 @@ div.post-header {
 	width: 200px;
 }
 
-.edit-button:hover{
+.edit-button:hover, .delete-comment-button:hover, .edit-post-button:hover, .delete-post-button:hover{
     background-color: #0081A7;
 }
-.edit-button {
+
+.edit-button, .delete-comment-button, .edit-post-button, .delete-post-button{
     font-family: 'Roboto Mono', monospace;
     font-size: 1.2rem;
     padding: 0px;
     border-radius: 50px;
     background-color: lightgray;
 	width: 200px;
+    margin-right: 5px;
+}
+
+.delete-comment-button, .delete-post-button{
+	width: 100px;
 }
 
 .save-button {

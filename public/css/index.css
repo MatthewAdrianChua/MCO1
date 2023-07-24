@@ -297,8 +297,9 @@ body .wrapper {
 }
 
 .post-instance{
+    padding: 5px;
     display:flex;
-    flex-direction: row;
+    flex-wrap: row;
     align-items: center;
     z-index: 0;
     border: solid 3px ;
@@ -306,7 +307,7 @@ body .wrapper {
     font-size: 30px;
     border-radius: 50px;
     background-color: #3bc98e;
-    pointer-events: none;
+    /*pointer-events: none;*/
     transition: 0.5s;
   
 }
@@ -317,6 +318,7 @@ body .wrapper {
 }
 
 .like-sprite{
+    border-radius: 50px;
     display: inline-block;
     background-image: url("/static/images/sprites2.png");
     width: 50px;
@@ -324,7 +326,7 @@ body .wrapper {
     background-position: -605px -520px;
     background-size: 900px 786px;
     margin-top: 10px;
-    background-color: yellow;
+    background-color: white;
     border: none;
 }
 
@@ -335,6 +337,7 @@ body .wrapper {
 }
 
 .comment-sprite{
+    border-radius: 50px;
     display: inline-block;
     background-image: url("/static/images/sprites2.png");
     width: 50px;
@@ -342,18 +345,20 @@ body .wrapper {
     background-position: -211px -785px;
     background-size: 700px 450px;
     margin-top: 10px;
-    background-color: yellow;
+    background-color: white;
     border: none;
     margin-left: 10px;
 }
 
 .index-title{
-    margin-left: 100px;
+    margin-left: 0px;
     font-size: 20px;
     font-weight: 700;
     font-size: 2rem;
     margin-top: 4px;
     pointer-events: auto;
+    text-align: center;
+    flex-grow: 1;
 }
 
 .comment-count{

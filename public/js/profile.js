@@ -147,6 +147,7 @@ for (let x = 0; x < editButton.length; x++) {
       commentInstance.querySelector("#edit-comment-body").style.display = "inline-block";
       commentInstance.querySelector(".save-button").style.display = "inline-block";
 
+      editButton[x].style.display = "none";
       let save = commentInstance.querySelector('.save-button');
 
       save.addEventListener('click', async() => {
