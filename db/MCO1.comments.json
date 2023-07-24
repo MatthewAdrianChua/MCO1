@@ -179,4 +179,242 @@
   "isEdited": false,
   "likedBy": [],
   "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be62ee821df2b97d44e5e1"
+  },
+  "commentBody": "I heard its useful when building compilers and languages",
+  "postID": "7",
+  "userID": 1,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6324821df2b97d44e5e2"
+  },
+  "commentBody": "yeah in my opinion its not worth it unless you're maybe upgrading from 20 series",
+  "postID": "8",
+  "userID": 3,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6344821df2b97d44e5e3"
+  },
+  "commentBody": "I have a 40 series and its going really well would recommend!",
+  "postID": "8",
+  "userID": 2,
+  "commentID": 2,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6453821df2b97d44e5e8"
+  },
+  "commentBody": "yeah same with Derek there are not really much games that take full advantage of the 40 series' power",
+  "postID": "8",
+  "userID": 6,
+  "commentID": 3,
+  "parent": "1",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be65d0821df2b97d44e5eb"
+  },
+  "commentBody": "Congratulations on the new addition to your family! Luna is absolutely adorable and looks like a real sweetheart. Wishing you both lots of love and joy together!",
+  "postID": "10",
+  "userID": 2,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6605821df2b97d44e5ed"
+  },
+  "commentBody": "I made this for dinner tonight, and it was AMAZING! The flavors are spot on, and it's so easy to prepare. Thanks for sharing the recipe, OP. It's going straight into my regular meal rotation!",
+  "postID": "11",
+  "userID": 4,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6634821df2b97d44e5ef"
+  },
+  "commentBody": "Sunrises in the mountains have a way of filling you with gratitude and wonder",
+  "postID": "12",
+  "userID": 1,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be665e821df2b97d44e5f1"
+  },
+  "commentBody": "I remember that feeling when I first read 'Dune' too! It's a literary marvel, and Frank Herbert's imagination is incredible. The movie trailers look promising; fingers crossed it does justice to the book! What was your favorite part of the story?",
+  "postID": "13",
+  "userID": 3,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be66ad821df2b97d44e5f3"
+  },
+  "commentBody": "Peru is on my bucket list, and your photo just fueled my wanderlust even more! Machu Picchu looks majestic in the golden light",
+  "postID": "14",
+  "userID": 5,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be66d7821df2b97d44e5f5"
+  },
+  "commentBody": "Nothing beats a gaming marathon with friends! It's all about the shared laughter and excitement. Looks like you all had a fantastic time.",
+  "postID": "15",
+  "userID": 6,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be671f821df2b97d44e5f8"
+  },
+  "commentBody": "Aww, family recipes are the best! Thanks for sharing your grandma's cookie recipe. I can almost smell them baking in the oven! Can't wait to try making them and reminisce about my own grandma's cooking.",
+  "postID": "17",
+  "userID": 1,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6740821df2b97d44e5fa"
+  },
+  "commentBody": "What a phenomenal shot! Meteor showers are such awe-inspiring celestial events. I missed it this year, but your photo makes me feel like I was there too. Thanks for sharing the beauty of the night sky with us",
+  "postID": "18",
+  "userID": 3,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6795821df2b97d44e5fd"
+  },
+  "commentBody": " Enjoy your reading retreat!",
+  "postID": "20",
+  "userID": 4,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": true,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be67d2821df2b97d44e5ff"
+  },
+  "commentBody": "Congratulations on your solo adventure! Backpacking through Europe is an experience like no other. Your smile says it all; the journey must have been incredible. Any standout moments or travel tips you'd like to share with fellow adventurers?",
+  "postID": "21",
+  "userID": 2,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6843821df2b97d44e601"
+  },
+  "commentBody": "Your resilience is inspiring! Life can be tough, but it's how we face challenges that defines us. Remember, you're not alone on this journey. We're here to support each other. Thank you for sharing your story of strength and encouragement. Keep shining bright, and may your positivity inspire others as well! ",
+  "postID": "22",
+  "userID": 6,
+  "commentID": 1,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": true,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be69e34e9148489f6d7d01"
+  },
+  "commentBody": "space is such a wonderful mystery so many things yet unexplored!",
+  "postID": "18",
+  "userID": 1,
+  "commentID": 2,
+  "parent": "",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
+},
+{
+  "_id": {
+    "$oid": "64be6a394e9148489f6d7d02"
+  },
+  "commentBody": "Playing games with friends is one of my main forms of letting out stress!",
+  "postID": "15",
+  "userID": 1,
+  "commentID": 2,
+  "parent": "1",
+  "isDeleted": false,
+  "isEdited": false,
+  "likedBy": [],
+  "dislikedBy": []
 }]

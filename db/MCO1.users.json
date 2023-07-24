@@ -57,4 +57,16 @@
   "image": "/static/images/noProfile.jpg",
   "bio": "I play league",
   "birthday": "2014-02-11"
+},
+{
+  "_id": {
+    "$oid": "64be6362821df2b97d44e5e4"
+  },
+  "id": 6,
+  "name": "Andrei",
+  "email": "andrei@email.com",
+  "password": "12345",
+  "image": "http://localhost:3000/image/64be6416821df2b97d44e5e5",
+  "bio": "Andrei agegs",
+  "birthday": "2007-01-18"
 }]
