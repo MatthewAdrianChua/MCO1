@@ -158,3 +158,4 @@ prevPageBtn.addEventListener('click', async (e) => {
     });
     window.location.href = "/page";
 })
+
