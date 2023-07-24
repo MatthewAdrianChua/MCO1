@@ -529,7 +529,7 @@ class userData{
         this.name = "";
         this.email = "";
         this.password = "";
-        this.image = "http://localhost:3000/image/64b4887c56db8478142667c4";
+        this.image = "/static/images/noProfile.jpg";
         this.bio = "";      
         this.birthday = "";
     }
@@ -589,6 +589,9 @@ app.post("/login", async (req, res) => {
             console.log("Current User ",currentUser);
 
             req.session.userID = loginResult.id; //currently this has no functionality
+
+            pageIndex = 0;
+
             res.redirect('/');
         }else{
             console.log("Incorrect email or password");
@@ -975,6 +978,7 @@ app.post('/deleteComment', async(req, res) => {
 app.get("/logout", (req, res) => {
     console.log("logout request received");
     currentUser = "";
+    pageIndex = 0;
 
     res.sendStatus(200);
 })

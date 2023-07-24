@@ -482,6 +482,9 @@ ul{
 .formbox h2 {
     font-size: 2rem;
     text-align: center;
+    height: 2rem;
+    padding: 10px;
+    margin: 0px;
 }
 
 .inputbox {
@@ -576,4 +579,25 @@ ul{
     padding-left: 10px;
     padding-top: 11px;
     font-weight: 700;
+}
+
+.wrongCredentials{
+    visibility: hidden;
+    color: red;
+    margin-left: 35px;
+}
+
+.wrongCredentials.show{
+    visibility: visible;
+}
+
+.wrongRegister{
+    visibility: hidden;
+    color: red;
+    margin-left: 130px;
+    margin-top: 0px;
+}
+
+.wrongRegister.show{
+    visibility: visible;
 }

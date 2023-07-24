@@ -16,6 +16,9 @@ const wrapperBtnClose = document.querySelector('.closelogreg');
 const likeBtn = document.querySelector('.like');
 const dislikeBtn = document.querySelector('.dislike');
 
+const wrongCredentials = document.querySelector('.wrongCredentials');
+const wrongRegister = document.querySelector('.wrongRegister');
+
 function search(){
     const searchPostBtn = document.querySelector("#searchsubmit");
 
@@ -303,10 +306,14 @@ async function loadProfile(){ //this function will load the profile icon with dr
                     }
                 });
     
-                if (response.status == 200)
+                if (response.status == 200){
                     console.log("Register Successful");
-                else
+                    wrongRegister.classList.remove('show');
+                }
+                else{
                     console.error(`An error has occurred, Status code = ${response.status}`);
+                    wrongRegister.classList.add('show');
+                }
                  
             })
         })
@@ -333,9 +340,11 @@ async function loadProfile(){ //this function will load the profile icon with dr
             if(response.status == 200){
                 console.log("Login Successful");
                 window.location.reload(); //not sure if this is the correct way to do redirect after a login
+                wrongCredentials.classList.remove('show');
             }
             else
                 console.error(`An error has occured, Status code = ${response.status}`);
+                wrongCredentials.classList.add('show');
     
         })
 
