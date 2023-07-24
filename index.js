@@ -662,14 +662,13 @@ app.post("/like", async (req, res) => {
             // User has already liked this post, so we remove their like
             await posts.updateOne({id: parseInt(value)},
                 {$inc: {likeCount: -1}, $pull: {likedBy: currentUser}});
-        } else if(post.dislikedBy.includes(currentUser)){
-            // User has disliked this post, so we remove their dislike
-            await posts.updateOne({id: parseInt(value)},
-                {$inc: {likeCount: 1}, $pull: {dislikedBy: currentUser}});
         } else {
-            // User hasn't liked or disliked this post yet, so we add their like
-            await posts.updateOne({id: parseInt(value)},
-                {$inc: {likeCount: 1}, $push: {likedBy: currentUser}});
+            // User hasn't liked this post yet, so we add their like
+            // We also need to check if they've previously disliked this post
+            const updateQuery = post.dislikedBy.includes(currentUser)
+                ? {$inc: {likeCount: 2}, $push: {likedBy: currentUser}, $pull: {dislikedBy: currentUser}}
+                : {$inc: {likeCount: 1}, $push: {likedBy: currentUser}};
+            await posts.updateOne({id: parseInt(value)}, updateQuery);
         }
         res.sendStatus(200);
     } catch(err){
@@ -689,14 +688,13 @@ app.post("/dislike", async (req, res) => {
             // User has already disliked this post, so we remove their dislike
             await posts.updateOne({id: parseInt(value)},
                 {$inc: {likeCount: 1}, $pull: {dislikedBy: currentUser}});
-        } else if(post.likedBy.includes(currentUser)){
-            // User has liked this post, so we remove their like
-            await posts.updateOne({id: parseInt(value)},
-                {$inc: {likeCount: -1}, $pull: {likedBy: currentUser}});
         } else {
-            // User hasn't liked or disliked this post yet, so we add their dislike
-            await posts.updateOne({id: parseInt(value)},
-                {$inc: {likeCount: -1}, $push: {dislikedBy: currentUser}});
+            // User hasn't disliked this post yet, so we add their dislike
+            // We also need to check if they've previously liked this post
+            const updateQuery = post.likedBy.includes(currentUser)
+                ? {$inc: {likeCount: -2}, $push: {dislikedBy: currentUser}, $pull: {likedBy: currentUser}}
+                : {$inc: {likeCount: -1}, $push: {dislikedBy: currentUser}};
+            await posts.updateOne({id: parseInt(value)}, updateQuery);
         }
         res.sendStatus(200);
     } catch(err){
