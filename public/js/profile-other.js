@@ -107,7 +107,7 @@ async function loadProfile(){//if statement to load either the login/register bu
       })
 
       profileBtn.addEventListener('click', e => {
-        dropdownContent2.classList.toggle('show-menu');
+        dropdownContent.classList.toggle('show-menu');
       });
 
       const clickprofile2 = document.querySelector('.dropdown-content a:first-child');

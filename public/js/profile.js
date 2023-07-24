@@ -332,6 +332,16 @@ viewComments.addEventListener('click', async (e) => {
     window.location.href = '/profileComments/'+index;   
 })
 
+const pictureHolder = document.querySelector('#newProfilePic');
+
+pictureHolder.addEventListener('change', (e) => {
+    const uploadButton = document.querySelector('#uploadButton');
+
+    uploadButton.style.backgroundColor = '#3bc98e';
+
+});
+
+
 
 
 

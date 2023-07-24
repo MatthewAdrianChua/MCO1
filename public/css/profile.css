@@ -148,8 +148,8 @@ body{
     background-color: rgba(149, 149, 149, 0.5);
 }
 
-#savePic:hover, #uploadButton:hover {
-    background-color: #0081A7;
+#savePic:hover, #profilePic2:hover, #uploadButton:hover {
+    border: 3px solid #0081A7;
 }
 
 #profilePic2:hover{
