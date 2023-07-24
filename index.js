@@ -218,6 +218,23 @@ app.get("/postPage/:postID", async (req, res) => {
 
         const poster = await users.findOne({id: post.userID});
 
+        let like = false;
+        let dislike = false;
+
+        if(await posts.findOne({id: parseInt(postID), likedBy: parseInt(currentUser)}) ){
+            like = true;
+        }else
+            like = false;
+
+        console.log(like);
+
+        if(await posts.findOne({id: parseInt(postID), dislikedBy: parseInt(currentUser)}) ){
+            dislike = true;
+        }else
+            dislike = false;
+
+        console.log(dislike);
+
         if(post && currentUser){
 
             res.render("post", {
@@ -230,11 +247,14 @@ app.get("/postPage/:postID", async (req, res) => {
             script: "/static/js/post.js",
 
             image: user.image, //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
+            like: like,
+            dislike: dislike,
 
             comments: postComments,
             userArr: userArr
         
             });
+
         }else if(post){
             res.render("post", {
             title: post.title,
@@ -244,10 +264,14 @@ app.get("/postPage/:postID", async (req, res) => {
             posterName: poster.name,
             posterID: poster.id,
 
+            like: like,
+            dislike: dislike,
+
             script: "/static/js/post.js",
             comments: postComments,
             userArr: userArr    
             });
+
         }else{
             res.sendStatus(404);
             console.log("Post not found");

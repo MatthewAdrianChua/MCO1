@@ -394,4 +394,15 @@ posterInfo.addEventListener('click', (e) => {
     window.location.href = "/profile/"+index;
 })
 
+const isLiked = likeBtn.dataset.index;
+const isDisliked = dislikeBtn.dataset.index;
+const counter = document.querySelector('.counter');
+
+if(isLiked == "true")
+    counter.style.color = '#0081A7';
+else if(isDisliked == "true")
+    counter.style.color = "red";
+else
+    counter.style.color = "black";
+
   
