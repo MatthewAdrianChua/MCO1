@@ -16,6 +16,10 @@ npm i express-handlebars
 npm i express-session
 npm i dotenv
 npm i multer
+npm i express-validator
+npm i mime-types
+npm i connect-mongodb-session
+npm i bcrypt
 
 then if the .env file is not present create a .env file with and copy paste this block of code:
 "
