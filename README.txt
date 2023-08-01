@@ -1,4 +1,4 @@
-Last Edited: 24/07/2023 8:18pm
+Last Edited: 24/07/2023 9:00pm
 
 install monngodb from 
 "https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/"
@@ -16,6 +16,10 @@ npm i express-handlebars
 npm i express-session
 npm i dotenv
 npm i multer
+npm i express-validator
+npm i mime-types
+npm i connect-mongodb-session
+npm i bcrypt
 
 then if the .env file is not present create a .env file with and copy paste this block of code:
 "
