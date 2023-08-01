@@ -74,7 +74,15 @@ loginSubmit.addEventListener('click', async (e) => {
     const password = document.querySelector('#logpassword').value;
 
     console.log("in script.js",{email, password});
-    const jString = JSON.stringify({email, password});
+
+    let rememberStatus = false;
+
+    if(document.querySelector('.remember-forgot input').checked){
+        rememberStatus = true;
+    }
+
+    const jString = JSON.stringify({email, password, rememberStatus});
+    console.log(jString);
 
     const response = await fetch("/login", {
         method: "POST",

@@ -6,7 +6,14 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 import multer from 'multer';
 import { GridFSBucket, ObjectId } from 'mongodb';
-import session from 'express-session';
+import session, { Cookie } from 'express-session';
+import { default as connectMongoDBSession } from 'connect-mongodb-session';
+const MongoDBStore = connectMongoDBSession(session);
+import bcrypt from 'bcrypt';
+const SALT_WORK_FACTOR = 10;
+import {body, validationResult} from 'express-validator';
+
+const app = express();
 
 let db = "";
 let currentUser = ""; //since MCO2 does not include session management this is how we keep track of the current user logged in, it stores the user ID as the variable (!WILL BE CHANGED IN MCO3!)
@@ -24,14 +31,28 @@ function main(err){
 
 connectToMongo(main);
 
-/*------------------------------------------------------------------------------------------------------------------------------------------*/
-const app = express();
+app.use(express.json()); //It enables your Express server to automatically parse the JSON data sent in the request body and make it available in req.body as a JavaScript object
+app.use(express.urlencoded({extended: true})); // automatically parse data sent in the URL-encoded format (such as form data submitted from HTML forms) and make it available in req.body as a JavaScript object.
 
-app.use(session({
+/*------------------------------------------------------------------------------------------------------------------------------------------*/
+
+const store = new MongoDBStore({
+    uri: 'mongodb://127.0.0.1:27017/MCO1',
+    collection: 'sessions',
+});
+
+store.on('error', function(error) {
+    console.log(error);
+});
+
+app.use(session({ //initially a non persistent session is created for a user when they first visit the website and stores it in db sessions, if a user checks remember me when logging in the session will become a persistent session lasting for 3 weeks
     secret: 'ABCDEFG',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: store,
 }));
+
+/*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 app.use("/static", express.static("public"));
 
@@ -58,10 +79,17 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
+/*------------------------------------------------------------------------------------------------------------------------------------------*/
+
 const pageLimit = 20;
 
 app.get("/", async (req,res) => {
     console.log("Index page loaded");
+
+    if(req.session.userID){
+        console.log('Session found');
+        res.redirect('/loggedIn');
+    }
 
     pageIndex = 0;
     const posts = await db.collection('posts');
@@ -118,7 +146,7 @@ app.get("/loggedIn", async (req, res) => {
     });
 
     const users = await db.collection('users');
-    const user = await users.findOne({id: parseInt(currentUser)});
+    const user = await users.findOne({id: parseInt(req.session.userID)});
 
     const testNext = await posts.find({isDeleted: false}).skip((pageIndex + 1) * pageLimit).limit(pageLimit).toArray(function (err, documents) {
         if (err) {
@@ -219,28 +247,28 @@ app.get("/postPage/:postID", async (req, res) => {
         //console.log("USER ARR",userArr);
 
         const users = await db.collection('users');
-        const user = await users.findOne({id: parseInt(currentUser)});
+        const user = await users.findOne({id: parseInt(req.session.userID)});
 
         const poster = await users.findOne({id: post.userID});
 
         let like = false;
         let dislike = false;
 
-        if(await posts.findOne({id: parseInt(postID), likedBy: parseInt(currentUser)}) ){
+        if(await posts.findOne({id: parseInt(postID), likedBy: parseInt(req.session.userID)}) ){
             like = true;
         }else
             like = false;
 
         console.log(like);
 
-        if(await posts.findOne({id: parseInt(postID), dislikedBy: parseInt(currentUser)}) ){
+        if(await posts.findOne({id: parseInt(postID), dislikedBy: parseInt(req.session.userID)}) ){
             dislike = true;
         }else
             dislike = false;
 
         console.log(dislike);
 
-        if(post && currentUser){
+        if(post && req.session.userID){
 
             res.render("post", {
             title: post.title,
@@ -300,7 +328,7 @@ app.get("/profile/:userID", async (req, res) => {
             const profileUser = await users.findOne({id: parseInt(profileID)});
             //console.log(profileUser);
 
-            const currentUserDB = await users.findOne({id: parseInt(currentUser)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
+            const currentUserDB = await users.findOne({id: parseInt(req.session.userIDr)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
 
             if(profileUser){
 
@@ -348,7 +376,7 @@ app.get("/profile/:userID", async (req, res) => {
 
                 
 
-                if (currentUser == profileID) {
+                if (req.session.userID == profileID) {
                     // Render 'profile' when viewing own profile
                     res.render("profile", {
                         script: "/static/js/profile.js",
@@ -423,7 +451,7 @@ app.get("/profilePosts/:userID", async (req, res) => {
             const users = await db.collection('users');
             const profileUser = await users.findOne({id: parseInt(profileID)});
 
-            const currentUserDB = await users.findOne({id: parseInt(currentUser)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
+            const currentUserDB = await users.findOne({id: parseInt(req.session.userID)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
 
             if(profileUser){
 
@@ -434,7 +462,7 @@ app.get("/profilePosts/:userID", async (req, res) => {
                     }
                 });
 
-                if (currentUser == profileID) {
+                if (req.session.userID == profileID) {
                     res.render("allPosts", {
                         script: "/static/js/allPosts.js",
 
@@ -489,7 +517,7 @@ app.get("/profileComments/:userID", async (req, res) => {
             const users = await db.collection('users');
             const profileUser = await users.findOne({id: parseInt(profileID)});
 
-            const currentUserDB = await users.findOne({id: parseInt(currentUser)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
+            const currentUserDB = await users.findOne({id: parseInt(req.session.userID)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
 
             if(profileUser){
 
@@ -502,7 +530,7 @@ app.get("/profileComments/:userID", async (req, res) => {
 
                 const userArr = await findPosts(commentsCollection);
 
-                if (currentUser == profileID) {
+                if (req.session.userID == profileID) {
                     res.render("allComments", {
                         script: "/static/js/allComments.js",
 
@@ -564,10 +592,14 @@ class userData{
     }
 }
 
-app.use(express.json()); //It enables your Express server to automatically parse the JSON data sent in the request body and make it available in req.body as a JavaScript object
-app.use(express.urlencoded({extended: true})); // automatically parse data sent in the URL-encoded format (such as form data submitted from HTML forms) and make it available in req.body as a JavaScript object.
+app.post("/register", body('name').notEmpty().isAlphanumeric(), body('email').notEmpty().isEmail(), body('password').notEmpty(), body('email').normalizeEmail(), async (req, res) => {
 
-app.post("/register", async (req, res) => {
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Register Request received");
     console.log(req.body);
     const {name, email, password} = req.body;
@@ -576,7 +608,12 @@ app.post("/register", async (req, res) => {
         const newUser = new userData();
         newUser.name = name;
         newUser.email = email;
-        newUser.password = password;
+
+        const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+
+        const hash = await bcrypt.hash(password, salt);
+
+        newUser.password = hash;
 
         const users = await db.collection("users");
 
@@ -601,27 +638,34 @@ app.post("/register", async (req, res) => {
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
-app.post("/login", async (req, res) => {
+app.post("/login", body('email').notEmpty().normalizeEmail(), body('password').notEmpty(), body('email').normalizeEmail(), async (req, res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(403);
+    }
+
     console.log("Login Request received");
     console.log(req.body);
-    const {email, password} = req.body;
+    const {email, password, rememberStatus} = req.body;
 
     const users = await db.collection("users");
 
     if(email && password){
-        let loginResult = await users.findOne({email: email, password: password});
-        if(loginResult){
+        let loginResult = await users.findOne({email: email});
+        if(loginResult && bcrypt.compare(password, loginResult.password)){
             console.log("Login was successful");
             //console.log(loginResult);
 
-            currentUser = loginResult.id;
-            console.log("Current User ",currentUser);
+            if(rememberStatus == true){ //if the user selects to be remembered extends the age of the session to last x amount of seconds
+                req.session.cookie.maxAge = 21 * 24 * 60 * 60 * 1000; //21 days in milliseconds
+            }
 
-            req.session.userID = loginResult.id; //currently this has no functionality
-
+            req.session.userID = loginResult.id;
             pageIndex = 0;
 
-            res.redirect('/');
+            res.redirect('/loggedIn');
         }else{
             console.log("Incorrect email or password");
             res.sendStatus(403);
@@ -630,7 +674,6 @@ app.post("/login", async (req, res) => {
         res.sendStatus(400);
     }
 })
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -651,7 +694,14 @@ class post_data{
 }
 
 
-app.post("/post", async (req, res) => {
+app.post("/post", body('title').notEmpty(), body(body).notEmpty(), async (req, res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Post Request Received");
     console.log(req.body);
     const{title, body} = req.body;
@@ -660,7 +710,7 @@ app.post("/post", async (req, res) => {
         const post = new post_data();
         post.title = title;
         post.body = body;
-        post.userID = currentUser; //THIS WILL NEED TO BE CHANGED IN MCO3 AS IT USES SESSION MANAGEMENT
+        post.userID = req.session.userID; 
         const posts = await db.collection("posts");
 
         try{
@@ -687,16 +737,16 @@ app.post("/like", async (req, res) => {
     const posts = await db.collection('posts');
     try{
         const post = await posts.findOne({id: parseInt(value)});
-        if(post.likedBy.includes(currentUser)){
+        if(post.likedBy.includes(req.session.userID)){
             // User has already liked this post, so we remove their like
             await posts.updateOne({id: parseInt(value)},
-                {$inc: {likeCount: -1}, $pull: {likedBy: currentUser}});
+                {$inc: {likeCount: -1}, $pull: {likedBy: req.session.userID}});
         } else {
             // User hasn't liked this post yet, so we add their like
             // We also need to check if they've previously disliked this post
-            const updateQuery = post.dislikedBy.includes(currentUser)
-                ? {$inc: {likeCount: 2}, $push: {likedBy: currentUser}, $pull: {dislikedBy: currentUser}}
-                : {$inc: {likeCount: 1}, $push: {likedBy: currentUser}};
+            const updateQuery = post.dislikedBy.includes(req.session.userID)
+                ? {$inc: {likeCount: 2}, $push: {likedBy: req.session.userID}, $pull: {dislikedBy: req.session.userID}}
+                : {$inc: {likeCount: 1}, $push: {likedBy: req.session.userID}};
             await posts.updateOne({id: parseInt(value)}, updateQuery);
         }
         res.sendStatus(200);
@@ -713,16 +763,16 @@ app.post("/dislike", async (req, res) => {
     const posts = await db.collection('posts');
     try{
         const post = await posts.findOne({id: parseInt(value)});
-        if(post.dislikedBy.includes(currentUser)){
+        if(post.dislikedBy.includes(req.session.userID)){
             // User has already disliked this post, so we remove their dislike
             await posts.updateOne({id: parseInt(value)},
-                {$inc: {likeCount: 1}, $pull: {dislikedBy: currentUser}});
+                {$inc: {likeCount: 1}, $pull: {dislikedBy: req.session.userID}});
         } else {
             // User hasn't disliked this post yet, so we add their dislike
             // We also need to check if they've previously liked this post
-            const updateQuery = post.likedBy.includes(currentUser)
-                ? {$inc: {likeCount: -2}, $push: {dislikedBy: currentUser}, $pull: {likedBy: currentUser}}
-                : {$inc: {likeCount: -1}, $push: {dislikedBy: currentUser}};
+            const updateQuery = post.likedBy.includes(req.session.userID)
+                ? {$inc: {likeCount: -2}, $push: {dislikedBy: req.session.userID}, $pull: {likedBy: req.session.userID}}
+                : {$inc: {likeCount: -1}, $push: {dislikedBy: req.session.userID}};
             await posts.updateOne({id: parseInt(value)}, updateQuery);
         }
         res.sendStatus(200);
@@ -748,7 +798,14 @@ class commentData{
     }
 }
 
-app.post("/comment", async (req, res) => {
+app.post("/comment", body('body').notEmpty(), body('postID').notEmpty, async (req, res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Comment Request Received");
     console.log(req.body);
     const{body, postID, parent} = req.body;
@@ -758,7 +815,7 @@ app.post("/comment", async (req, res) => {
         comment.commentBody= body;
         comment.postID = postID; //can be changed to int to keep consistency however comments do not display when converted to int
         comment.parent = parent;
-        comment.userID = currentUser; //THIS WILL NEED TO BE CHANGED IN MCO3 AS IT USES SESSION MANAGEMENT
+        comment.userID = req.session.userID; //THIS WILL NEED TO BE CHANGED IN MCO3 AS IT USES SESSION MANAGEMENT
 
         const comments = await db.collection("comments");
         const posts = await db.collection("posts")
@@ -791,7 +848,14 @@ app.post("/comment", async (req, res) => {
 
 })
 
-app.post("/editPost", async (req,res) => {
+app.post("/editPost", body('title').notEmpty(), body('body').notEmpty(), body('sendPostID').notEmpty(), async (req,res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Edit post request received");
     console.log(req.body);
     const {title, body, sendPostID} = req.body;
@@ -820,7 +884,14 @@ app.post("/editPost", async (req,res) => {
     }
 })
 
-app.post("/editComment", async (req,res) => {
+app.post("/editComment", body('postID').notEmpty(), body('commentID').notEmpty(), body('commentBody').notEmpty(), async (req,res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Edit comment request received");
     console.log(req.body);
     const {postID, commentID, commentBody} = req.body;
@@ -848,16 +919,23 @@ app.post("/editComment", async (req,res) => {
 })
 
 app.get('/getCurrentUser', (req,res) =>{
-    if(currentUser){
-        console.log(currentUser);
-        res.status(200).send(currentUser.toString());
+    if(req.session.userID){
+        console.log(req.session.userID);
+        res.status(200).send(req.session.userID.toString());
     }else{
         res.sendStatus(400);
         console.log("Failed to get current user");
     }
 })
 
-app.post("/editProfile", async (req,res) => {
+app.post("/editProfile", body('newUsername').notEmpty(), body('newBio').notEmpty(), body('newBday').notEmpty(), body('currentUser').notEmpty(), async (req,res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Edit profile request received");
     console.log(req.body);
     const {newUsername, newBio, newBday, currentUser} = req.body;
@@ -889,44 +967,55 @@ app.post("/editProfile", async (req,res) => {
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-app.post("/editPicture",upload.single('image'), async (req, res) =>{
+import mime from 'mime-types';
 
+// Function to check if a file is an image
+const isImage = (file) => {
+    const mimeType = mime.lookup(file);
+    return mimeType && mimeType.startsWith('image/');
+  };
+  
+  app.post("/editPicture", upload.single('image'), async (req, res) => {
     const users = await db.collection('users');
-    const user = await users.findOne({id: parseInt(currentUser)});
-    //console.log("EDIT PICTURE USER", user);
-
-    try{
+    const user = await users.findOne({ id: parseInt(req.session.userID) });
+  
+    try {
+      if (req.file && isImage(req.file.originalname)) { // Check if the file exists and is an image
         const bucket = new GridFSBucket(db);
-
         const image = req.file;
-
+  
         console.log(image);
-
+  
         const uploadStream = bucket.openUploadStream(image.originalname);
         uploadStream.write(image.buffer);
         uploadStream.end();
-
-        uploadStream.on('finish', async (file) => {  
-            console.log("ObjectId:", file._id); 
-
-            const edit = await users.updateOne({id: parseInt(currentUser)},
-                {$set: {
-                    image: "http://localhost:3000/image/"+file._id
-                    }                
-                }     
-            );
-            //console.log(edit);
-                  
+  
+        uploadStream.on('finish', async (file) => {
+          console.log("ObjectId:", file._id);
+  
+          const edit = await users.updateOne({ id: parseInt(req.session.userID) },
+            {
+              $set: {
+                image: "http://localhost:3000/image/" + file._id
+              }
+            }
+          );
+          //console.log(edit);
+  
         });
-
+  
         res.sendStatus(200);
-        console.log("Image successfully added to db")
-    }catch(err){
-        console.log("Error uploading image");
-        console.error(err);
-        res.sendStatus(500);
+        console.log("Image successfully added to db");
+      } else {
+        res.status(400).json({ error: 'Please upload a valid image file.' });
+      }
+    } catch (err) {
+      console.log("Error uploading image");
+      console.error(err);
+      res.sendStatus(500);
     }
-});
+  });
+
 
 app.get('/image/:id', async (req, res) => {
     console.log("Image request received");
@@ -958,7 +1047,14 @@ app.get('/image/:id', async (req, res) => {
     }
   });
 
-app.post('/deletePost', async(req, res) => {
+app.post('/deletePost', body('index').notEmpty(), async(req, res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Delete post request received");
 
     const {index} = req.body;
@@ -982,7 +1078,14 @@ app.post('/deletePost', async(req, res) => {
     }
 })
 
-app.post('/deleteComment', async(req, res) => {
+app.post('/deleteComment', body('commentID').notEmpty(), body('postID').notEmpty(), async(req, res) => {
+
+    const errors = validationResult(req);
+    console.log(errors)
+    if(!errors.isEmpty()){
+        return res.sendStatus(400);
+    }
+
     console.log("Delete post request received");
 
     const {commentID, postID} = req.body;
@@ -1006,7 +1109,13 @@ app.post('/deleteComment', async(req, res) => {
 
 app.get("/logout", (req, res) => {
     console.log("logout request received");
-    currentUser = "";
+    req.session.destroy((err) => {
+        if(err){
+            console.error(err);
+        }else{
+            console.log("session destroyed successfully");
+        }
+    })
     pageIndex = 0;
 
     res.sendStatus(200);
@@ -1044,7 +1153,7 @@ app.get("/searchl", async (req, res) => {
         }
     });
     const users = await db.collection('users');
-    const user = await users.findOne({id: parseInt(currentUser)});
+    const user = await users.findOne({id: parseInt(req.session.userID)});
 
     res.render("indexLogin", {
         title: "Login",
@@ -1122,7 +1231,7 @@ app.get("/pagel", async (req, res) => {
     });
     
     const users = await db.collection('users');
-    const user = await users.findOne({id: parseInt(currentUser)});
+    const user = await users.findOne({id: parseInt(req.session.userID)});
 
     const testNext = await posts.find({isDeleted: false}).skip((pageIndex + 1) * pageLimit).limit(pageLimit).toArray(function (err, documents) {
         if (err) {
