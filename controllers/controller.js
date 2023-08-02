@@ -269,7 +269,8 @@ const controller = {
     
         if(email && password){
             let loginResult = await users.findOne({email: email});
-            if(loginResult && bcrypt.compare(password, loginResult.password)){
+            console.log(await bcrypt.compare(password, loginResult.password));
+            if(loginResult && (await bcrypt.compare(password, loginResult.password) == true)){
                 console.log("Login was successful");
                 //console.log(loginResult);
     
