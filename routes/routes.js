@@ -35,7 +35,7 @@ router.post("/dislike", controller.dislike);
 router.post("/comment", body('body').notEmpty(), body('postID').notEmpty(), controller.comment);
 router.post("/editPost", body('title').notEmpty(), body('body').notEmpty(), body('sendPostID').notEmpty(), controller.editPost);
 router.post("/editComment", body('postID').notEmpty(), body('commentID').notEmpty(), body('commentBody').notEmpty(), controller.editComment);
-router.post("/editProfile", body('newUsername').notEmpty(), body('newBio').notEmpty(), body('newBday').notEmpty(), body('currentUser').notEmpty(), controller.editProfile);
+router.post("/editProfile", body('newUsername').notEmpty(), body('currentUser').notEmpty(), controller.editProfile);
 router.post("/editPicture", upload.single('image'), controller.editPicture);
 router.post('/deletePost', body('index').notEmpty(), controller.deletePost);
 router.post('/deleteComment', body('commentID').notEmpty(), body('postID').notEmpty(), controller.deleteComment);
