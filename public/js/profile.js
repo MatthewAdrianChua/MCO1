@@ -8,7 +8,7 @@ var blackBlock = document.querySelector(".black-hover");
 var modal = document.getElementById("editProfileModal");
 var btn = document.getElementById("editProfile");
 var span = document.getElementsByClassName("close")[0];
-var saveBtn = document.getElementById("saveChanges");
+const saveBtn = document.getElementById("saveChanges");
 
 var isMouseDownInModal = false;
 
@@ -203,6 +203,27 @@ for (let x = 0; x < editButton.length; x++) {
   });
 }
 
+const checkUsername = document.querySelector('#newUsername');
+const checkBio = document.querySelector('#newBio');
+const checkBday = document.querySelector('#newBday');
+
+function checkInputs() {
+  if(checkUsername.value.trim() !== '' && checkBio.value.trim() !== '' && checkBday.value !== ''){
+      saveBtn.disabled = false;
+      saveBtn.value = "Submit";
+      saveBtn.style.color = "black";
+  }else{
+      saveBtn.disabled = true;
+      saveBtn.value = "Fill out all inputs!";
+      saveBtn.style.color = "red";
+  }
+}
+
+btn.addEventListener('click', checkInputs);
+checkUsername.addEventListener('input', checkInputs);
+checkBio.addEventListener('input', checkInputs);
+checkBday.addEventListener('input', checkInputs);
+
 
 saveBtn.onclick = async function() {
     var newUsername = document.getElementById("newUsername").value;
@@ -263,9 +284,11 @@ savePic.addEventListener('click', async (e) => {
   if(response.status == 200){
     console.log("Edit picture success");
     window.location.reload();
-  }else
-    console.error(`An error has occured. Status code = ${response.status}`); 
-
+  }else{
+    console.error(`An error has occured. Status code = ${response.status}`);
+    uploadButton.textContent = "Invalid File Type!";
+    uploadButton.style.backgroundColor = "red";
+  }
 })
 
 const deletePost = document.querySelectorAll('.delete-post-button');
@@ -360,6 +383,7 @@ const pictureHolder = document.querySelector('#newProfilePic');
 pictureHolder.addEventListener('change', (e) => {
     const uploadButton = document.querySelector('#uploadButton');
 
+    uploadButton.textContent = "Upload profile pic"
     uploadButton.style.backgroundColor = '#3bc98e';
 
 });

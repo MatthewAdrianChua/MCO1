@@ -54,14 +54,14 @@
                 <span class="close">&times;</span>
                 <form id="editProfileForm">
                     <label for="newUsername">Username:</label><br>
-                    <input type="text" id="newUsername" name="newUsername" placeholder="Username"><br>
+                    <input type="text" id="newUsername" name="newUsername" placeholder="Username" value="{{name}}"><br>
                     <label for="newBio">Bio:</label><br>
-                    <textarea id="newBio" name="newBio" placeholder="Bio"></textarea><br>
+                    <textarea id="newBio" name="newBio" placeholder="Bio">{{bio}}</textarea><br>
                     <label for="newBday">Birthday:</label><br>
-                    <input type="date" id="newBday" name="newBday"><br>
+                    <input type="date" id="newBday" name="newBday" value={{birthday}}><br>
                     <!--label for="newProfilePic">Profile Picture:</label><br-->
                     <!--<input type="file" id="newProfilePic" name="newProfilePic"><br>-->
-                    <button type="button" id="saveChanges">Save</button>
+                    <input type="submit" id="saveChanges" value="Save">
                 </form>
             </div>
         </div>
