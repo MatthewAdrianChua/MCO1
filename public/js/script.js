@@ -69,6 +69,10 @@ registerSumbit.forEach(button => {
             if (response2.status == 200){
                 window.location.href = "/loggedIn"; 
             }
+            else{
+                console.error(`An error has occured, Status code = ${response.status}`);
+                wrongCredentials.classList.add('show');
+            }
         }
         else{
             console.error(`An error has occurred, Status code = ${response.status}`);
