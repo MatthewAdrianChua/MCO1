@@ -208,13 +208,13 @@ const checkBio = document.querySelector('#newBio');
 const checkBday = document.querySelector('#newBday');
 
 function checkInputs() {
-  if(checkUsername.value.trim() !== '' && checkBio.value.trim() !== '' && checkBday.value !== ''){
+  if(checkUsername.value.trim() !== ''){
       saveBtn.disabled = false;
       saveBtn.value = "Submit";
       saveBtn.style.color = "black";
   }else{
       saveBtn.disabled = true;
-      saveBtn.value = "Fill out all inputs!";
+      saveBtn.value = "Username Empty!";
       saveBtn.style.color = "red";
   }
 }
