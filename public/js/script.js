@@ -40,7 +40,10 @@ registerSumbit.forEach(button => {
 
         console.log("in script.js",{name, email, password});
         const jString = JSON.stringify({name, email, password});
+        const f = false;
+        const jString2 = JSON.stringify({email, password, f});
 
+       
         const response = await fetch("/register", {
             method: "POST",
             body: jString,
@@ -54,6 +57,18 @@ registerSumbit.forEach(button => {
             wrongRegister.classList.add('show');
             wrongRegister.textContent = 'Registering Success!'
             wrongRegister.style.color = "#0081A7";
+           
+            const response2 = await fetch("/login",{
+                method: "POST",
+                body: jString,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (response2.status == 200){
+                window.location.href = "/loggedIn"; 
+            }
         }
         else{
             console.error(`An error has occurred, Status code = ${response.status}`);
