@@ -33,7 +33,7 @@
             </span>
             {{/if}}
         </div>
-        <div class="post-container">
+        <div class="post-container" data-author-id={{posterID}} data-index={{id}}>
             <div class="header">
                 <div class="likes">
                     <button class="like" data-index={{like}}></button>
@@ -54,7 +54,10 @@
             <div class="body">
                 {{postBody}}
             </div>
-
+            {{#if (eq posterID currUserID)}}
+                <button class="edit-post-button">Edit</button>
+                <button class="delete-post-button">Delete</button>
+            {{/if}}
             <div class="comments">
                 <div class="add-comment">
                     <p>add a comment</p>
@@ -80,13 +83,13 @@
                                     <div>
                                         <button class="reply-button">Reply</button>
                                         {{#each ../comments}}
-                                       
+
                                         {{#if (eq parent ../commentID)}}
                                             {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3) edited=(eq3 isEdited) userID=(eq5 ../../currUserID) postID=postID}}  
                                         {{/if}}
                                         {{/each}}
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         {{/if}}
                     {{/each}}
@@ -141,4 +144,16 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="editDiv">
+            <form id="editpostform" name="editpost-form">
+                <div class="header-post">
+                    <span class ="editheader">EDIT A POST</span>
+                    <button class ="exit">X</button>
+                </div>
+                <input id="titlepost" name="title-post" type="text" placeholder="Title"></input><br>
+                <input id="postbody" name="post-body" type="text" placeholder="Text"></input><br>
+                <input id="submit-post" type="submit" value="Submit">
+            </form>
         </div>

@@ -470,28 +470,121 @@ const deleteComment = document.querySelectorAll('.delete-comment-button');
 
 for (let x = 0; x < deleteComment.length; x++) {
     deleteComment[x].addEventListener("click", async (e) => {
-      const commentInstance = e.target.closest('.comment-instance');
-      const commentID = commentInstance.getAttribute('data-index');
-      const postID = commentInstance.getAttribute('data-postID');
+        const commentInstance = e.target.closest('.comment-instance');
+        const commentID = commentInstance.getAttribute('data-index');
+        const postID = commentInstance.getAttribute('data-postID');
 
-      console.log("info: ", commentID, postID);
+        console.log("info: ", commentID, postID);
 
-      const jString = JSON.stringify({commentID,postID});
+        const jString = JSON.stringify({commentID,postID});
 
-      const response = await fetch("/deleteComment", {
-        method: "POST",
-        body: jString,
-        headers: {
-            "Content-Type": "application/json"
-        }
-      });
-  
-      if(response.status == 200){
-        console.log("Delete Post Success");
-        window.location.reload();
-      }else
-        console.error(`An error has occured. Status code = ${response.status}`); 
-  });
+        const response = await fetch("/deleteComment", {
+            method: "POST",
+            body: jString,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    
+        if(response.status == 200){
+            console.log("Delete Post Success");
+            window.location.reload();
+        }else
+            console.error(`An error has occured. Status code = ${response.status}`); 
+    });
 }
 
-  
+const editPost = document.querySelectorAll('.edit-post-button');
+const editpostForm = document.querySelector('#editpostform'); 
+const submitPost = document.querySelector('#submit-post');
+
+const title = document.querySelector('#titlepost');
+const body = document.querySelector('#postbody');
+
+let canSubmit = 0;
+
+function checkInputs() {
+    if(title.value.trim() !== '' && body.value.trim() !== ''){
+        submitPost.disabled = false;
+        submitPost.value = "Submit";
+        submitPost.style.color = "black";
+    }else{
+        submitPost.disabled = true;
+        submitPost.value = "Fill out all inputs!";
+        submitPost.style.color = "red";
+    }
+}
+
+title.addEventListener('input', checkInputs);
+body.addEventListener('input', checkInputs);
+
+editPost.forEach(button =>{
+    button.addEventListener('click', (a) => {
+        editpostForm.classList.add('show');
+        submitPost.disabled = true;
+        submitPost.value = "Fill out all inputs!";
+        submitPost.style.color = "red";
+
+        const exitpostform = document.querySelector('.exit');
+
+        exitpostform.addEventListener('click', (e) => {
+            e.preventDefault();
+            editpostForm.classList.remove('show');
+        })
+
+        const postID = document.querySelector('.post-container').dataset.index;
+        console.log("POST INDEX", postID);
+
+        submitPost.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const title = document.querySelector('#titlepost').value;
+        const body = document.querySelector('#postbody').value;
+        const sendPostID = parseInt(postID);
+
+        console.log({title, body, sendPostID});
+        const jString = JSON.stringify({title, body, sendPostID});
+
+        const response = await fetch("/editPost", {
+            method: "POST",
+            body: jString,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        editpostForm.classList.remove('show');
+
+        if(response.status == 200){
+            console.log("Edit post success");
+            const postID = await response.text()
+            window.location.href = "/postPage/"+postID;
+        }else
+            console.error(`An error has occured. Status code = ${response.status}`);          
+        })
+    })       
+})
+
+const deletePost = document.querySelectorAll('.delete-post-button');
+
+for (let x = 0; x < deletePost.length; x++) {
+    deletePost[x].addEventListener("click", async (e) => {
+        const index = document.querySelector('.post-container').dataset.index;
+
+        const jString = JSON.stringify({index});
+
+        const response = await fetch("/deletePost", {
+            method: "POST",
+            body: jString,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    
+        if(response.status == 200){
+            console.log("Delete Post Success");
+            window.location.reload();
+        }else
+            console.error(`An error has occured. Status code = ${response.status}`); 
+    });
+}

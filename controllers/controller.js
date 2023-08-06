@@ -342,6 +342,7 @@ const controller = {
 
             if(post && req.session.userID){
                 res.render("post", {
+                id: post.id,
                 title: post.title,
                 postBody: post.body,
                 likeCount: post.likeCount,
@@ -361,6 +362,7 @@ const controller = {
     
             }else if(post){
                 res.render("post", {
+                id: post.id,
                 title: post.title,
                 postBody: post.body,
                 likeCount: post.likeCount,
