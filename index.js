@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true})); // automatically parse data sent 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 const store = new MongoDBStore({
-    uri: process.env.MONGO_URI,
+    uri: process.env.MONGODB_URI,
     collection: 'sessions',
 });
 
