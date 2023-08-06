@@ -50,6 +50,17 @@ const hbs = exphbs.create({
         eq3: function(a){
             if(a == true)
                 return a;
+        },
+        eq4: function(a,b){
+            if(a == b){
+                return true;
+            }
+            else{
+                return false;
+            }
+        },
+        eq5: function(a){
+            return a;
         }
     }
 })

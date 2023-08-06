@@ -402,11 +402,96 @@ const isLiked = likeBtn.dataset.index;
 const isDisliked = dislikeBtn.dataset.index;
 const counter = document.querySelector('.counter');
 
-if(isLiked == "true")
+if(isLiked == "true"){
     counter.style.color = '#0081A7';
-else if(isDisliked == "true")
+    likeBtn.style.backgroundPosition = "-605px -520px";
+}
+else if(isDisliked == "true"){
     counter.style.color = "red";
+    dislikeBtn.style.backgroundPosition = "-386px -520px";
+}
 else
+{
     counter.style.color = "black";
+}
+if(isLiked == "false"){
+    likeBtn.style.backgroundPosition = "-550px -520px";
+}
+if(isDisliked == "false"){
+    dislikeBtn.style.backgroundPosition = "-331px -520px";
+}
+
+/*-----------------------------*/
+
+var editButton = document.querySelectorAll('.edit-comment-button');
+
+
+for (let x = 0; x < editButton.length; x++) {
+    editButton[x].addEventListener("click", (e) => {
+      let commentInstance = e.target.closest('.comment-instance');
+      commentInstance.querySelector(".comment-body").style.display = "none";
+      commentInstance.querySelector(".edit-comment-body").value = document.getElementById("comment-body").textContent.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+      commentInstance.querySelector(".edit-comment-body").style.display = "inline-block";
+      commentInstance.querySelector(".save-button").style.display = "inline-block";
+      
+      let save = commentInstance.querySelector('.save-button');
+
+      save.addEventListener('click', async() => {
+
+          const postID = commentInstance.getAttribute('data-postID');
+          const commentID = commentInstance.getAttribute('data-index');
+          const commentBody = commentInstance.querySelector(".edit-comment-body").value;
+
+          console.log({postID,commentID,commentBody});
+          const jString = JSON.stringify({postID,commentID,commentBody});
+
+          const response = await fetch("/editComment", {
+            method: "POST",
+            body: jString,
+            headers: {
+                "Content-Type": "application/json"
+            }
+          });
+
+          //editpostForm.classList.remove('show');
+
+          if(response.status == 200){
+            console.log("Edit post success");
+            const postID = await response.text()
+            window.location.href = "/postPage/"+postID;
+          }else
+            console.error(`An error has occured. Status code = ${response.status}`); 
+   
+      });
+  });
+}
+
+const deleteComment = document.querySelectorAll('.delete-comment-button');
+
+for (let x = 0; x < deleteComment.length; x++) {
+    deleteComment[x].addEventListener("click", async (e) => {
+      const commentInstance = e.target.closest('.comment-instance');
+      const commentID = commentInstance.getAttribute('data-index');
+      const postID = commentInstance.getAttribute('data-postID');
+
+      console.log("info: ", commentID, postID);
+
+      const jString = JSON.stringify({commentID,postID});
+
+      const response = await fetch("/deleteComment", {
+        method: "POST",
+        body: jString,
+        headers: {
+            "Content-Type": "application/json"
+        }
+      });
+  
+      if(response.status == 200){
+        console.log("Delete Post Success");
+        window.location.reload();
+      }else
+        console.error(`An error has occured. Status code = ${response.status}`); 
+  });
+}
 
   

@@ -118,6 +118,7 @@ async function findPosts(comments){
     return userArr;
 }
 
+
 const controller = {
 
     getCurrentUser: (req,res) =>{
@@ -291,6 +292,7 @@ const controller = {
         }
     },
 
+
     postPage: async (req, res) => {
         console.log("Request received:", req.method, req.url);
         console.log("Post Page loaded");
@@ -335,9 +337,10 @@ const controller = {
                 dislike = false;
     
             console.log(dislike);
-    
+            
+            const currUser = req.session.userID;
+
             if(post && req.session.userID){
-    
                 res.render("post", {
                 title: post.title,
                 postBody: post.body,
@@ -350,10 +353,10 @@ const controller = {
                 image: user.image, //WILL CHANGE THIS ONCE THE SEPARATE PAGES ISSUE HAS BEEN RESOLVED
                 like: like,
                 dislike: dislike,
-    
+
+                currUserID: currUser,
                 comments: postComments,
                 userArr: userArr
-            
                 });
     
             }else if(post){

@@ -1,12 +1,18 @@
-<div class="comment-instance" data-index={{commentID}}>
+<div class="comment-instance" data-index={{commentID}} data-postID={{postID}}>
         <div class="comment-header" data-index={{id}}>
             <img class="comment-profile" src={{image}}>
             <span class="comment-name">{{name}}</span>
             {{#if isEdited}}
                 <span class="isEdited"> ● edited</span>
             {{/if}}
+            {{#if (eq4 userID id)}}
+                <button class="edit-comment-button">Edit</button>
+                <button class="delete-comment-button">Delete</button>
+            {{/if}}
         </div>
         <div class="comment-body">
             {{commentBody}}
         </div>
+        <input type="text"  class="edit-comment-body" style="flex-grow: 1; display: none;"/>
+            <button class="save-button" style="display: none;">Save</button>
     </div>
