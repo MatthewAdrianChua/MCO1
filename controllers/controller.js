@@ -958,7 +958,7 @@ const controller = {
               const edit = await users.updateOne({ id: parseInt(req.session.userID) },
                 {
                   $set: {
-                    image: "http://localhost:3000/image/" + file._id
+                    image: "https://postiee.onrender.com/image/" + file._id
                   }
                 }
               );
