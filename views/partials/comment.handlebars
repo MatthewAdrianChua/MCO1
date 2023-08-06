@@ -5,8 +5,14 @@
             {{#if isEdited}}
                 <span class="isEdited"> ● edited</span>
             {{/if}}
+            {{#if (eq4 userID id)}}
+                <button class="edit-comment-button">Edit</button>
+                <button class="delete-comment-button">Delete</button>
+            {{/if}}
         </div>
-        <div class="comment-body">
+        <input type="text"  class="edit-comment-body" style="flex-grow: 1; display: none;"/>
+        <button class="save-button" style="display: none;">Save</button>
+        <div class="comment-body" id="comment-body">
             {{commentBody}}
         </div>
     

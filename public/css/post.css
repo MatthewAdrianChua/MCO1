@@ -114,6 +114,11 @@ body{
     background-color: #f5f5f5;
 }
 
+.like:focus{
+    background-position: -605px -520px;
+    background-size: 900px 786px;
+}
+
 .counter{
     font-size: 18px;
     text-align: center;
@@ -216,6 +221,41 @@ body{
     margin-left: 100px;
     padding-bottom: 5px;
 }
+
+/*---------Edit/Delete Comment-------------*/
+
+.edit-comment-button, .delete-comment-button {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0px;
+    border-radius: 50px;
+    background-color: lightgray;
+	width: 60px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.edit-comment-body{
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 50px;
+}
+
+.save-button {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0px;
+    border-radius: 50px;
+    background-color: lightgray;
+	width: 60px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+
+/*----------------------------------------*/
 
 .reply-button{
     height: 30px;

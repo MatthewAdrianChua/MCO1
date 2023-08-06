@@ -66,6 +66,7 @@
 
                 <div class="divider">
                     <hr class="line">
+                    {{currUserID}}
                     Comments
                 </div>
 
@@ -73,15 +74,16 @@
                     {{#each comments}}
                         {{#if (eq parent "")}}
                             <div class="comment-thread">
-                                <div class="comment-instance" data-index={{commentID}}>
+                                <div class="comment-instance" data-index={{commentID}} data-postID={{postID}}>
                                 {{#unless (eq2 (lookup ../userArr @index) 2)}}
-                                {{> comment this name=(eq2 (lookup ../userArr @index) 0) image=(eq2 (lookup ../userArr @index) 1) id=(eq2 (lookup ../userArr @index) 3) edited=(eq3 isEdited)}}
+                                {{> comment this name=(eq2 (lookup ../userArr @index) 0) image=(eq2 (lookup ../userArr @index) 1) id=(eq2 (lookup ../userArr @index) 3) edited=(eq3 isEdited) userID=(eq5 ../currUserID)}}
                                 {{/unless}}
                                     <div>
                                         <button class="reply-button">Reply</button>
                                         {{#each ../comments}}
-                                        {{#if (eq parent ../commentID)}}           
-                                            {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3) edited=(eq3 isEdited)}}  
+                                       
+                                        {{#if (eq parent ../commentID)}}
+                                            {{> reply this name=(eq2 (lookup ../../userArr @index) 0) image=(eq2 (lookup ../../userArr @index) 1) id=(eq2 (lookup ../../userArr @index) 3) edited=(eq3 isEdited) userID=(eq5 ../../currUserID) postID=postID}}  
                                         {{/if}}
                                         {{/each}}
                                     </div>
