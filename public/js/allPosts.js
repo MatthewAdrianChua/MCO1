@@ -91,9 +91,6 @@ body.addEventListener('input', checkInputs);
 editPost.forEach(button =>{
   button.addEventListener('click', (a) => {
       editpostForm.classList.add('show');
-      submitPost.disabled = true;
-      submitPost.value = "Fill out all inputs!";
-      submitPost.style.color = "red";
 
       const exitpostform = document.querySelector('.exit');
 
@@ -105,6 +102,9 @@ editPost.forEach(button =>{
       const postInstance = a.target.closest('.post-instance');
       const postID = postInstance.getAttribute('data-ID');
       console.log("POST INDEX", postID);
+
+      body.value = postInstance.getAttribute('data-body');
+      title.value = button.textContent;
 
       submitPost.addEventListener('click', async (e) => {
         e.preventDefault();

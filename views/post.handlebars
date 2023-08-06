@@ -46,18 +46,17 @@
                         {{#if (eq3 isEdited)}}
                             <span class="isEdited"> ● edited</span>
                         {{/if}}
+                        {{#if (eq posterID currUserID)}}
+                            <button class="edit-post-button">Edit</button>
+                            <button class="delete-post-button">Delete</button>
+                        {{/if}}
                     </div>
                     <span class="post-title">{{title}}</span>
                 </div>
             </div>
 
-            <div class="body">
-                {{postBody}}
-            </div>
-            {{#if (eq posterID currUserID)}}
-                <button class="edit-post-button">Edit</button>
-                <button class="delete-post-button">Delete</button>
-            {{/if}}
+            <div class="body">{{postBody}}</div>
+
             <div class="comments">
                 <div class="add-comment">
                     <p>add a comment</p>
