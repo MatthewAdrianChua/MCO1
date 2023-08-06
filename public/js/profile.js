@@ -95,28 +95,25 @@ const body = document.querySelector('#postbody');
 
 let canSubmit = 0;
 
-function checkInputs() {
-    if(title.value.trim() !== '' && body.value.trim() !== ''){
-        submitPost.disabled = false;
-        submitPost.value = "Submit";
-        submitPost.style.color = "black";
-    }else{
-        submitPost.disabled = true;
-        submitPost.value = "Fill out all inputs!";
-        submitPost.style.color = "red";
-    }
+function checkInputs1() {
+  if(title.value.trim() !== '' && body.value.trim() !== ''){
+      submitPost.disabled = false;
+      submitPost.value = "Submit";
+      submitPost.style.color = "black";
+  }else{
+      submitPost.disabled = true;
+      submitPost.value = "Fill out all inputs!";
+      submitPost.style.color = "red";
+  }
 }
 
-title.addEventListener('input', checkInputs);
-body.addEventListener('input', checkInputs);
+title.addEventListener('input', checkInputs1);
+body.addEventListener('input', checkInputs1);
 
 editPost.forEach(button =>{
   button.addEventListener('click', (a) => {
       editpostForm.classList.add('show');
-      submitPost.disabled = true;
-      submitPost.value = "Fill out all inputs!";
-      submitPost.style.color = "red";
-
+    
       const exitpostform = document.querySelector('.exit');
 
       exitpostform.addEventListener('click', (e) => {
@@ -127,6 +124,9 @@ editPost.forEach(button =>{
       const postInstance = a.target.closest('.post-instance');
       const postID = postInstance.getAttribute('data-ID');
       console.log("POST INDEX", postID);
+
+      body.value = postInstance.querySelector('.textBody').textContent;
+      title.value = button.textContent;
 
       submitPost.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -165,7 +165,7 @@ for (let x = 0; x < editButton.length; x++) {
     editButton[x].addEventListener("click", (e) => {
       let commentInstance = e.target.closest('.comment-bar');
       commentInstance.querySelector("#comment-body").style.display = "none";
-      commentInstance.querySelector("#edit-comment-body").value = document.getElementById("comment-body").textContent;
+      commentInstance.querySelector("#edit-comment-body").value = commentInstance.querySelector('#comment-body').textContent;
       commentInstance.querySelector("#edit-comment-body").style.display = "inline-block";
       commentInstance.querySelector(".save-button").style.display = "inline-block";
 

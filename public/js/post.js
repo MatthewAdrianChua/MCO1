@@ -508,10 +508,12 @@ function checkInputs() {
         submitPost.disabled = false;
         submitPost.value = "Submit";
         submitPost.style.color = "black";
+        console.log('OKAY')
     }else{
         submitPost.disabled = true;
         submitPost.value = "Fill out all inputs!";
         submitPost.style.color = "red";
+        console.log('ERROR')
     }
 }
 
@@ -521,11 +523,8 @@ body.addEventListener('input', checkInputs);
 editPost.forEach(button =>{
     button.addEventListener('click', (a) => {
         editpostForm.classList.add('show');
-        submitPost.disabled = true;
-        submitPost.value = "Fill out all inputs!";
-        submitPost.style.color = "red";
-
-        const exitpostform = document.querySelector('.exit');
+       
+         const exitpostform = document.querySelector('.exit');
 
         exitpostform.addEventListener('click', (e) => {
             e.preventDefault();
@@ -534,6 +533,9 @@ editPost.forEach(button =>{
 
         const postID = document.querySelector('.post-container').dataset.index;
         console.log("POST INDEX", postID);
+
+        document.querySelector('#postbody').value = document.querySelector('.body').textContent;
+        document.querySelector('#titlepost').value = document.querySelector('.post-title').textContent;
 
         submitPost.addEventListener('click', async (e) => {
         e.preventDefault();

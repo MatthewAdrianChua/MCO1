@@ -72,9 +72,11 @@ for (let x = 0; x < editButton.length; x++) {
     editButton[x].addEventListener("click", (e) => {
       let commentInstance = e.target.closest('.comment-bar');
       commentInstance.querySelector("#comment-body").style.display = "none";
-      commentInstance.querySelector("#edit-comment-body").value = document.getElementById("comment-body").textContent;
+      commentInstance.querySelector("#edit-comment-body").value = commentInstance.querySelector('#comment-body').textContent;
       commentInstance.querySelector("#edit-comment-body").style.display = "inline-block";
       commentInstance.querySelector(".save-button").style.display = "inline-block";
+
+      editButton[x].style.display = "none";
 
       let save = commentInstance.querySelector('.save-button');
 

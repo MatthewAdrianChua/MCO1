@@ -445,10 +445,7 @@ const controller = {
                     }
     
                     const userArr = await findPosts(previewComments);
-                    console.log(userArr);
-                    console.log(currentUserDB.image);
-    
-                    
+                    console.log(userArr);                    
     
                     if (req.session.userID == profileID) {
                         // Render 'profile' when viewing own profile
