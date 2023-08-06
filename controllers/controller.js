@@ -123,7 +123,7 @@ const controller = {
 
     getCurrentUser: (req,res) =>{
         if(req.session.userID){
-            console.log(req.session.userID);
+            console.log("USER ID"+ req.session.userID);
             res.status(200).send(req.session.userID.toString());
         }else{
             res.sendStatus(400);
@@ -399,7 +399,7 @@ const controller = {
                 const profileUser = await users.findOne({id: parseInt(profileID)});
                 //console.log(profileUser);
     
-                const currentUserDB = await users.findOne({id: parseInt(req.session.userIDr)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
+                const currentUserDB = await users.findOne({id: parseInt(req.session.userID)}); //this is for the currentUser profile to be loaded in the profile page, example viewing johns profile and logged in as matt this is for matts profile on the profile icon
     
                 if(profileUser){
     
@@ -444,6 +444,7 @@ const controller = {
     
                     const userArr = await findPosts(previewComments);
                     console.log(userArr);
+                    console.log(currentUserDB.image);
     
                     
     

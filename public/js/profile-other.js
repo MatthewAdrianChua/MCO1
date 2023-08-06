@@ -82,6 +82,7 @@ async function loadProfile(){//if statement to load either the login/register bu
 
     if(response.status == 200){
         currentUser = await response.text();
+        console.log(currentUser);
     }else{
         console.error(`An error has occured. Status code = ${response.status}`); 
     }
