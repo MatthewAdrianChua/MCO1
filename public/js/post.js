@@ -357,11 +357,6 @@ async function loadProfile(){ //this function will load the profile icon with dr
             wrapper.classList.add('active-popup');
         })
 
-        commentSection.addEventListener('click', (e) => {
-            e.preventDefault
-            wrapper.classList.add('active-popup');
-        })
-
         likeBtn.addEventListener('click', (e) => {
             e.preventDefault
             wrapper.classList.add('active-popup');
@@ -380,7 +375,7 @@ loadProfile();
 
 commentSection.addEventListener('click', (e) => {
     if (e.target.matches('.comment-name')) {
-      
+        e.preventDefault();
         const userInstance = e.target.closest('.comment-header');
         const index = userInstance.dataset.index;
         console.log("USER INDEX", index);
