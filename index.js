@@ -15,9 +15,9 @@ app.use(express.json()); //It enables your Express server to automatically parse
 app.use(express.urlencoded({extended: true})); // automatically parse data sent in the URL-encoded format (such as form data submitted from HTML forms) and make it available in req.body as a JavaScript object.
 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
-
+const mongodb = process.env.MONGODB_URI;
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://matthewadrianuchua:Acdcacdc-1@cluster0.tftgokc.mongodb.net/MCO1',
+    uri: mongodb,
     collection: 'sessions',
 });
 
