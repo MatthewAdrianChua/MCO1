@@ -103,9 +103,9 @@ editPost.forEach(button =>{
       const postID = postInstance.getAttribute('data-ID');
       console.log("POST INDEX", postID);
 
-      body.value = postInstance.getAttribute('data-body');
-      title.value = button.textContent;
-
+      body.value = postInstance.querySelector('.textBody').textContent;
+      title.value = a.target.textContent;
+      
       submitPost.addEventListener('click', async (e) => {
         e.preventDefault();
 
