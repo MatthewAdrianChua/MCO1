@@ -1124,6 +1124,17 @@ div.post-header {
     background-color: lightgray;
 }
 
+#about{
+    margin: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: left;
+    float: left;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 1.625rem;
+}
+
 
 
 
