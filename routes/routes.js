@@ -25,6 +25,7 @@ router.get("/searchl", controller.search1);
 router.get("/page", controller.page);
 router.get("/pagel", controller.page1);
 router.get("/logout", controller.logout);
+router.get("/about", controller.about);
 
 
 router.post("/register", body('name').notEmpty().isAlphanumeric(), body('email').notEmpty().isEmail(), body('password').notEmpty(), body('email').normalizeEmail(), controller.register)

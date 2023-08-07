@@ -267,8 +267,10 @@ const controller = {
         const {email, password, rememberStatus} = req.body;
     
         const users = await db.collection("users");
+
+        const emailExists = await users.findOne({email: email});
     
-        if(email && password){
+        if(email && password && emailExists != null){
             let loginResult = await users.findOne({email: email});
             console.log(await bcrypt.compare(password, loginResult.password));
             if(loginResult && (await bcrypt.compare(password, loginResult.password) == true)){
@@ -1202,6 +1204,13 @@ const controller = {
     
         res.sendStatus(200);
     },
+
+    about: (req, res) => {
+        console.log("About request received");
+        res.render("about", {
+            script: "/static/js/about.js"
+        });
+    }
 
     
 

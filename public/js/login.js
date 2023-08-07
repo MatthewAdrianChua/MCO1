@@ -202,3 +202,10 @@ if(showPrev == "true"){
 }else{
     prevPageBtn.classList.remove('show');
 }
+
+about.addEventListener('click', async (e) => {
+    const response = await fetch('/about', {
+        method: "GET"
+    })
+    window.location.href = "/about";
+})

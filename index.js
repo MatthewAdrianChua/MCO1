@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true})); // automatically parse data sent 
 /*------------------------------------------------------------------------------------------------------------------------------------------*/
 
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://matthewadrianuchua:Acdcacdc-1@cluster0.tftgokc.mongodb.net/MCO1',
+    uri: 'mongodb://127.0.0.1:27017/MCO1',
     collection: 'sessions',
 });
 
