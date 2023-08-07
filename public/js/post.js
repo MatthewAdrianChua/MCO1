@@ -380,7 +380,6 @@ loadProfile();
 
 commentSection.addEventListener('click', (e) => {
     if (e.target.matches('.comment-name')) {
-        e.preventDefault();
       
         const userInstance = e.target.closest('.comment-header');
         const index = userInstance.dataset.index;
